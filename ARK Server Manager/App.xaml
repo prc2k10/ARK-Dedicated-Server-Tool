@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="UIStyles/MainControlListBox.xaml"/>
                 <ResourceDictionary Source="UIStyles/GlowSlider.xaml"/>
                 <ResourceDictionary Source="UIStyles/MainTabControl.xaml"/>
+                <ResourceDictionary Source="UIStyles/MainTabControl.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 			<SolidColorBrush x:Key="LtBeige" Color="#FFE6DFD8"/>
 			<SolidColorBrush x:Key="MedBeige" Color="#FFD8CCBC"/>

@@ -23,5 +23,17 @@ namespace ARK_Server_Manager
 			
 			// Insert code required on object creation below this point.
 		}
-	}
+
+        // Due to a shortcoming in Blend, we can't have a selected item for the listbox prior to runtime.
+        // To prevent having NO item selected at runtime, select the first item on load.
+        private void listBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListBox lb = (ListBox)(e.Source);
+            if (lb.Items.Count > 0)
+            {
+                lb.SelectedIndex = 0;
+            }
+
+        }
+    }
 }

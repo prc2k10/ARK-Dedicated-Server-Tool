@@ -126,14 +126,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
-    <SolidColorBrush x:Key="MainControlSelected" Color="#FF405970"/>
-    <Style x:Key="MainLBItem" TargetType="{x:Type ListBoxItem}">
+    <Style x:Key="MainListBoxItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
@@ -141,18 +134,37 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="DummyClickTestBorder" Background="#01FFFFFF">
+                    <Border x:Name="border" Padding="0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="4" Opacity="0" ShadowDepth="0"/>
+                        </Border.Effect>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="MouseOverBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Dark_Brush}"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF405970"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -160,39 +172,31 @@
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="SelectionStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
-                                    <VisualTransition From="Selected" GeneratedDuration="0" To="SelectedUnfocused"/>
-                                    <VisualTransition From="SelectedUnfocused" GeneratedDuration="0" To="Selected"/>
-                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Unselected"/>
+                                    <VisualTransition GeneratedDuration="0:0:0.1"/>
                                 </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Unselected">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="SelectionBorder">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="Bd">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <SolidColorBrush Color="#01FFFFFF"/>
+                                                    <SolidColorBrush Color="#FF405970"/>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Selected">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" Storyboard.TargetName="SelectionBorder">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.75"/>
                                         </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="SelectionBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Dark_Brush}"/>
-                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="SelectedUnfocused">
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" Storyboard.TargetName="SelectionBorder">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.75"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="SelectionBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Dark_Brush}"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="Bd">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF405970"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -200,29 +204,50 @@
                             <VisualStateGroup x:Name="FocusStates"/>
                             <VisualStateGroup x:Name="ValidationStates"/>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="SelectionBorder">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="4" ShadowDepth="0" Opacity="0"/>
-                            </Border.Effect>
-                            <Border x:Name="MouseOverBorder" Padding="0">
-                                <VisualStateManager.CustomVisualStateManager>
-                                    <ei:ExtendedVisualStateManager/>
-                                </VisualStateManager.CustomVisualStateManager>
-                                <Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" BorderBrush="{DynamicResource MainControlGray}" Background="{x:Null}">
-                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                        <ContentPresenter.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="0.9"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </ContentPresenter.RenderTransform>
-                                    </ContentPresenter>
-                                </Border>
-                            </Border>
+                        <VisualStateManager.CustomVisualStateManager>
+                            <ei:ExtendedVisualStateManager/>
+                        </VisualStateManager.CustomVisualStateManager>
+                        <Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" BorderBrush="#FF505050">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <ContentPresenter.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.9"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
                         </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="#1F26A0DA"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="#a826A0Da"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="#3DDADADA"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="#FFDADADA"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="#3D26A0DA"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="#FF26A0DA"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

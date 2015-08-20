@@ -236,8 +236,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="UIStyles\MainTabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="UIStyles\iStock_000003783032Medium.jpg" />
     <Resource Include="UIStyles\iStock_000003783032MediumA.jpg" />
