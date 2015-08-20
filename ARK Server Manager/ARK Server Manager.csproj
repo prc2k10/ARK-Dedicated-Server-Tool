@@ -90,7 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ArkData">
-      <HintPath>..\..\ArkData\ArkData\bin\Debug\ArkData.dll</HintPath>
+      <HintPath>ExternalLibs\ArkData.dll</HintPath>
     </Reference>
     <Reference Include="EO.Wpf, Version=4.0.12.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
       <HintPath>..\packages\EO.Wpf.4.0.12\lib\EO.Wpf.dll</HintPath>
@@ -235,6 +235,12 @@
     <Content Include="Lib\ServerUpdater\mcrcon.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="UIStyles\MainTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="UIStyles\iStock_000003783032Medium.jpg" />
+    <Resource Include="UIStyles\iStock_000003783032MediumA.jpg" />
     <Page Include="AnnotatedSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,10 +270,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UIStyles\MainControlListBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UIStyles\MainTabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -385,7 +387,6 @@
       <Numbers>True</Numbers>
       <Punctuation>True</Punctuation>
     </BlendEmbeddedFont>
-    <Resource Include="UIStyles\iStock_000003783032Medium.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

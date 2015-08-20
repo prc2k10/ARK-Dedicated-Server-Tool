@@ -4,7 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-	<Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+	<Style x:Key="ButtonDefault" TargetType="{x:Type Button}">
 		<Setter Property="Background" Value="#FFDDDDDD"/>
 		<Setter Property="BorderBrush" Value="#FF707070"/>
 		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -69,7 +69,7 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
+	<Style x:Key="CheckBoxDefault" TargetType="{x:Type CheckBox}">
 		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
 		<Setter Property="Background" Value="#FFFFFFFF"/>
 		<Setter Property="BorderBrush" Value="#FF707070"/>
@@ -138,12 +138,9 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
-	<SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
-	<SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
-	<Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+    <Style x:Key="TextBoxDefault" TargetType="{x:Type TextBox}">
 		<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+		<Setter Property="BorderBrush" Value="#FFABAdB3"/>
 		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 		<Setter Property="BorderThickness" Value="1"/>
 		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -170,10 +167,10 @@
 							<Setter Property="Opacity" TargetName="border" Value="0.56"/>
 						</Trigger>
 						<Trigger Property="IsMouseOver" Value="true">
-							<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+							<Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
 						</Trigger>
 						<Trigger Property="IsKeyboardFocused" Value="true">
-							<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+							<Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
