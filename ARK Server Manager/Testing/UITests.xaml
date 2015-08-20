@@ -24,29 +24,54 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource MainTabControl}">
-                    <TabItem Header="TabItem" Margin="0">
-                        <Grid Background="#FFE5E5E5">
-                            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="A" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
+                    <TabItem x:Name="tabAdmin" Header="tabAdmin" Margin="0">
+                        <Grid Background="{x:Null}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="753"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Border x:Name="headerArea" Margin="8,8,8,0" Tag="Raisins and Dates" BorderBrush="Black" Padding="0,8" Height="75" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="48" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5">
+                    <TabItem x:Name="tabRules" Header="tabRules">
+                        <Grid>
                             <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64" TextAlignment="Center"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5">
+                    <TabItem x:Name="tabUI" Header="tabUI">
+                        <Grid>
                             <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="U" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5">
-                            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="P" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
-                        </Grid>
+                    <TabItem x:Name="tabPlayer" Header="TabItem" Margin="-2,0">
+                        <Grid/>
                     </TabItem>
+                    <TabItem x:Name="tabDino" Header="tabDino">
+                        <Grid/>
+                    </TabItem>
+                    <TabItem x:Name="tabEnvironment" Header="tabEnvironment">
+                        <Grid/>
+                    </TabItem>
+                    <TabItem x:Name="tabMods" Header="tabMods">
+                        <Grid/>
+                    </TabItem>
+
                 </TabControl>
                 <ListBox x:Name="listBox" Width="213" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0,0,-1,0" Background="{DynamicResource DarkNeutralFade_Brush}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="Black" Loaded="listBox_Loaded">
-                    <ListBoxItem Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
+                    <ListBoxItem x:Name="listBoxItem" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
                     <ListBoxItem Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>

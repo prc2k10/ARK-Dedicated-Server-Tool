@@ -16,6 +16,9 @@
     <Color x:Key="Dark_Color">#FF253858</Color>
     <SolidColorBrush x:Key="Dark_Brush" Color="{DynamicResource Dark_Color}"/>
 
+    <Color x:Key="VeryDark_Color">#FF1D1E2E</Color>
+    <SolidColorBrush x:Key="VeryDark_Brush" Color="{DynamicResource VeryDark_Color}"/>
+
     <Color x:Key="TextLight_Color">#FFc3c3c3</Color>
     <SolidColorBrush x:Key="TextLight_Brush" Color="{DynamicResource TextLight_Color}"/>
 
@@ -24,6 +27,9 @@
 
     <Color x:Key="DarkNeutral_Color">#FF404040</Color>
     <SolidColorBrush x:Key="DarkNeutral_Brush" Color="{DynamicResource DarkNeutral_Color}"/>
+
+    <Color x:Key="VeryDarkNeutral_Color">#FF202020</Color>
+    <SolidColorBrush x:Key="VeryDarkNeutral_Brush" Color="{DynamicResource VeryDarkNeutral_Color}"/>
 
     <Color x:Key="Disabled_Color">#FF9D9D9D</Color>
     <SolidColorBrush x:Key="Disabled_Brush" Color="{DynamicResource Disabled_Color}"/>
@@ -44,5 +50,5 @@
     <SolidColorBrush x:Key="DarkNeutralFade_Brush" Color="{DynamicResource DarkNeutralFade_Color}"/>
 
     <FontFamily x:Key="LabelFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>
-	<!-- Resource dictionary entries should be defined here. -->
+    <!-- Resource dictionary entries should be defined here. -->
 </ResourceDictionary>

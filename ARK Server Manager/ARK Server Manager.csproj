@@ -232,14 +232,24 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIStyles\ExtendedSlider.cs">
+      <DependentUpon>ExtendedSlider.xaml</DependentUpon>
+    </Compile>
     <Content Include="Lib\ServerUpdater\mcrcon.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="UIStyles\ExtendedSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UIStyles\MainTabControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="UIStyles\iStock_000003783032Medium.jpg" />
+    <Page Include="UIStyles\Slider_TwoTone.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="UIStyles\iStock_000003783032MediumA.jpg" />
     <Page Include="AnnotatedSlider.xaml">
       <SubType>Designer</SubType>
@@ -262,10 +272,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UIStyles\Brushes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UIStyles\GlowSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

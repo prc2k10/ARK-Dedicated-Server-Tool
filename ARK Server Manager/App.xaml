@@ -10,9 +10,9 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="UIStyles/Brushes.xaml"/>
                 <ResourceDictionary Source="UIStyles/MainControlListBox.xaml"/>
-                <ResourceDictionary Source="UIStyles/GlowSlider.xaml"/>
+                <ResourceDictionary Source="UIStyles/ExtendedSlider.xaml"/>
                 <ResourceDictionary Source="UIStyles/MainTabControl.xaml"/>
-                <ResourceDictionary Source="UIStyles/MainTabControl.xaml"/>
+                <ResourceDictionary Source="UIStyles/Slider_TwoTone.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 			<SolidColorBrush x:Key="LtBeige" Color="#FFE6DFD8"/>
 			<SolidColorBrush x:Key="MedBeige" Color="#FFD8CCBC"/>
