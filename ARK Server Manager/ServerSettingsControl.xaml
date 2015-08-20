@@ -19,6 +19,11 @@
         <vm:DinoNameValueConverter x:Key="DinoNameValueConverter" />
         <vm:ResourceNameValueConverter x:Key="ResourceNameValueConverter" />
         <vm:DinoSettingsList x:Key="BaseDinoSettings"/>
+        <vm:TimeValidationRule x:Key="TimeValidationRule"/>
+        <vm:IdListValidationRule x:Key="IdListValidationRule"/>
+        <vm:SecondsToTimeValueConverter x:Key="SecondsToTimeValueConverter"/>
+        <vm:MinutesToTimeValueConverter x:Key="MinutesToTimeValueConverter"/>
+        <vm:EnumConverter x:Key="EnumConverter"/>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style TargetType="local:AnnotatedTextBox">
             <Setter Property="Template">
@@ -695,6 +700,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Grid.Column="0" Grid.Row="0" Content="Server Name:"/>
                             <TextBox Grid.Column="1" Grid.Row="0"  Text="{Binding ServerName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
@@ -736,29 +742,76 @@
         						ToolTip="Sets the IP address to bind the server to. Only necessary if your machine is on multiple networks. Most users do not need to use this and it should remain blank."/>
                             -->
 
-                            <Label Grid.Column="0" Grid.Row="2" Content="Map"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ServerMap}" VerticalContentAlignment="Center"/>
                             <Label Grid.Column="2" Grid.Row="2" Content="Spectator Password:"/>
                             <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding SpectatorPassword}" VerticalContentAlignment="Center"/>
-
                             <local:AnnotatedSlider Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" Label="Max Players:"  Value="{Binding MaxPlayers}" Minimum="1" Maximum="127" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="25" SmallChange="10" TickFrequency="10" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="0" 
         						ToolTip="Sets the maximum number of players which can join this server."/>
-
-                            
-                            <CheckBox x:Name="EnableRCON" Grid.Column="0" Grid.Row="3" IsChecked="{Binding RCONEnabled}" Content="Enable Remote Console" VerticalAlignment="Center" Margin="5"/>
-                            <Label Grid.Column="2" Grid.Row="3" Content="RCON Port:" VerticalAlignment="Center"/>
-                            <TextBox Grid.Column="3" Grid.Row="3" IsEnabled="{Binding ElementName=EnableRCON, Path=IsChecked}" Text="{Binding RCONPort}" VerticalContentAlignment="Center" />
+                       
+                            <CheckBox x:Name="EnableRCON" Grid.Column="0" Grid.Row="2" IsChecked="{Binding RCONEnabled}" Content="Enable RCON Port" VerticalAlignment="Center" Margin="5"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" IsEnabled="{Binding ElementName=EnableRCON, Path=IsChecked}" Text="{Binding RCONPort}" VerticalContentAlignment="Center" />
                             
                             <CheckBox x:Name="EnableKickIdlePlayersCheckbox" Grid.Column="0" Grid.Row="4" IsChecked="{Binding EnableKickIdlePlayers}" Content="Enable Idle Timeout" VerticalAlignment="Center" Margin="5"/>
-                            <local:AnnotatedSlider Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Label="Idle Player Timeout:" Suffix="seconds"  Value="{Binding KickIdlePlayersPeriod}" Minimum="60" Maximum="7200" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="300" SmallChange="60" TickFrequency="300" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="Auto" 
+                            <local:AnnotatedSlider Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Label="" Suffix="seconds"  Value="{Binding KickIdlePlayersPeriod}" Minimum="60" Maximum="7200" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="300" SmallChange="60" TickFrequency="300" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="Auto" 
         						ToolTip="The time until idle players are kicked from the server."
                                 IsEnabled="{Binding ElementName=EnableKickIdlePlayersCheckbox, Path=IsChecked}"/>
 
-                            <local:AnnotatedSlider Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="5" Label="Auto Save Period:" Suffix="minutes"  Value="{Binding AutoSavePeriodMinutes}" Minimum="1" Maximum="720" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="10" SmallChange="1" TickFrequency="10" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="Auto" 
+                            <Label Grid.Column="0" Grid.Row="5" Content="Auto Save Period:"/>
+                            <local:AnnotatedSlider Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" Label="" Suffix="minutes"  Value="{Binding AutoSavePeriodMinutes}" Minimum="1" Maximum="720" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="10" SmallChange="1" TickFrequency="10" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="Auto" 
         						ToolTip="The time between server auto-saves."/>
 
+                            <GroupBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="6" BorderBrush="#FFD4C2B0">
+                                <GroupBox.Style>
+                                    <Style TargetType="{x:Type GroupBox}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=EnableSOTF, Path=IsChecked}" Value="True">
+                                                <Setter Property="Header" Value="Survival of the Fittest enabled.  Maps and Mods disabled."/>
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=EnableSOTF, Path=IsChecked}" Value="False">
+                                                <Setter Property="Header" Value="Maps and Mods"/>
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </GroupBox.Style>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!--<RadioButton Name="VanillaMapCheckBox" Grid.Column="0" Grid.Row="0" Content="Map or Map Mod Path:" VerticalAlignment="Center" GroupName="MapGroup" IsChecked="{Binding MapSource, Mode=TwoWay, Converter={StaticResource EnumConverter}, ConverterParameter=ByName}"/>-->
+                                    <Label Grid.Column="0" Grid.Row="0"   Content="Map or Map Mod Path:"/>
+                                    <!--<TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ServerMap}" Width="200"  HorizontalAlignment="Left" IsEnabled="{Binding ElementName=VanillaMapCheckBox, Path=IsChecked}" ToolTip="The standard map name (e.g. TheIsland), or the local mod path (e.g. /Game/Mods/123456789/myModMap).  Use Map Mod Id instead if your mod is on the workshop."/>-->
+                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ServerMap}" Width="200"  HorizontalAlignment="Left" ToolTip="The standard map name (e.g. TheIsland), or the local mod path (e.g. /Game/Mods/123456789/myModMap) if your mod has a map in it."/>
 
-                            <GroupBox Header="Message of the Day" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="6" BorderBrush="#FFD4C2B0" Height="100">
+                                    <!--<RadioButton IsEnabled="False" Name="MapIdCheckbox" Grid.Column="0" Grid.Row="1" Content="Map Mod Id:" VerticalAlignment="Center" GroupName="MapGroup" IsChecked="{Binding MapSource, Mode=TwoWay, Converter={StaticResource EnumConverter}, ConverterParameter=ById}"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ServerMapModId}" Width="100"  HorizontalAlignment="Left" IsEnabled="{Binding ElementName=MapIdCheckbox, Path=IsChecked}" ToolTip="The id of the mod which contains the map."/>-->
+                                    <Label Grid.Column="0" Grid.Row="1"   Content="Mod IDs:"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" ToolTip="A comma-separated list of mod ids, in the order in which they should be applied.">
+                                        <Validation.ErrorTemplate>
+                                            <ControlTemplate>
+                                                <StackPanel>
+                                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                                    <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Validation.ErrorTemplate>
+                                        <TextBox.Text>
+                                            <Binding Path="ServerModIds">
+                                                <Binding.ValidationRules>
+                                                    <vm:IdListValidationRule ValidatesOnTargetUpdated="true" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </Grid>
+                            </GroupBox>
+
+                            <GroupBox Header="Message of the Day" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="6" BorderBrush="#FFD4C2B0" Height="100">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
@@ -770,12 +823,82 @@
                                 </Grid>
                             </GroupBox>
 
-                            <Label Grid.Column="0" Grid.Row="7" Content="Additional Args:" VerticalAlignment="Center"/>
-                            <DockPanel Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="7" LastChildFill="True">
+                            <Label Grid.Column="0" Grid.Row="8" Content="Additional Args:" VerticalAlignment="Center"/>
+                            <DockPanel Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="8" LastChildFill="True">
                                 <Button DockPanel.Dock="Right" Content="{StaticResource ShowCmdButtonContent}" Margin="5" Click="ShowCmd_Click"/>
                                 <TextBox DockPanel.Dock ="Right" VerticalAlignment="Center" Height="29" HorizontalAlignment="Stretch" Text="{Binding AdditionalArgs}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
         						ToolTip="Additional command-line args for the server.  If you specify this, add the args which start with ?'s first, followed by any other args.  For example: ?MaxPlayers=5?QueryPort=9999 -nosteamclient" Margin="0.667,0,-0.667,0"/>
                             </DockPanel>
+                        </Grid>
+                    </Expander>
+                    <Expander IsExpanded="True" Style="{DynamicResource ExpanderStyle1}">
+                        <Expander.Header>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Left"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Automatic Management" VerticalAlignment="Center" FontWeight="Bold" FontSize="13.333"/>
+                                <Button Margin="10,0,0,0" DockPanel.Dock="Right" Content="Why can't I use this?" Click="NeedAdmin_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=SettingsControl, Path=IsAdministrator}" Value="False">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=SettingsControl, Path=IsAdministrator}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DockPanel>
+                        </Expander.Header>
+                        <Grid Margin="10">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=SettingsControl, Path=IsAdministrator}" Value="False">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=SettingsControl, Path=IsAdministrator}" Value="True">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Grid.Style>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"  Orientation="Horizontal" Margin="9,0,0,5" Height="20">
+                                <CheckBox IsChecked="{Binding EnableAutoStart}" VerticalAlignment="Center"  Content="Auto-start Server" ToolTip="Automatically start the server when the machine starts." />
+                            </StackPanel>
+                            <GroupBox Grid.Row="1" HorizontalAlignment="Stretch">
+                                <GroupBox.Header>
+                                    <CheckBox Name="EnableAutoUpdatesCheckbox" Content="Enable Periodic Auto-Updates" IsChecked="{Binding EnableAutoUpdate}" ToolTip="Automatically check for updates periodically and upgrade the server."/>
+                                </GroupBox.Header>
+                                <StackPanel Orientation="Horizontal"  Margin="2" HorizontalAlignment="Stretch">
+                                    <Label Content="Update Period"/>
+                                    <TextBox Margin="0,0,0,0" Width="75">
+                                        <Validation.ErrorTemplate>
+                                            <ControlTemplate>
+                                                <StackPanel>
+                                                    <!-- Placeholder for the TextBox itself -->
+                                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                                    <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Validation.ErrorTemplate>
+                                        <TextBox.Text>
+                                            <Binding Path="AutoUpdatePeriod" Converter="{StaticResource MinutesToTimeValueConverter}">
+                                                <Binding.ValidationRules>
+                                                    <vm:TimeValidationRule ValidatesOnTargetUpdated="true" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <local:AnnotatedSlider HorizontalAlignment="Stretch"  Margin="5,0,0,0" Width="400"  Label="Restart Grace Period:" LabelRelativeWidth="125" SuffixRelativeWidth="55"  Value="{Binding ServerUpdateGraceMinutes}" SmallChange="1" LargeChange="5" Minimum="0" Maximum="60" Suffix="minutes" />
+                                </StackPanel>
+                            </GroupBox>
                         </Grid>
                     </Expander>
                     <Expander IsExpanded="True" Style="{DynamicResource ExpanderStyle1}">
@@ -794,31 +917,74 @@
                                     <GroupBox.Header>
                                         <CheckBox Name="EnableTributeDownloadsCheckbox" IsChecked="{Binding EnableTributeDownloads}" Content="Enable Tribute Downloads" Margin="0,5,5,5"/>
                                     </GroupBox.Header>
-                                    <StackPanel>
-                                        <CheckBox IsChecked="{Binding PreventDownloadSurvivors}" IsEnabled="{Binding ElementName=EnableTributeDownloadsCheckbox, Path=IsChecked}" Content="No Survivor Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                                        <CheckBox IsChecked="{Binding PreventDownloadItems}" IsEnabled="{Binding ElementName=EnableTributeDownloadsCheckbox, Path=IsChecked}" Content="No Item Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                                        <CheckBox IsChecked="{Binding PreventDownloadDinos}" IsEnabled="{Binding ElementName=EnableTributeDownloadsCheckbox, Path=IsChecked}" Content="No Dino Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                    <StackPanel IsEnabled="{Binding ElementName=EnableTributeDownloadsCheckbox, Path=IsChecked}">
+                                        <CheckBox IsChecked="{Binding PreventDownloadSurvivors}"  Content="No Survivor Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                        <CheckBox IsChecked="{Binding PreventDownloadItems}" Content="No Item Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                        <CheckBox IsChecked="{Binding PreventDownloadDinos}" Content="No Dino Downloads" HorizontalAlignment="Left" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox  HorizontalAlignment="Stretch">
                                     <GroupBox.Header>
                                         <CheckBox Name="EnableIncreasePvPRespawnInterval" IsChecked="{Binding IncreasePvPRespawnInterval}" Content="Increase PvP Respawn Interval" Margin="0,5,5,5"/>
                                     </GroupBox.Header>
-                                    <StackPanel>
-                                        <local:AnnotatedSlider Label="Increase Check Period:" Value="{Binding IncreasePvPRespawnIntervalCheckPeriod}" IsEnabled="{Binding ElementName=EnableIncreasePvPRespawnInterval, Path=IsChecked}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />
-                                        <local:AnnotatedSlider Label="Increase Multiplier:" Value="{Binding IncreasePvPRespawnIntervalMultiplier}" IsEnabled="{Binding ElementName=EnableIncreasePvPRespawnInterval, Path=IsChecked}" Suffix="x" Minimum="0.01" Maximum="10" SmallChange="0.5" LargeChange="1" TickFrequency="1" />
-                                        <local:AnnotatedSlider Label="Increase Base Amount:" Value="{Binding IncreasePvPRespawnIntervalBaseAmount}" IsEnabled="{Binding ElementName=EnableIncreasePvPRespawnInterval, Path=IsChecked}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />                                        
+                                    <StackPanel  IsEnabled="{Binding ElementName=EnableIncreasePvPRespawnInterval, Path=IsChecked}">
+                                        <local:AnnotatedSlider Label="Increase Check Period:" Value="{Binding IncreasePvPRespawnIntervalCheckPeriod}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />
+                                        <local:AnnotatedSlider Label="Increase Multiplier:" Value="{Binding IncreasePvPRespawnIntervalMultiplier}" Suffix="x" Minimum="0.01" Maximum="10" SmallChange="0.5" LargeChange="1" TickFrequency="1" />
+                                        <local:AnnotatedSlider Label="Increase Base Amount:" Value="{Binding IncreasePvPRespawnIntervalBaseAmount}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />                                        
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox  HorizontalAlignment="Stretch">
                                     <GroupBox.Header>
                                         <CheckBox Name="EnableAutoPvETimer" IsChecked="{Binding AutoPvETimer}" Content="PvE Schedule" Margin="0,5,5,5"/>
                                     </GroupBox.Header>
-                                    <StackPanel>
-                                        <CheckBox IsChecked="{Binding AutoPvEUseSystemTime}" IsEnabled="{Binding ElementName=EnableAutoPvETimer, Path=IsChecked}" Content="Use Server Time" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                                        <local:AnnotatedSlider Label="Start Time" Value="{Binding AutoPvEStartTimeSeconds}" IsEnabled="{Binding ElementName=EnableAutoPvETimer, Path=IsChecked}" Suffix="seconds" Minimum="0" Maximum="86400" SmallChange="900" LargeChange="3600" TickFrequency="3600" />
-                                        <local:AnnotatedSlider Label="Stop Time" Value="{Binding AutoPvEStopTimeSeconds}" IsEnabled="{Binding ElementName=EnableAutoPvETimer, Path=IsChecked}" Suffix="seconds" Minimum="0" Maximum="86400" SmallChange="900" LargeChange="3600" TickFrequency="3600" />
-                                    </StackPanel>
+                                    <Grid IsEnabled="{Binding ElementName=EnableAutoPvETimer, Path=IsChecked}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding AutoPvEUseSystemTime}" Content="Use Server Time" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                        <Label    Grid.Column="1" Content="Start Time:"  Margin="10,0,0,0"/>
+                                        <TextBox  Grid.Column="2" FontSize="12"  Width="100" Margin="5,0,0,6" VerticalContentAlignment="Center" ToolTip="The start time in hours and minutes from midnight" >
+                                            <Validation.ErrorTemplate>
+                                                <ControlTemplate>
+                                                    <StackPanel>
+                                                        <!-- Placeholder for the TextBox itself -->
+                                                        <AdornedElementPlaceholder x:Name="textBox"/>
+                                                        <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Validation.ErrorTemplate>
+                                            <TextBox.Text>
+                                                <Binding Path="AutoPvEStartTimeSeconds" Converter="{StaticResource ResourceKey=SecondsToTimeValueConverter}">
+                                                    <Binding.ValidationRules>
+                                                        <vm:TimeValidationRule ValidatesOnTargetUpdated="true" />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <Label   Grid.Column="3" Content="Stop Time:" Margin="10,0,0,0"/>
+                                        <TextBox Grid.Column="4" FontSize="12" Width="100" Margin="5,0,0,6" VerticalContentAlignment="Center" ToolTip="The stop time in hours and minutes from midnight" >
+                                            <Validation.ErrorTemplate>
+                                                <ControlTemplate>
+                                                    <StackPanel>
+                                                        <!-- Placeholder for the TextBox itself -->
+                                                        <AdornedElementPlaceholder x:Name="textBox"/>
+                                                        <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Validation.ErrorTemplate>
+                                            <TextBox.Text>
+                                                <Binding Path="AutoPvEStopTimeSeconds" Converter="{StaticResource ResourceKey=SecondsToTimeValueConverter}">
+                                                    <Binding.ValidationRules>
+                                                        <vm:TimeValidationRule ValidatesOnTargetUpdated="true" />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </Grid>
                                 </GroupBox>
                             </StackPanel>
                         </Grid>
@@ -1165,7 +1331,7 @@
                                         </Button>
                                     </StackPanel>
                                 </GroupBox.Header>
-                                <ListView x:Name="EngramsOverrideListView"  ItemsSource="{Binding OverrideNamedEngramEntries}" Height="200" IsEnabled="{Binding ElementName=EnableEngramOverridesCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
+                                <ListView x:Name="EngramsOverrideListView"  ItemsSource="{Binding OverrideNamedEngramEntries}" Height="400" IsEnabled="{Binding ElementName=EnableEngramOverridesCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding EngramClassName, Converter={StaticResource EngramClassNameToDisplayNameConverter}}"/>
@@ -1222,7 +1388,7 @@
                                             </Button>
                                         </StackPanel>
                                     </GroupBox.Header>
-                                    <ListView x:Name="CustomPlayerLevelsView"  ItemsSource="{Binding PlayerLevels}" Height="200" IsEnabled="{Binding ElementName=EnableLevelsCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
+                                    <ListView x:Name="CustomPlayerLevelsView"  ItemsSource="{Binding PlayerLevels}" Height="400" IsEnabled="{Binding ElementName=EnableLevelsCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
                                         <ListView.View>
                                             <GridView>
                                                 <GridViewColumn Header="+" Width="Auto">
@@ -1278,7 +1444,7 @@
                                         </StackPanel>
                                     </GroupBox.Header>
 
-                                    <ListView x:Name="CustomDinoLevelsView" ItemsSource="{Binding DinoLevels}" Height="200" IsEnabled="{Binding ElementName=EnableLevelsCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
+                                    <ListView x:Name="CustomDinoLevelsView" ItemsSource="{Binding DinoLevels}" Height="400" IsEnabled="{Binding ElementName=EnableLevelsCheckbox, Path=IsChecked}" HorizontalContentAlignment="Stretch">
                                         <ListView.View>
                                             <GridView>
                                                 <GridViewColumn Header="+" Width="Auto">
@@ -1312,6 +1478,33 @@
                                     </ListView>
                                 </GroupBox>
                             </StackPanel>
+                        </Grid>
+                    </Expander>
+                    <Expander IsExpanded="True" Style="{DynamicResource ExpanderStyle1}">
+                        <Expander.Header>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Survival of the Fittest" VerticalAlignment="Center" FontWeight="Bold" FontSize="13.333"/>
+                        </Expander.Header>
+                        <Grid Margin ="10">
+                            <GroupBox>
+                                <GroupBox.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Name="EnableSOTF" IsChecked="{Binding SOTF_Enabled}" VerticalAlignment="Center">Enable Survival of the Fittest</CheckBox>
+                                        <Button Margin="5" Click="HelpSOTF_Click" BorderThickness="0" Background="{StaticResource BeigeGradient}"  ToolTip="Load an existing profile, or import one directly from an existing server.">
+                                            <Image Source="Art/Help.png" Height="16" Margin="0" />
+                                        </Button>
+                                    </StackPanel>
+                                </GroupBox.Header>
+                                <StackPanel IsEnabled="{Binding ElementName=EnableSOTF, Path=IsChecked}">
+                                    <CheckBox IsChecked="{Binding SOTF_DisableDeathSPectator}" ToolTip="If checked, players cannot be spectators after they die.">Disable Death Spectator</CheckBox>
+                                    <CheckBox IsChecked="{Binding SOTF_OnlyAdminRejoinAsSpectator}" ToolTip="If checked, only admins can join as spectators once the game has started.">Only Admin Rejoin As Spectator</CheckBox>
+                                    <local:AnnotatedSlider Label="Max Players in Tribe:" Value="{Binding SOTF_MaxNumberOfPlayersInTribe}" Suffix="players" Minimum="1" Maximum="127" SmallChange="5" LargeChange="20" TickFrequency="10" ToolTip="The maximum number of players allowed in a tribe."/>
+                                    <local:AnnotatedSlider Label="Tribe Required for Game:" Value="{Binding SOTF_BattleNumOfTribesToStartGame}" Suffix="tribes" Minimum="1" Maximum="127" SmallChange="5" LargeChange="20" TickFrequency="10" ToolTip="The number of tribes requires for the game to start."/>
+                                    <local:AnnotatedSlider Label="Ring of Death Collapse Time:" Value="{Binding SOTF_TimeToCollapseROD}" Suffix="seconds" Minimum="60" Maximum="86400" SmallChange="900" LargeChange="3600" TickFrequency="3600" ToolTip="The game length before Sudden Death."/>
+                                    <local:AnnotatedSlider Label="Auto-start Delay Time:" Value="{Binding SOTF_BattleAutoStartGameInterval}" Suffix="seconds" Minimum="5" Maximum="120" SmallChange="5" LargeChange="20" TickFrequency="10" ToolTip="The time after the minimum number of tribes has been achieved before the game starts."/>
+                                    <local:AnnotatedSlider Label="Auto-restart Delay Time:" Value="{Binding SOTF_BattleAutoRestartGameInterval}" Suffix="seconds"  Minimum="5" Maximum="120" SmallChange="5" LargeChange="20" TickFrequency="10" ToolTip="The time after the last game has ended before the new game will start."/>
+                                    <local:AnnotatedSlider Label="Sudden Death Time:" Value="{Binding SOTF_BattleSuddenDeathInterval}" Suffix="seconds" Minimum="60" Maximum="3600" SmallChange="60" LargeChange="600" TickFrequency="300" ToolTip="The amount of time Sudden Death will be in effect until the game is declared a draw."/>
+                                </StackPanel>
+                            </GroupBox>
                         </Grid>
                     </Expander>
                 </StackPanel>

@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using WPFSharp.Globalizer;
+using SteamKit2;
 
 namespace ARK_Server_Manager
 {
@@ -41,26 +42,74 @@ namespace ARK_Server_Manager
         {
             AppDomain.CurrentDomain.UnhandledException += ErrorHandling.CurrentDomain_UnhandledException;
             App.Instance = this;
-        }
 
-        static App()
-        {
-            ReconfigureLogging();            
+            //
+            // Migrate settings when we update.
+            //
+            if(Config.Default.UpgradeConfig)
+            {
+                Config.Default.Upgrade();
+                Config.Default.UpgradeConfig = false;
+                Config.Default.Save();
+            }
+
+            ReconfigureLogging();
             App.Version = App.GetDeployedVersion();
         }
 
         public static void ReconfigureLogging()
-        {            
+        {               
             string logDir = Path.Combine(Config.Default.DataDir, Config.Default.LogsDir);
-            System.IO.Directory.CreateDirectory(logDir);
-            var statusWatcherTarget = (FileTarget)LogManager.Configuration.FindTargetByName("statuswatcher");
-            statusWatcherTarget.FileName = Path.Combine(logDir, "ASM_ServerStatusWatcher.log");
+            LogManager.Configuration.Variables["logDir"] = logDir;
 
-            var debugTarget = (FileTarget)LogManager.Configuration.FindTargetByName("debugFile");
-            debugTarget.FileName = Path.Combine(logDir, "ASM_Debug.log");
+            System.IO.Directory.CreateDirectory(logDir);
+            var target = (FileTarget)LogManager.Configuration.FindTargetByName("statuswatcher");
+            target.FileName = Path.Combine(logDir, "ASM_ServerStatusWatcher.log");
+
+            target = (FileTarget)LogManager.Configuration.FindTargetByName("debugFile");
+            target.FileName = Path.Combine(logDir, "ASM_Debug.log");
+
+            target = (FileTarget)LogManager.Configuration.FindTargetByName("scripts");
+            target.FileName = Path.Combine(logDir, "ASM_Scripts.log");
 
             LogManager.ReconfigExistingLoggers();
         }   
+
+        public static string GetProfileLogDir(string profileName)
+        {
+            var logFilePath = Path.Combine(Config.Default.DataDir, Config.Default.LogsDir, profileName);
+            return logFilePath;
+        }
+
+        public static Logger GetProfileLogger(string profileName, string name)
+        {
+            var loggerName = $"{profileName}_{name}";
+
+            Logger logger = null;
+            var config = LogManager.Configuration;
+            if (config.FindTargetByName(loggerName) == null)
+            {            
+                var logFile = new FileTarget();
+                config.AddTarget(loggerName, logFile);
+
+                var logFilePath = GetProfileLogDir(profileName);
+                logFile.FileName = Path.Combine(logFilePath, $"{name}.log");
+                logFile.Layout = "${time} ${message}";
+                var datePlaceholder = "{#}";
+                logFile.ArchiveFileName = Path.Combine(logFilePath, $"{name}.{datePlaceholder}.log");
+                logFile.ArchiveNumbering = ArchiveNumberingMode.DateAndSequence;
+                logFile.ArchiveEvery = FileArchivePeriod.Day;
+                logFile.ArchiveDateFormat = "yyyyMMdd";
+
+                var rule = new LoggingRule(loggerName, LogLevel.Info, logFile);
+                config.LoggingRules.Add(rule);
+
+                LogManager.Configuration = config;
+            }
+
+            logger = LogManager.GetLogger(loggerName);
+            return logger;
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {                                  
@@ -108,6 +157,7 @@ namespace ARK_Server_Manager
                 Task.Factory.StartNew(async () => await App.DiscoverMachinePublicIP(forceOverride: false));
             }
 
+            
             base.OnStartup(e);
         }
 

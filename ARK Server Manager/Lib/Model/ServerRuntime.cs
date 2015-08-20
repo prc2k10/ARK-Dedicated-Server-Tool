@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -145,7 +146,7 @@ namespace ARK_Server_Manager.Lib
                 InstallDirectory = profile.InstallDirectory,
                 QueryPort = profile.ServerPort,
                 ServerConnectionPort = profile.ServerConnectionPort,
-                ServerIP = profile.ServerIP,
+                ServerIP = String.IsNullOrWhiteSpace(profile.ServerIP) ? IPAddress.Loopback.ToString() : profile.ServerIP,
                 LastInstalledVersion = profile.LastInstalledVersion,
                 ProfileName = profile.ProfileName,
                 RCONEnabled = profile.RCONEnabled,
@@ -254,6 +255,52 @@ namespace ARK_Server_Manager.Lib
             return;            
         }
 
+        // Delegate type to be used as the Handler Routine for SCCH
+        delegate Boolean ConsoleCtrlDelegate(CtrlTypes CtrlType);
+
+        // Enumerated type for the control messages sent to the handler routine
+        enum CtrlTypes : uint
+        {
+            CTRL_C_EVENT = 0,
+            CTRL_BREAK_EVENT,
+            CTRL_CLOSE_EVENT,
+            CTRL_LOGOFF_EVENT = 5,
+            CTRL_SHUTDOWN_EVENT
+        }
+        [DllImport("kernel32.dll")]
+        static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool AttachConsole(uint dwProcessId);
+
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GenerateConsoleCtrlEvent(CtrlTypes dwCtrlEvent, uint dwProcessGroupId);
+
+        public static void SendStop(Process proc)
+        {
+            //This does not require the console window to be visible.
+            if (AttachConsole((uint)proc.Id))
+            {
+                // Disable Ctrl-C handling for our program
+                SetConsoleCtrlHandler(null, true);
+                GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0);
+
+                // Must wait here. If we don't and re-enable Ctrl-C
+                // handling below too fast, we might terminate ourselves.
+                //proc.WaitForExit(2000);
+
+                FreeConsole();
+
+                //Re-enable Ctrl-C handling or any subsequently started
+                //programs will inherit the disabled state.
+                SetConsoleCtrlHandler(null, false);
+            }
+        }
+
         public async Task StopAsync()
         {
             switch(this.Status)
@@ -274,8 +321,19 @@ namespace ARK_Server_Manager.Lib
                                 this.Status = ServerStatus.Stopping;
                                 this.Steam = SteamStatus.Unavailable;
                                 process.Exited += handler;
-                                process.CloseMainWindow();
-                                await ts.Task;
+                                if (AttachConsole((uint)process.Id))
+                                {
+                                    // Disable Ctrl-C handling for our program
+                                    SetConsoleCtrlHandler(null, true);
+                                    GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0);
+                                    await ts.Task;
+                                    FreeConsole();
+                                    SetConsoleCtrlHandler(null, false);
+                                }
+                                else
+                                {
+                                    process.Kill();
+                                }
                             }
                             finally
                             {
@@ -313,26 +371,17 @@ namespace ARK_Server_Manager.Lib
                 this.Status = ServerStatus.Updating;
 
                 // Run the SteamCMD to install the server
-                var steamCmdPath = System.IO.Path.Combine(Config.Default.DataDir, Config.Default.SteamCmdDir, Config.Default.SteamCmdExe);
-                Directory.CreateDirectory(this.ProfileSnapshot.InstallDirectory);
-                var steamArgs = String.Format(Config.Default.SteamCmdInstallServerArgsFormat, this.ProfileSnapshot.InstallDirectory, validate ? "validate" : String.Empty);
-                var process = Process.Start(steamCmdPath, steamArgs);
-                process.EnableRaisingEvents = true;
-                var ts = new TaskCompletionSource<bool>();
-                using (var cancelRegistration = cancellationToken.Register(() => { try { process.CloseMainWindow(); } finally { ts.TrySetCanceled(); } }))
+                var steamCmdPath = AutoUpdater.GetSteamCMDPath();
+                //DataReceivedEventHandler dataReceived = (s, e) => Console.WriteLine(e.Data);
+                var success = await ServerUpdater.UpgradeServerAsync(validate, this.ProfileSnapshot.InstallDirectory, steamCmdPath, Config.Default.SteamCmdInstallServerArgsFormat, null /* dataReceived*/, cancellationToken);
+                if (success && ServerManager.Instance.AvailableVersion != null)
                 {
-                    process.Exited += (s, e) => ts.TrySetResult(process.ExitCode == 0);
-                    process.ErrorDataReceived += (s, e) => ts.TrySetException(new Exception(e.Data));
-                    var success = await ts.Task;
-                    if(success && ServerManager.Instance.AvailableVersion != null)
-                    {
-                        this.Version = ServerManager.Instance.AvailableVersion;
-                    }
-
-                    return success;
+                    this.Version = ServerManager.Instance.AvailableVersion;
                 }
+
+                return success;
             }
-            catch(TaskCanceledException)
+            catch (TaskCanceledException)
             {
                 return false;
             }
@@ -340,8 +389,8 @@ namespace ARK_Server_Manager.Lib
             {
                 this.Status = ServerStatus.Stopped;
             }
-        }
-    
+        }       
+
         public void Dispose()
         {
             this.updateRegistration.DisposeAsync().DoNotWait();

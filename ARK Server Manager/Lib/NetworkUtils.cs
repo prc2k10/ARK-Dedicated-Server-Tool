@@ -22,6 +22,12 @@ namespace ARK_Server_Manager.Lib
             this.Description = description;
         }
 
+        public NetworkAdapterEntry(string address, string description)
+        {
+            this.IPAddress = address;
+            this.Description = description;
+        }
+
         public string IPAddress
         {
             get;
@@ -56,6 +62,23 @@ namespace ARK_Server_Manager.Lib
             }
 
             return adapters;
+        }
+
+        public static async Task<Version> GetLatestASMVersion()
+        {
+            using (var webClient = new WebClient())
+            {
+                try
+                {
+                    var latestVersion = await webClient.DownloadStringTaskAsync(Config.Default.LatestASMVersionUrl);
+                    return Version.Parse(latestVersion);
+                }
+                catch (Exception ex)
+                {
+                    logger.Debug(String.Format("Exception checking for ASM version: {0}\r\n{1}", ex.Message, ex.StackTrace));
+                    return new Version();
+                }
+            }
         }
 
         public static NetworkAdapterEntry GetPreferredIP(IEnumerable<NetworkAdapterEntry> adapters)

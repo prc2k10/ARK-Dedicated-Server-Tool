@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +53,18 @@ namespace ARK_Server_Manager
         public static readonly DependencyProperty ServerManagerProperty =
             DependencyProperty.Register(nameof(ServerManager), typeof(ServerManager), typeof(ServerSettingsControl), new PropertyMetadata(null));
 
-        
+
+
+        public bool IsAdministrator
+        {
+            get { return (bool)GetValue(IsAdministratorProperty); }
+            set { SetValue(IsAdministratorProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsAdministratorProperty = DependencyProperty.Register(nameof(IsAdministrator), typeof(bool), typeof(ServerSettingsControl), new PropertyMetadata(false));
+
+
+
         public Server Server
         {
             get { return (Server)GetValue(ServerProperty); }
@@ -101,7 +113,11 @@ namespace ARK_Server_Manager
         public ServerSettingsControl()
         {
             InitializeComponent();
-            this.ServerManager = ServerManager.Instance;           
+            this.ServerManager = ServerManager.Instance;
+
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            this.IsAdministrator = principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         private void ReinitializeNetworkAdapters()
@@ -112,7 +128,7 @@ namespace ARK_Server_Manager
             // Filter out self-assigned addresses
             //
             adapters.RemoveAll(a => a.IPAddress.StartsWith("169.254."));
-
+            adapters.Insert(0, new NetworkAdapterEntry(String.Empty, "Let ARK choose"));
             var savedServerIp = this.Settings.ServerIP;
             this.NetworkInterfaces = adapters;
             this.Settings.ServerIP = savedServerIp;
@@ -238,7 +254,29 @@ namespace ARK_Server_Manager
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            if (Settings.EnableAutoUpdate && !AutoUpdater.IsServerCacheAutoUpdateEnabled)
+            {
+                var result = MessageBox.Show("Auto-updates is enabled but the Server Cache update is not yet configured.  The server cache downloads server updates in the background automatically to enable faster server updates, particularly when there are multiple servers.  You must first configure the cache, then you may enable automatic updating.  Would you like to configure the cache now?", "Server cache not configured", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if(result == MessageBoxResult.Yes)
+                {
+                    var settingsWindow = new SettingsWindow();
+                    settingsWindow.ShowDialog();
+                    if(!AutoUpdater.IsServerCacheAutoUpdateEnabled)
+                    {
+                        MessageBox.Show("The server cache was not configured.  Disabling auto-updates.", "Server cache not configured", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Settings.EnableAutoUpdate = false;
+                    }
+                }
+            }
+
             Settings.Save();
+            if (this.IsAdministrator)
+            {
+                if (!Settings.UpdateAutoUpdateSettings())
+                {
+                    MessageBox.Show("Failed to update scheduled tasks.  Ensure you have administrator rights on this machine and try again.  If the problem persists, please report this as a bug.", "Update schedule failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }           
         }
 
         private void CopyProfile_Click(object sender, RoutedEventArgs e)
@@ -369,7 +407,7 @@ namespace ARK_Server_Manager
         {
             if(this.rconWindow == null || !this.rconWindow.IsLoaded)
             {
-                this.rconWindow = new RCONWindow(this.Settings.ProfileName, new IPEndPoint(IPAddress.Parse(this.Settings.ServerIP), this.Settings.RCONPort), this.Settings.AdminPassword);                
+                this.rconWindow = new RCONWindow(this.Server);                
             }
 
             this.rconWindow.Show();
@@ -379,6 +417,28 @@ namespace ARK_Server_Manager
         private void Engrams_Reset(object sender, RoutedEventArgs e)
         {
             this.Settings.OverrideNamedEngramEntries.Reset();
+        }
+
+        private void HelpSOTF_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Survival of the Fittest is a total conversion mod.  In order to enable it, you will need to first install it (we don't yet support installing it for you.)  Would you like to open the installation instructions web page now?", "Go to SOTF web page?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(result == MessageBoxResult.Yes)
+            {
+                Process.Start("http://steamcommunity.com/app/346110/discussions/10/530649887204866610/");
+            }
+        }
+
+        private void TestUpdater_Click(object sender, RoutedEventArgs e)
+        {
+            if(!this.Settings.UpdateAutoUpdateSettings())
+            {
+                
+            }
+        }
+
+        private void NeedAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Automatic Management features of the Server Manager use administrator features of Windows to schedule tasks that will run even if the ASM is not running, without installing any separate processes or services.  To do this, the Server Manager must run with administrator privileges.  Restart the Server Manager and 'Run As Administrator' and you will be able to utilize these features.", "Needs Administrator Access", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
