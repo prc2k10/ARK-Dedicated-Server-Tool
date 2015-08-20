@@ -137,6 +137,9 @@
       <DependentUpon>AnnotatedSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnnotatedTextBox.cs" />
+    <Compile Include="Art\Shapes.xaml.cs">
+      <DependentUpon>Shapes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
@@ -195,13 +198,14 @@
     <Compile Include="Testing\UITests.xaml.cs">
       <DependentUpon>UITests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WPFControls\AnnotatedGlowSlider.xaml.cs">
-      <DependentUpon>AnnotatedGlowSlider.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AnnotatedSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Art\Shapes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,10 +234,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UIStyles\MainTabControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPFControls\AnnotatedGlowSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

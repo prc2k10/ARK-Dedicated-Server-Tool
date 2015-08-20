@@ -176,59 +176,8 @@
 			<TabItem Header="Administration">
 				<Grid Background="{DynamicResource _GrayMainBG}" Opacity="0.795">
 					<Grid Margin="10">
-        					<Grid.ColumnDefinitions>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        						<ColumnDefinition Width="Auto" MinWidth="120"/>
-        					</Grid.ColumnDefinitions>
-        					<Grid.RowDefinitions>
-        						<RowDefinition Height="38"/>
-        						<RowDefinition Height="38"/>
-        						<RowDefinition Height="38"/>
-        						<RowDefinition Height="38"/>
-        						<RowDefinition Height="38"/>
-        						<RowDefinition Height="38"/>
-        					</Grid.RowDefinitions>
-							<TextBlock HorizontalAlignment="Right" Grid.Row="0" TextWrapping="Wrap" Text="Server Name:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,0,4,0" Height="14.4"  />
-							<TextBox Grid.Column="1" Grid.Row="0"  Text="{Binding ServerName}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="The public name of the server, as seen in Steam and Ark." Margin="0,8"/>
-        					<TextBlock HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" TextWrapping="Wrap" Text="Server Password:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,4.783,4,4.785" Height="14.4" Width="100.26" />
-							<TextBox Grid.Column="3" Grid.Row="0"  Text="{Binding ServerPassword}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="The password users must enter in order to access the server. If this is set, only people who know the password can access your server." Margin="0,8"/>
-
-        					<TextBlock HorizontalAlignment="Right" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" Text="Admin Password:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,4.783,4,4.785" Height="14.4" Width="103.464" />
-							<TextBox Grid.Column="5" Grid.Row="0" Text="{Binding AdminPassword}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
-        						ToolTip="Ths password users must enter to execute admin/cheat commands on the server. If this is not set, anyone can use cheats." Margin="0,8"/>							
-							<TextBlock HorizontalAlignment="Right"  Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="Server Port:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,0,4,0" Height="14.4"  />
-
-        					<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ServerConnectionPort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
-        						ToolTip="The port users will use to connect to your server. Default is 7777. Change this and Query Port if you wish to host multiple servers on one machine." Margin="0,8"/>
-        					<Label Grid.Column="2" Grid.Row="1" Content="Query Port:" VerticalContentAlignment="Center" Margin="8,98.874,0,98.88" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="15.96" Width="59.97"/>
-        					<TextBlock HorizontalAlignment="Right"  Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" Text="Query Port:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,0,4,0" Height="14.4"  />
-							<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding ServerPort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
-        						ToolTip="The port Steam uses to communicate with your server. Default is 27015. Change this and Server Port if you wish to host multiple servers on one machine." Margin="0,8"/>
-        					<Label Grid.Column="4" Grid.Row="1" Content="MultiHome IP:" VerticalContentAlignment="Center" Margin="8,98.874,0,98.88" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Height="15.96" Width="75.41"/>
-        					<TextBlock HorizontalAlignment="Right"  Grid.Column="4" Grid.Row="1" TextWrapping="Wrap" Text="MultiHome IP:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,0,4,0" Height="14.4"  />
-							
-							<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding ServerIP}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
-        						ToolTip="Sets the IP address to bind the server to. Only necessary if your machine is on multiple networks. Most users do not need to use this and it should remain blank." Margin="0,8"/>
-
-        					<local:AnnotatedGlowSlider Grid.Column= "0" Grid.ColumnSpan="6" Grid.Row="2" FrontNote="Max Players:" EndNote="" SliderValue="{Binding MaxPlayers}" SliderMin="1" SliderMax="127" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" ToolTip="Sets the maximum number of players which can join this server." Height="38" Margin="0,0,-45,0" FontFamily="{DynamicResource LabelFont}"/>
-                            <TextBlock HorizontalAlignment="Right"  Grid.Column="0" Grid.Row="3" TextWrapping="Wrap" Text="MOTD:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,0,4,0" Height="14.4"  />
         					
-        					<TextBox Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3"  Text="{Binding MOTD}" TextWrapping="Wrap" MaxLength="256"
-        						ToolTip="The Message of the Day displayed to users when they connect to the server." SnapsToDevicePixels="True" Margin="0,8"/>
-        					<TextBox Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" MinWidth="400" HorizontalAlignment="Stretch" Text="{Binding AdditionalArgs}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
-        						ToolTip="Additional command-line args for the server.  If you specify this, add the args which start with ?'s first, followed by any other args.  For example: ?MaxPlayers=5?QueryPort=9999 -nosteamclient" Margin="0,0,0,10"/>
-        					<TextBlock HorizontalAlignment="Right"  Grid.Column="0" Grid.Row="5" TextWrapping="Wrap" Text="Additional Args:" VerticalAlignment="Center" Foreground="{DynamicResource _GrayTextLight}" FontFamily="{DynamicResource LabelFont}" Margin="0,10,4,13.6" Height="14.4"  />
-        					<TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="34.666" Margin="66.667,60.707,0,-57.373" Grid.Row="5" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="130" Style="{DynamicResource TextBlockStyle1}"/>
-        					<Slider x:Name="slider" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Left" Height="24.667" Margin="49.333,138.04,0,-124.707" Grid.Row="5" VerticalAlignment="Top" Width="248.667"/>
-        					<TextBlock Grid.ColumnSpan="2" Grid.Column="3" HorizontalAlignment="Left" Height="37.334" Margin="99.333,125.373,0,-124.707" Grid.Row="5" TextWrapping="Wrap" Text="{Binding Value, ElementName=slider}" VerticalAlignment="Top" Width="96.667"/>
-        					<Calendar Grid.ColumnSpan="3" Grid.Column="3" HorizontalAlignment="Left" Height="172" Margin="33.333,227.373,0,-361.373" Grid.Row="5" VerticalAlignment="Top" Width="221.667"/>
-        					
-
-        				</Grid>
+                    </Grid>
 				</Grid>
 			</TabItem>
 			
