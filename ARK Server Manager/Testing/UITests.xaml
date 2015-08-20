@@ -7,7 +7,7 @@
 	x:Class="ARK_Server_Manager.UITests"
 	x:Name="Window"
 	Title="UITests"
-	Width="1024" Height="800">
+	Width="1186" Height="900">
 
     <Grid x:Name="LayoutRoot">
         <Rectangle x:Name="Background" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3">
@@ -15,36 +15,46 @@
                 <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/iStock_000003783032MediumA.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid Margin="8,63,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3"/>
         <Grid x:Name="Header" Height="54" Margin="8,9,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3"/>
-        <Grid x:Name="ServerDetail" Margin="8,50,8,8" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="212"/>
-                <ColumnDefinition Width="8"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TabControl x:Name="mainTabControl" Padding="0" Background="{x:Null}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource MainTabControl}">
-                <TabItem Header="Administration" x:Name="tabItemAdministration">
-                    <Grid Background="{DynamicResource DarkNeutralFade_Brush}">
-                        <Grid Margin="10"/>
-                        <Rectangle Height="189" Width="301" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/iStock_000003783032MediumA.jpg" Stretch="UniformToFill"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Grid>
-                </TabItem>
-
-            </TabControl>
-            <ListBox x:Name="listBox" Width="213" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0,0,-1,0" Background="{DynamicResource DarkNeutralFade_Brush}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="Black" Loaded="listBox_Loaded">
-                <ListBoxItem Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,4,8" Margin="0,3,0,0"/>
-                <ListBoxItem Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                <ListBoxItem Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                <ListBoxItem Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                <ListBoxItem Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                <ListBoxItem Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                <ListBoxItem Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-            </ListBox>
+        <Grid x:Name="Body" Margin="8,50,8,8">
+            <Grid x:Name="ServerDetail">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="212"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource MainTabControl}">
+                    <TabItem Header="TabItem" Margin="0">
+                        <Grid Background="#FFE5E5E5">
+                            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="A" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5">
+                            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64" TextAlignment="Center"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5">
+                            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="U" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5">
+                            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="P" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+                <ListBox x:Name="listBox" Width="213" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0,0,-1,0" Background="{DynamicResource DarkNeutralFade_Brush}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="Black" Loaded="listBox_Loaded">
+                    <ListBoxItem Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
+                    <ListBoxItem Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                </ListBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
