@@ -222,8 +222,11 @@
     <Compile Include="RCONWindow.xaml.cs">
       <DependentUpon>RCONWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServerDetailBox.xaml.cs">
-      <DependentUpon>ServerDetailBox.xaml</DependentUpon>
+    <Compile Include="ServerDetailControl.xaml.cs">
+      <DependentUpon>ServerDetailControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ServerListItem.xaml.cs">
+      <DependentUpon>ServerListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServerSettingsControl.xaml.cs">
       <DependentUpon>ServerSettingsControl.xaml</DependentUpon>
@@ -246,11 +249,15 @@
     </Content>
     <Resource Include="UIStyles\header.png" />
     <Resource Include="UIStyles\headerTitle.jpg" />
-    <Page Include="ServerDetailBox.xaml">
+    <Page Include="ServerDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TextStyles.xaml">
+    <Page Include="ServerListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIStyles\TextStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="UIStyles/MainTabControl.xaml"/>
                 <ResourceDictionary Source="UIStyles/Slider_TwoTone.xaml"/>
                 <ResourceDictionary Source="UIStyles/BasicStyles.xaml"/>
-                <ResourceDictionary Source="TextStyles.xaml"/>
+                <ResourceDictionary Source="UIStyles/TextStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 			<SolidColorBrush x:Key="LtBeige" Color="#FFE6DFD8"/>
 			<SolidColorBrush x:Key="MedBeige" Color="#FFD8CCBC"/>
@@ -26,6 +26,7 @@
 				<Setter Property="Background" Value="{DynamicResource LtBeige}"/>
 			</Style>
 			<SolidColorBrush x:Key="DkBeige" Color="#FFBFA786"/>
-		</ResourceDictionary>
+            <SolidColorBrush x:Key="StopButtonBase" Color="#FF951515"/>
+        </ResourceDictionary>
 	</globalizer:GlobalizedApplication.Resources>
 </globalizer:GlobalizedApplication>

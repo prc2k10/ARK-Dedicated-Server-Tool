@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ARK_Server_Manager
 {
     /// <summary>
-    /// Interaction logic for ServerDetailBox.xaml
+    /// Interaction logic for ServerListItem.xaml
     /// </summary>
-    public partial class ServerDetailBox : UserControl
+    public partial class ServerListItem : UserControl
     {
-        public ServerDetailBox()
+        public ServerListItem()
         {
             InitializeComponent();
         }

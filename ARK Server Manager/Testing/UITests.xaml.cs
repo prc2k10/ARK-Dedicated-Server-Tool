@@ -35,5 +35,10 @@ namespace ARK_Server_Manager
             }
 
         }
+
+        private void ShowDetailView(object sender, RoutedEventArgs e)
+        {
+            serverDetailCtrl.BeginStoryboard(serverDetailCtrl.FindResource("show") as System.Windows.Media.Animation.Storyboard);
+        }
     }
 }
