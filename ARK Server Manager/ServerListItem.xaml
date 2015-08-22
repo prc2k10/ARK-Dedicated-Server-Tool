@@ -12,7 +12,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <Border x:Name="detailButtonArea" Grid.Column="1" Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <LinearGradientBrush.RelativeTransform>
@@ -27,11 +27,24 @@
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <Button x:Name="button" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center"/>
+                <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center"/>
             </Border>
-            <Grid Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                <Button x:Name="button1" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
-                <Button x:Name="button1_Copy" Content="STOP" HorizontalAlignment="Right" Margin="0,0,112,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
+            <Grid x:Name="bodyArea" Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                <Button x:Name="buttonStart" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
+                <Button x:Name="buttonStop" Content="STOP" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
+                <TextBlock x:Name="textBlock" Margin="6.06,56.035,184.94,3.965" TextWrapping="Wrap" Foreground="Red"><Run Text="Installed version of Ark (date last updated)"/><LineBreak/><Run Text="&#x9;&#x9;Update button if new available (date, not version number)"/><LineBreak/><Run Text="&#x9;&#x9;IP address (public and private):port#"/><LineBreak/><Run Text="&#x9;&#x9;Publicly available?"/><LineBreak/><Run Text="&#x9;&#x9;Server Status (status: running, stopped, not installed, initializing)"/></TextBlock>
+                <Grid x:Name="titleArea" Height="30.088" Margin="0,2.62,-4.289,0" VerticalAlignment="Top">
+                    <Path Data="F1M0,0L230.479,14.095 0,28.188z" Stretch="Fill" Fill="{DynamicResource BlackFadeRight_Brush}"/>
+                    <StackPanel HorizontalAlignment="Left" Margin="3.38,4.949,0,5.939" Orientation="Horizontal" d:LayoutOverrides="Height">
+                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Server:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="[serverName]" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel HorizontalAlignment="Left" Margin="6.06,37.708,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+                    <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Installed Version" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold"/>
+                    <TextBlock x:Name="textInstalledVersion" TextWrapping="Wrap" Text="[installedVersion]" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0"/>
+                    <Button x:Name="button" Content="Button" Height="18.327" Width="18.326" Margin="8,0,0,0" Style="{DynamicResource RefreshButton}"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

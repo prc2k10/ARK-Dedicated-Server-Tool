@@ -48,8 +48,8 @@
             <Button x:Name="button" Content="SwitchViews" Margin="446,34,457,34" Click="ShowDetailView"/>
         </Grid>
         <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10"/>
-        <ScrollViewer x:Name="ServerListArea" Background="{DynamicResource DarkNeutralFade_Brush}" Margin="8,119.5,10,10" VerticalScrollBarVisibility="Auto" Visibility="Hidden">
-            <WrapPanel Background="#FF935252" HorizontalAlignment="Center">
+        <ScrollViewer x:Name="ServerListArea" Background="{DynamicResource DarkNeutralFade_Brush}" Margin="8,119.5,10,10" VerticalScrollBarVisibility="Auto">
+            <WrapPanel HorizontalAlignment="Center">
                 <local:ServerListItem Height="137" Width="594" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4"/>
                 <local:ServerListItem Height="137" Width="594" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4"/>
                 <local:ServerListItem Height="137" Width="594" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4"/>

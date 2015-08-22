@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ARK_Server_Manager" xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <FontFamily x:Key="ServerListBodyFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
     <FontFamily x:Key="DefaultFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>
     <System:Double x:Key="DefaultButtonFontSize">14.667</System:Double>
     <FontFamily x:Key="HeaderFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>
