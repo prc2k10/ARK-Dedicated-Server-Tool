@@ -222,6 +222,9 @@
     <Compile Include="RCONWindow.xaml.cs">
       <DependentUpon>RCONWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServerDetailBox.xaml.cs">
+      <DependentUpon>ServerDetailBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServerSettingsControl.xaml.cs">
       <DependentUpon>ServerSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -235,14 +238,35 @@
     <Compile Include="UIStyles\ExtendedSlider.cs">
       <DependentUpon>ExtendedSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIStyles\Shapes.xaml.cs">
+      <DependentUpon>Shapes.xaml</DependentUpon>
+    </Compile>
     <Content Include="Lib\ServerUpdater\mcrcon.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="UIStyles\header.png" />
+    <Resource Include="UIStyles\headerTitle.jpg" />
+    <Page Include="ServerDetailBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIStyles\BasicStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UIStyles\ExtendedSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UIStyles\MainTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIStyles\Shapes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

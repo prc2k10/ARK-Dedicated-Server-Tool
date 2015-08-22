@@ -7,16 +7,192 @@
 	x:Class="ARK_Server_Manager.UITests"
 	x:Name="Window"
 	Title="UITests"
-	Width="1186" Height="900">
+	Width="1186" Height="900" MinWidth="900" MinHeight="500">
+    <Window.Resources>
+        <Style x:Key="BackButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Margin="0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonBase_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonBase_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHover_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHover_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPress_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPress_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="border_Copy" SnapsToDevicePixels="true" Background="{DynamicResource Master_Brush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="38.994,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border x:Name="border" SnapsToDevicePixels="true" Background="{DynamicResource Master_Brush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Left" Width="36.438">
+                                <Path Data="F1M123.864,157.779L0,0 99.345,157.561 0,301.193z" Fill="{DynamicResource ButtonFillColor}" Margin="8.645,3.902" HorizontalAlignment="Stretch" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="180"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" Margin="51.473,0,13.104,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BackButton2" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Margin="0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonBase_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHover_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border_Copy">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPress_Brush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="border_Copy" SnapsToDevicePixels="true" Background="{DynamicResource Master_Brush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0" RenderTransformOrigin="0.5,0.5">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                            </Border>
+                            <StackPanel Margin="12,6,0,6" Orientation="Horizontal" d:LayoutOverrides="Width" HorizontalAlignment="Left">
+                                <Path Data="F1M123.864,157.779L0,0 75.345,157.561 0,301.193z" Fill="{DynamicResource ButtonFillColor}" Margin="0" HorizontalAlignment="Stretch" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Width="15.148">
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="180"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Left" Margin="30,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto"/>
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="ServerDetail"/>
+    </Window.Triggers>
 
     <Grid x:Name="LayoutRoot">
-        <Rectangle x:Name="Background" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3">
+        <Rectangle x:Name="Background" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3" d:IsLocked="True">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/iStock_000003783032MediumA.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid x:Name="Header" Height="54" Margin="8,9,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3"/>
-        <Grid x:Name="Body" Margin="8,50,8,8">
+        <Grid x:Name="Header" Height="100" Margin="8,9,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3" Background="{DynamicResource DarkNeutral_Brush}">
+            <Rectangle HorizontalAlignment="Left" Width="272">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/header.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button x:Name="button_Copy" Width="95.986" Style="{DynamicResource ButtonDefault}" BorderBrush="Black" IsDefault="True" HorizontalAlignment="Right" Margin="0,12.743,10,0" VerticalAlignment="Top" Height="32">
+                <StackPanel Orientation="Horizontal">
+                    <Path x:Name="DollarSign" Data="F1M32.396,78.922C32.396,79.342,31.874,79.762,31.351,79.762L21.946,79.762C20.9,79.762 20.9,79.026 20.9,72.73 7.184,70.735 0,63.494 0,51.11 0,50.585 0.391,50.271 1.044,50.165L17.634,49.431C18.418,49.431 18.81,49.641 19.072,50.585 19.986,54.259 22.076,56.463 25.081,56.463 26.779,56.463 27.955,55.518 27.955,54.153 27.955,51.425 24.819,49.116 14.5,43.134 7.053,38.831 2.22,32.639 2.22,25.083 2.22,17.107 8.751,8.711 20.9,6.716L20.9,0.944C20.9,0.42,21.292,0,21.815,0L31.351,0C32.396,0 32.396,0.629 32.396,6.821 44.414,8.816 51.729,16.792 51.729,26.027 51.729,26.657 51.207,27.077 50.292,27.182L32.396,27.916C31.481,27.916 29.13,23.928 28.085,23.928 26.91,23.928 26.387,24.768 26.387,25.503 26.387,28.021 30.698,30.645 39.45,35.997 47.549,40.93 51.86,46.808 51.86,53.315 51.86,63.809 44.544,70.945 32.396,72.835z" Fill="{DynamicResource ButtonFillColor}" Height="23.08" Width="15.006" Stretch="Fill"/>
+                    <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Donate" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0,0,0" FontFamily="{DynamicResource ButtonFont}" FontSize="14.667" Foreground="{DynamicResource ButtonFillColor}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_Copy1" Width="95.986" Style="{DynamicResource ButtonDefault}" BorderBrush="Black" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,10,12.984" Height="32" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="F1M86.168,119.73C67.632,119.73 52.604,104.704 52.604,86.168 52.604,67.632 67.632,52.606 86.168,52.606 104.704,52.606 119.73,67.632 119.73,86.168 119.73,104.704 104.704,119.73 86.168,119.73 M171.984,93.724C172.202,91.232 172.334,88.716 172.334,86.168 172.334,83.778 172.212,81.418 172.02,79.078L156.88,75.288C156.104,70.204,154.776,65.305,152.99,60.632L164.256,49.734C162.184,45.302,159.748,41.078,156.982,37.096L141.94,41.396C138.746,37.422,135.14,33.794,131.18,30.584L135.484,15.526C131.522,12.756,127.324,10.304,122.914,8.222L112.03,19.474C107.314,17.644,102.364,16.285,97.228,15.488L93.432,0.329C91.036,0.128 88.616,0.001 86.168,0.001 83.718,0.001 81.3,0.128 78.902,0.329L75.108,15.488C69.97,16.285,65.02,17.644,60.306,19.474L49.42,8.222C45.01,10.304,40.812,12.756,36.852,15.526L41.154,30.584C37.194,33.794,33.588,37.422,30.394,41.396L15.352,37.096C12.588,41.078,10.15,45.302,8.08,49.734L19.344,60.632C17.558,65.305,16.23,70.204,15.456,75.288L0.314,79.078C0.124,81.418 0,83.778 0,86.168 0,88.716 0.132,91.232 0.35,93.724L15.54,97.526C16.343,102.56,17.68,107.412,19.474,112.036L8.223,122.92C10.33,127.378,12.814,131.622,15.624,135.622L30.688,131.316C33.838,135.18,37.384,138.704,41.262,141.836L36.96,156.886C40.98,159.69,45.248,162.158,49.73,164.252L60.626,152.99C65.208,154.742,70.01,156.046,74.988,156.828L78.786,172C81.22,172.206 83.678,172.334 86.168,172.334 88.656,172.334 91.114,172.206 93.55,172L97.348,156.828C102.326,156.046,107.126,154.742,111.708,152.99L122.606,164.252C127.086,162.158,131.354,159.69,135.374,156.886L131.074,141.836C134.952,138.704,138.498,135.18,141.646,131.316L156.712,135.62C159.52,131.622,162.004,127.378,164.11,122.92L152.86,112.036C154.654,107.412,155.992,102.56,156.794,97.526z" Fill="{DynamicResource ButtonFillColor}" Height="22.166" Stretch="Fill" Width="22.166"/>
+                    <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontFamily="{DynamicResource ButtonFont}" FontSize="14.667" Foreground="{DynamicResource ButtonFillColor}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_Copy2" Width="95.986" Style="{DynamicResource ButtonDefault}" BorderBrush="Black" IsDefault="True" HorizontalAlignment="Right" Margin="0,12.743,114.987,0" Height="32" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" Width="81.151">
+                    <Path Data="F1M0,203.921L0,170.489 100.571,201.066 100.571,0 173.731,0 173.731,201.066 274.302,162.62 274.302,203.921 137.151,340.98z" Fill="{DynamicResource ButtonFillColor}" Stretch="Fill" Height="24.283" Width="19.534"/>
+                    <TextBlock x:Name="textBlock4" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontFamily="{DynamicResource ButtonFont}" FontSize="14.667" Foreground="{DynamicResource ButtonFillColor}"><Run Text="I"/><Run Text="mport"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_Copy3" Width="95.986" Style="{DynamicResource ButtonDefault}" BorderBrush="Black" IsDefault="True" HorizontalAlignment="Right" Margin="0,0,114.987,12.984" Height="32" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal" Width="81.151">
+                    <Path x:Name="NewFile" Data="F1M122,128L98,128 98,152 77,152 77,128 53,128 53,107 77,107 77,83 98,83 98,107 122,107z M84,0L0,0 0,160 129,160 129,49z" Fill="{DynamicResource ButtonFillColor}" Height="20.948" Width="16.89" Stretch="Fill"/>
+                    <TextBlock x:Name="textBlock5" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontSize="14.667" Text="New" Foreground="{DynamicResource ButtonFillColor}" FontFamily="{DynamicResource ButtonFont}"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Grid x:Name="BodyArea" Margin="8,116,8,8">
             <Grid x:Name="ServerDetail">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="212"/>
@@ -31,14 +207,14 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <Border x:Name="headerArea" Margin="8,8,8,0" Tag="Raisins and Dates" BorderBrush="Black" Padding="0,8" Height="75" VerticalAlignment="Top" >
+                            <Border x:Name="headerArea" Margin="8,8,8,0" Tag="Raisins and Dates" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
                                 </Border.Effect>
                                 <Border.Background>
                                     <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                                 </Border.Background>
-                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="48" HorizontalAlignment="Center">
+                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem0}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                                     <TextBlock.Foreground>
                                         <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                                     </TextBlock.Foreground>
@@ -48,38 +224,130 @@
                     </TabItem>
                     <TabItem x:Name="tabRules" Header="tabRules">
                         <Grid>
-                            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="R" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64" TextAlignment="Center"/>
+                            <Border x:Name="headerArea_Copy" Tag="Raisins and Dates" BorderBrush="Black" Padding="0,8" Margin="8,8,8,0" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem1}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="tabUI" Header="tabUI">
                         <Grid>
-                            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="108" Margin="268,188,0,0" TextWrapping="Wrap" Text="U" VerticalAlignment="Top" Width="194" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="64"/>
+                            <Border Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem2}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
                         </Grid>
                     </TabItem>
-                    <TabItem x:Name="tabPlayer" Header="TabItem" Margin="-2,0">
-                        <Grid/>
+                    <TabItem x:Name="tabPlayer" Header="tabPlayer" Margin="-2,0" FontSize="18.667">
+                        <Grid>
+                            <Border Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem5}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
                     </TabItem>
                     <TabItem x:Name="tabDino" Header="tabDino">
-                        <Grid/>
+                        <Grid>
+                            <Border Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
                     </TabItem>
                     <TabItem x:Name="tabEnvironment" Header="tabEnvironment">
-                        <Grid/>
+                        <Grid>
+                            <Border Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem3}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
                     </TabItem>
                     <TabItem x:Name="tabMods" Header="tabMods">
-                        <Grid/>
+                        <Grid>
+                            <Border Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
+                                </Border.Background>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem4}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
                     </TabItem>
 
                 </TabControl>
-                <ListBox x:Name="listBox" Width="213" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0,0,-1,0" Background="{DynamicResource DarkNeutralFade_Brush}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="Black" Loaded="listBox_Loaded">
-                    <ListBoxItem x:Name="listBoxItem" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
-                    <ListBoxItem Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                </ListBox>
+                <Border d:LayoutOverrides="Height" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1">
+                    <StackPanel Orientation="Vertical">
+                        <ListBox x:Name="listBox" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{x:Null}" Loaded="listBox_Loaded" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top">
+                            <ListBoxItem x:Name="listBoxItem0" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
+                            <ListBoxItem x:Name="listBoxItem1" Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                            <ListBoxItem x:Name="listBoxItem2" Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                            <ListBoxItem x:Name="listBoxItem5" Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                            <ListBoxItem x:Name="listBoxItem" Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                            <ListBoxItem x:Name="listBoxItem3" Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                            <ListBoxItem x:Name="listBoxItem4" Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                        </ListBox>
+                        <Button x:Name="button_Copy4" Height="42.837" Margin="28,25,28,0" Style="{DynamicResource BackButton2}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White" Click="GotoListView">
+                            <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Text="List" FontSize="24" FontFamily="{DynamicResource DefaultFont}"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
             </Grid>
+            <StackPanel x:Name="ServerList" Margin="0" Orientation="Vertical" VerticalAlignment="Top" Width="900" HorizontalAlignment="Center">
+                <local:ServerDetailBox Height="100" Width="Auto" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                <local:ServerDetailBox Height="100" Width="Auto" d:LayoutOverrides="LeftPosition, RightPosition" Margin="0,12,0,0"/>
+                <local:ServerDetailBox Height="100" Width="Auto" d:LayoutOverrides="LeftPosition, RightPosition" Margin="0,12,0,0"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
