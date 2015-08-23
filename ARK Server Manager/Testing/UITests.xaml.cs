@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ARK_Server_Manager.Lib;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,9 +38,27 @@ namespace ARK_Server_Manager
 
         }
 
-        private void ShowDetailView(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            serverDetailCtrl.BeginStoryboard(serverDetailCtrl.FindResource("show") as System.Windows.Media.Animation.Storyboard);
+            //
+            // Kick off the initialization.
+            //
+            TaskUtils.RunOnUIThreadAsync(() =>
+            {
+                // We need to load the set of existing servers, or create a blank one if we don't have any...
+                foreach (var profile in Directory.EnumerateFiles(Config.Default.ConfigDirectory, "*" + Config.Default.ProfileExtension))
+                {
+                    try
+                    {
+                        ServerManager.Instance.AddFromPath(profile);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(String.Format("The profile at {0} failed to load.  The error was: {1}\r\n{2}", profile, ex.Message, ex.StackTrace), "Profile failed to load", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                }
+
+            }).DoNotWait();
         }
     }
 }
