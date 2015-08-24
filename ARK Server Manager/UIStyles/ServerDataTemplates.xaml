@@ -13,28 +13,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="detailButtonArea" Grid.Column="1">
-                    <Border Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <LinearGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </LinearGradientBrush.RelativeTransform>
-                                <GradientStop Color="#44000000" Offset="0"/>
-                                <GradientStop Color="#00000000" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center"/>
-                    </Border>
-                </Grid>
                 <Grid x:Name="bodyArea" Margin="0,32.708,0,0" d:LayoutOverrides="LeftMargin, RightMargin">
-                    <Button x:Name="buttonStart" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
-                    <Button x:Name="buttonStop" Content="STOP" HorizontalAlignment="Right" Margin="0,0,112,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
                     <TextBlock x:Name="textBlock" Margin="343.395,6,10,62.683" TextWrapping="Wrap" Foreground="Red" FontSize="9.333"><Run Text="IP address (public and private):port#"/><LineBreak/><Run Text="Publicly available?"/><LineBreak/><Run Text="Server Status (status: running, stopped, not installed, initializing)"/></TextBlock>
                     <StackPanel HorizontalAlignment="Left" Margin="6.06,6,0,10" Orientation="Vertical" Width="332.335">
                         <StackPanel x:Name="installedVersionArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
@@ -63,6 +42,27 @@
                         <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="{Binding Profile.ProfileName}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Grid>
+                <Grid x:Name="detailButtonArea" Grid.Column="1">
+                    <Border Margin="0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#44000000" Offset="0"/>
+                                <GradientStop Color="#00000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+                <Button x:Name="buttonStart" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
+                <Button x:Name="buttonStop" Content="STOP" HorizontalAlignment="Right" Margin="0,0,112,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </DataTemplate>

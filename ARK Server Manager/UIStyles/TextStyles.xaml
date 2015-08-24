@@ -7,9 +7,9 @@
     <FontFamily x:Key="HeaderFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>
 
     <System:Double x:Key="ServerListBodyFontSize">14.667</System:Double>
-    
 
-    <System:Double x:Key="HeaderSize">36</System:Double>
+
+    <System:Double x:Key="HeaderSize">24</System:Double>
     <FontFamily x:Key="ButtonFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
 
 </ResourceDictionary>

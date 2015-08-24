@@ -223,7 +223,7 @@
                 </TransformGroup>
             </Border.RenderTransform>
             <StackPanel Orientation="Vertical">
-                <ListBox x:Name="listBox" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{x:Null}" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top">
+                <ListBox x:Name="listBox" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{x:Null}" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top" Loaded="listBox_Loaded">
                     <ListBoxItem x:Name="listBoxItem0" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
                     <ListBoxItem x:Name="listBoxItem1" Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItem2" Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>

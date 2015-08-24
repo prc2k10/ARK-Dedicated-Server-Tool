@@ -45,14 +45,16 @@
                     <TextBlock x:Name="textBlock5" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontSize="14.667" Text="New" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}"/>
                 </StackPanel>
             </Button>
-
         </Grid>
-        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Servers, Source={x:Static lib:ServerManager.Instance}}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Source={x:Static lib:ServerManager.Instance}, Path=Servers}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+           
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
+        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10" d:IsHidden="True"/>
+        <Button x:Name="buttonStop" Content="STOP" Margin="498,46.333,421,0" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Top"/>
     </Grid>
 </Window>

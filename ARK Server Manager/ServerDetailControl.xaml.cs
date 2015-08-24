@@ -24,5 +24,15 @@ namespace ARK_Server_Manager
         {
             InitializeComponent();
         }
+
+        private void listBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            // If no item is selected, select the first item.
+            if (listBox.SelectedIndex < 0)
+            {
+                listBox.SelectedIndex = 0;
+            }
+
+        }
     }
 }
