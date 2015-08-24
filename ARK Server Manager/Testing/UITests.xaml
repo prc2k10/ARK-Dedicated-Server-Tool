@@ -47,7 +47,7 @@
             </Button>
 
         </Grid>
-        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Servers, Source={x:Static lib:ServerManager.Instance}}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="{x:Null}" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Servers, Source={x:Static lib:ServerManager.Instance}}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>

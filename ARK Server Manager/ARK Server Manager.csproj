@@ -244,6 +244,7 @@
     <Compile Include="UIStyles\Shapes.xaml.cs">
       <DependentUpon>Shapes.xaml</DependentUpon>
     </Compile>
+    <SplashScreen Include="Art\splashScreen.png" />
     <Content Include="Lib\ServerUpdater\mcrcon.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
