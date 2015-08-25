@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="ServerListViewDataTemplate">
-        <Border Background="{DynamicResource DarkNeutralFade_Brush}" Margin="0" Width="750" Height="150">
+        <Border Background="{DynamicResource DarkNeutralFade_Brush}" Margin="0" Width="750" Height="150" BorderBrush="Black" BorderThickness="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
