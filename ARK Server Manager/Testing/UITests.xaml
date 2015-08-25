@@ -23,10 +23,10 @@
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="30"/>
             </DoubleAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listViewServers">
-                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="10,114,10,10"/>
-                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="10,800,10,10"/>
-            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="listViewServers">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="100"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="showServerList">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listViewServers">
@@ -45,6 +45,10 @@
                 <SplineThicknessKeyFrame KeyTime="0" Value="10,114,10,10"/>
                 <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="10,114,10,10"/>
             </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="listViewServers">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
     <Window.Triggers>
@@ -91,11 +95,19 @@
                     <TextBlock x:Name="textBlock5" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontSize="14.667" Text="New" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center" Command="{Binding OpenDetailView}" CommandParameter="{Binding Items[0], ElementName=listViewServers}"/>
+            <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center" Command="{Binding OpenDetailView}" CommandParameter="{Binding SelectedValue.Profile, ElementName=listViewServers}" />
         </Grid>
-        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Source={x:Static lib:ServerManager.Instance}, Path=Servers}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
+        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Source={x:Static lib:ServerManager.Instance}, Path=Servers}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" MinWidth="750" RenderTransformOrigin="0.5,0.5">
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListView.RenderTransform>
             <ListView.Effect>
-                <BlurEffect/>
+                <BlurEffect Radius="0"/>
             </ListView.Effect>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -103,6 +115,6 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10"/>
+        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10" d:IsHidden="True"/>
     </Grid>
 </Window>

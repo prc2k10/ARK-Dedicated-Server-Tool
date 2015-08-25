@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="ServerListViewDataTemplate">
-        <Border Background="{DynamicResource DarkNeutralFade_Brush}" Margin="0,0,0,10" Width="750" Height="150">
+        <Border Background="{DynamicResource DarkNeutralFade_Brush}" Margin="0" Width="750" Height="150">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -53,11 +53,7 @@
                     <Path Data="F1M0,0L230.479,14.095 0,28.188z" Stretch="Fill" Fill="{DynamicResource BlackFadeRight_Brush}"/>
                     <StackPanel HorizontalAlignment="Left" Margin="3.38,0,0,1" Orientation="Horizontal" Height="Auto" VerticalAlignment="Center">
                         <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Server:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" FontWeight="Bold" MinWidth="10" MinHeight="20" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="{Binding Profile.ProfileName}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="21.333" Margin="10,0,0,0" MinWidth="20" VerticalAlignment="Center" ClipToBounds="True">
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="3" ShadowDepth="0"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
+                        <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="{Binding Profile.ProfileName}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="21.333" Margin="10,0,0,0" MinWidth="20" VerticalAlignment="Center" ClipToBounds="True"/>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="detailButtonArea" Grid.Column="1">
