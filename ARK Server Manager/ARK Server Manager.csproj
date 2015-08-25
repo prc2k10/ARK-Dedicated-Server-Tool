@@ -225,9 +225,6 @@
     <Compile Include="ServerDetailControl.xaml.cs">
       <DependentUpon>ServerDetailControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServerListItem.xaml.cs">
-      <DependentUpon>ServerListItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ServerSettingsControl.xaml.cs">
       <DependentUpon>ServerSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -251,10 +248,6 @@
     <Resource Include="UIStyles\header.png" />
     <Resource Include="UIStyles\headerTitle.jpg" />
     <Page Include="ServerDetailControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ServerListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

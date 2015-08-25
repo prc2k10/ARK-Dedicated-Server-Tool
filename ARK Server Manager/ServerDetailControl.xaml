@@ -100,7 +100,7 @@
             <ColumnDefinition Width="8"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource MainTabControl}" RenderTransformOrigin="0.5,0.5">
+        <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource TabControlHiddenHeader}">
             <TabControl.Effect>
                 <BlurEffect Radius="0"/>
             </TabControl.Effect>

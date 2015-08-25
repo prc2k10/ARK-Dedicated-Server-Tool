@@ -74,7 +74,7 @@ namespace ARK_Server_Manager
                 return new RelayCommand<ServerProfile>(
                     execute: (profile) =>
                     {
-                        MessageBox.Show("command");
+                        // MessageBox.Show("command");
                         serverDetailCtrl.DataContext = profile;                        
                         hideListView(null, null);
                     },
