@@ -71,11 +71,11 @@ namespace ARK_Server_Manager
         {
             get
             {
-                return new RelayCommand<ServerProfile>(
-                    execute: (profile) =>
+                return new RelayCommand<Server>(
+                    execute: (svr) =>
                     {
                         // MessageBox.Show("command");
-                        serverDetailCtrl.DataContext = profile;                        
+                        serverDetailCtrl.DataContext = svr.Profile;                        
                         hideListView(null, null);
                     },
                     canExecute: (sort) => true
