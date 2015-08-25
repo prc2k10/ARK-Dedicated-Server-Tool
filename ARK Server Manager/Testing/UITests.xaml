@@ -51,11 +51,6 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource hideServerList}"/>
-        </EventTrigger>
-    </Window.Triggers>
     <Grid x:Name="LayoutRoot">
         <Rectangle x:Name="Background" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3">
             <Rectangle.Fill>
@@ -115,6 +110,6 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10" d:IsHidden="True"/>
+        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10" Visibility="Collapsed"/>
     </Grid>
 </Window>

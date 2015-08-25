@@ -64,6 +64,7 @@ namespace ARK_Server_Manager
             showListSB = this.FindResource("showServerList") as Storyboard;
             hideListSB = this.FindResource("hideServerList") as Storyboard;
             hideListSB.Completed += new EventHandler(showDetailView);
+
         }
 
         public ICommand OpenDetailView
@@ -73,7 +74,7 @@ namespace ARK_Server_Manager
                 return new RelayCommand<ServerProfile>(
                     execute: (profile) =>
                     {
-                       
+                        MessageBox.Show("command");
                         serverDetailCtrl.DataContext = profile;                        
                         hideListView(null, null);
                     },

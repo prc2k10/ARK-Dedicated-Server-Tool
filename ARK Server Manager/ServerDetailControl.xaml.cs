@@ -32,7 +32,6 @@ namespace ARK_Server_Manager
             {
                 listBox.SelectedIndex = 0;
             }
-
         }
     }
 }
