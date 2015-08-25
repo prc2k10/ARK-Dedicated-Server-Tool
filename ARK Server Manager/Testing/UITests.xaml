@@ -9,6 +9,49 @@
 	x:Name="Window" Loaded="Window_Loaded"
 	Title="UITests"
 	Width="1024" Height="768" MinWidth="1024" MinHeight="768">
+    <Window.Resources>
+        <Storyboard x:Key="hideServerList">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listViewServers">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="listViewServers">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="listViewServers">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="30"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listViewServers">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="10,114,10,10"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="10,800,10,10"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="showServerList">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listViewServers">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="listViewServers">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="listViewServers">
+                <SplineDoubleKeyFrame KeyTime="0" Value="30"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listViewServers">
+                <SplineThicknessKeyFrame KeyTime="0" Value="10,114,10,10"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="10,114,10,10"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource hideServerList}"/>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid x:Name="LayoutRoot">
         <Rectangle x:Name="Background" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3">
             <Rectangle.Fill>
@@ -16,6 +59,9 @@
             </Rectangle.Fill>
         </Rectangle>
         <Grid x:Name="Header" Height="100" Margin="8,9,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="3" Background="{DynamicResource DarkNeutral_Brush}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="3" ShadowDepth="0"/>
+            </Grid.Effect>
             <Rectangle HorizontalAlignment="Left" Width="272">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/header.png" Stretch="UniformToFill"/>
@@ -45,16 +91,18 @@
                     <TextBlock x:Name="textBlock5" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontSize="14.667" Text="New" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}"/>
                 </StackPanel>
             </Button>
+            <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center" Command="{Binding OpenDetailView}" CommandParameter="{Binding Items[0], ElementName=listViewServers}"/>
         </Grid>
-        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Source={x:Static lib:ServerManager.Instance}, Path=Servers}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-           
+        <ListView x:Name="listViewServers" ItemTemplate="{StaticResource ServerListViewDataTemplate}" ItemsSource="{Binding Source={x:Static lib:ServerManager.Instance}, Path=Servers}" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" Width="{Binding Width, ElementName=ServerListArea}" Margin="10,114,10,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
+            <ListView.Effect>
+                <BlurEffect/>
+            </ListView.Effect>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10" d:IsHidden="True"/>
-        <Button x:Name="buttonStop" Content="STOP" Margin="498,46.333,421,0" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Top"/>
+        <local:ServerDetailControl x:Name="serverDetailCtrl" Margin="10,114,10,10"/>
     </Grid>
 </Window>

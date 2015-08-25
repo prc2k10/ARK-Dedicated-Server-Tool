@@ -14,16 +14,16 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="bodyArea" Margin="0,32.708,0,0" d:LayoutOverrides="LeftMargin, RightMargin">
-                    <TextBlock x:Name="textBlock" Margin="343.395,6,10,62.683" TextWrapping="Wrap" Foreground="Red" FontSize="9.333"><Run Text="IP address (public and private):port#"/><LineBreak/><Run Text="Publicly available?"/><LineBreak/><Run Text="Server Status (status: running, stopped, not installed, initializing)"/></TextBlock>
+                    <TextBlock x:Name="textBlock" Margin="195.395,59.555,230.667,9.128" TextWrapping="Wrap" Foreground="Red" FontSize="9.333"><Run Text="IP address (public and private):port#"/><LineBreak/><Run Text="Publicly available?"/><LineBreak/><Run Text="Server Status (status: running, stopped, not installed, initializing)"/></TextBlock>
                     <StackPanel HorizontalAlignment="Left" Margin="6.06,6,0,10" Orientation="Vertical" Width="332.335">
                         <StackPanel x:Name="installedVersionArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
-                            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Installed Version" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Installed Version:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
                             <TextBlock x:Name="textInstalledVersion" TextWrapping="Wrap" Text="{Binding Profile.LastInstalledVersion}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             <Button x:Name="button" Content="Button" Height="18.327" Width="18.326" Margin="8,0,0,0" Style="{DynamicResource RefreshButton}" VerticalAlignment="Center"/>
                         </StackPanel>
                         <StackPanel x:Name="IPaddressArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
                             <TextBlock TextWrapping="Wrap" Text="Server IP Address:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="textServerIP" TextWrapping="Wrap" Text="{Binding Profile.ServerIP}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textServerIP" TextWrapping="Wrap" Text="{Binding Profile.ServerIP}" IsReadOnly="True" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center" Style="{DynamicResource PlainTextBox}"/>
                         </StackPanel>
                         <StackPanel x:Name="serverPortArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
                             <TextBlock TextWrapping="Wrap" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"><Run Text="Server "/><Run Text="Port"/><Run Text=":"/></TextBlock>
@@ -34,12 +34,30 @@
                             <TextBlock x:Name="textserverConnectionPort" TextWrapping="Wrap" Text="{Binding Profile.ServerConnectionPort}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,0,10,47.667" Width="196.734" Height="Auto" Background="#FFA8A8A8">
+                        <Grid Height="17.472" Margin="-0.5,0" VerticalAlignment="Top">
+                            <TextBlock x:Name="textBlockServerStatus" TextWrapping="Wrap" Text="{Binding Runtime.Status}" Height="17.472" Margin="0,0,0,-18.833" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="{DynamicResource DefaultFont}" FontSize="14.667" MinWidth="20" />
+                            <StackPanel Margin="0,0,0,-46.166" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                <TextBlock x:Name="textBlockPlayers" TextWrapping="Wrap" Height="17.472" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat Light" FontSize="12" MinWidth="20" Text="Players:" />
+                                <TextBlock x:Name="textBlockPlayersMin" Text="{Binding Players}" TextWrapping="Wrap" Height="17.472" Margin="2,0" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat Light" FontSize="12" MinWidth="5" />
+                                <TextBlock TextWrapping="Wrap" Height="17.472" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat Light" FontSize="12" MinWidth="0" Text="/" />
+                                <TextBlock x:Name="textBlockPlayersMax" Text="{Binding MaxPlayers}" TextWrapping="Wrap" Height="17.472" Margin="2,0" VerticalAlignment="Stretch" HorizontalAlignment="Left" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat Light" FontSize="12" MinWidth="5" />
+                            </StackPanel>
+                            <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="SERVER STATUS" FontFamily="{DynamicResource DefaultFont}" FontSize="13.333" HorizontalAlignment="Stretch" Foreground="{DynamicResource TextLight_Brush}" Margin="0" Background="Black" TextAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <Button x:Name="buttonStart" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
+                    <Button x:Name="buttonStop" Content="STOP" HorizontalAlignment="Right" Margin="0,0,109.734,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
                 </Grid>
                 <Grid x:Name="titleArea" Height="30.088" Margin="0,2.62,-4.289,0" VerticalAlignment="Top">
                     <Path Data="F1M0,0L230.479,14.095 0,28.188z" Stretch="Fill" Fill="{DynamicResource BlackFadeRight_Brush}"/>
-                    <StackPanel HorizontalAlignment="Left" Margin="3.38,4.949,0,5.939" Orientation="Horizontal" d:LayoutOverrides="Height">
-                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Server:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" FontWeight="Bold"/>
-                        <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="{Binding Profile.ProfileName}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" Margin="10,0,0,0"/>
+                    <StackPanel HorizontalAlignment="Left" Margin="3.38,0,0,1" Orientation="Horizontal" Height="Auto" VerticalAlignment="Center">
+                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Server:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="16" FontWeight="Bold" MinWidth="10" MinHeight="20" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="textServerName" TextWrapping="Wrap" Text="{Binding Profile.ProfileName}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource MasterComp_Brush}" FontFamily="{DynamicResource DefaultFont}" FontSize="21.333" Margin="10,0,0,0" MinWidth="20" VerticalAlignment="Center" ClipToBounds="True">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="3" ShadowDepth="0"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="detailButtonArea" Grid.Column="1">
@@ -58,13 +76,47 @@
                                 <GradientStop Color="#00000000" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
-                        <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center"/>
+                        <Button x:Name="buttonGoToDetail" Margin="0" Style="{DynamicResource ForwardButton}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="40" Height="80" BorderBrush="Black" VerticalAlignment="Center" Command="{Binding OpenDetailView}" CommandParameter="{Binding Profile}"/>
                     </Border>
                 </Grid>
-                <Button x:Name="buttonStart" Content="START" HorizontalAlignment="Right" Margin="0,0,10,10" Width="97" Style="{DynamicResource StartButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
-                <Button x:Name="buttonStop" Content="STOP" HorizontalAlignment="Right" Margin="0,0,112,10" Width="97" Style="{DynamicResource StopButton}" Foreground="{DynamicResource ButtonText_Brush}" FontFamily="{DynamicResource ButtonFont}" FontSize="{DynamicResource DefaultButtonFontSize}" Height="32.667" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </DataTemplate>
+    <Style x:Key="serverListViewStyle" TargetType="{x:Type ListView}">
+        <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListView}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
