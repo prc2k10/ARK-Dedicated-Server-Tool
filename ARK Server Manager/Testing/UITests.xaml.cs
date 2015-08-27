@@ -75,7 +75,9 @@ namespace ARK_Server_Manager
                     execute: (svr) =>
                     {
                         // MessageBox.Show("command");
-                        serverDetailCtrl.DataContext = svr.Profile;                        
+                        serverDetailCtrl.DataContext = svr.Profile;
+                        serverDetailCtrl.ltb.DataContext = svr.Profile;
+                        serverDetailCtrl.ltb.UpdateLayout();
                         hideListView(null, null);
                     },
                     canExecute: (sort) => true

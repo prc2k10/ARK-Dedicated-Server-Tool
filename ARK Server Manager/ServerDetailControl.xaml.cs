@@ -22,7 +22,7 @@ namespace ARK_Server_Manager
     {
         public ServerDetailControl()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
 
         private void listBox_Loaded(object sender, RoutedEventArgs e)
@@ -32,6 +32,11 @@ namespace ARK_Server_Manager
             {
                 listBox.SelectedIndex = 0;
             }
+        }
+
+        private void pressed(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

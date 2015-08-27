@@ -1,7 +1,127 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ARK_Server_Manager" xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <Style x:Key="DefaultTextBoxLong" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="2" SnapsToDevicePixels="True" Margin="0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF9CA2A8" Offset="1"/>
+                                <GradientStop Color="#FFB4B4B4"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border>
+                            <Border.Background>
+                                <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/TextBoxInnerShadowLong.png"/>
+                            </Border.Background>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="8,0,0,0" Background="{x:Null}" Foreground="{DynamicResource VeryDarkNeutral_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" OverridesDefaultStyle="False">
+                                <ScrollViewer.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
+                                </ScrollViewer.Effect>
+                            </ScrollViewer>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource MasterComp_Brush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource MasterComp_Brush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    <Thickness x:Key="DetailItemMargins">4</Thickness>
+    <System:Double x:Key="DefaultTextBlockWidth">175</System:Double>
+    <System:Double x:Key="DefaultTextBoxWidth">175</System:Double>
+    <System:Double x:Key="DefaultTextBlockSize">14</System:Double>
+    <FontFamily x:Key="DefaultTextBlockFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
     <FontFamily x:Key="ServerListBodyFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
+    <System:Double x:Key="DefaultTextBoxSize">16</System:Double>
+    <FontFamily x:Key="DefaultTextBoxFont">Palatino Linotype</FontFamily>
+    <Style x:Key="DefaultTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="2" SnapsToDevicePixels="True" Margin="0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF9CA2A8" Offset="1"/>
+                                <GradientStop Color="#FFB4B4B4"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border>
+                            <Border.Background>
+                                <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/TextBoxInnerShadow.png"/>
+                            </Border.Background>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="8,0,0,0" Background="{x:Null}" Foreground="{DynamicResource VeryDarkNeutral_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" OverridesDefaultStyle="False">
+                                <ScrollViewer.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
+                                </ScrollViewer.Effect>
+                            </ScrollViewer>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            <Setter Property="Opacity" TargetName="PART_ContentHost" Value="0.4"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TextLight_Brush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource MasterComp_Brush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
     <FontFamily x:Key="DefaultFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>
     <System:Double x:Key="DefaultButtonFontSize">14.667</System:Double>
     <FontFamily x:Key="HeaderFont">/ARK Server Manager;component/Fonts/#Montserrat</FontFamily>

@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ARK_Server_Manager"
              mc:Ignorable="d" 
-             d:DesignHeight="745" d:DesignWidth="1162">
+             d:DesignHeight="743.667" d:DesignWidth="1024" Width="Auto">
     <UserControl.Resources>
         <Storyboard x:Key="hide">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="mainTabControl">
@@ -96,11 +96,11 @@
             <BlurEffect Radius="0"/>
         </Grid.Effect>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="212"/>
+            <ColumnDefinition Width="195"/>
             <ColumnDefinition Width="8"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource TabControlHiddenHeader}">
+        <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0,0,0,-0.333" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource TabControlHiddenHeader}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <TabControl.Effect>
                 <BlurEffect Radius="0"/>
             </TabControl.Effect>
@@ -113,11 +113,8 @@
                 </TransformGroup>
             </TabControl.RenderTransform>
             <TabItem x:Name="tabAdmin" Header="tabAdmin" Margin="0">
-                <Grid Background="{x:Null}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="753"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+
+                <Grid>
 
                     <Border x:Name="headerArea" Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
                         <Border.Effect>
@@ -126,19 +123,31 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem0}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemAdmin}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Border>
-                    <StackPanel x:Name="IPaddressArea" HorizontalAlignment="Left" Margin="10,58,0,0" Orientation="Horizontal" VerticalAlignment="Top" Height="20">
-                        <TextBlock TextWrapping="Wrap" Text="Server IP Address:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
-                        <TextBox x:Name="textServerIP" TextWrapping="Wrap" Text="{Binding ServerIP}" IsReadOnly="True" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center" Style="{DynamicResource PlainTextBox}"/>
-                        <TextBlock TextWrapping="Wrap" Text="Profile:" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="0,1.2,0,0.8"/>
-                        <TextBox x:Name="textServerIP_Copy" TextWrapping="Wrap" Text="{Binding ProfileName}" IsReadOnly="True" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0.2,0,-0.2" VerticalAlignment="Center" Style="{DynamicResource PlainTextBox}"/>
-                    </StackPanel>
+                    <WrapPanel Orientation="Horizontal" Margin="0,58,0,0" HorizontalAlignment="Center">
+                        <local:LabeledTextBlock x:Name="ltb" Height="56" InputText="{Binding ProfileName}" Width="290" Margin="{DynamicResource DetailItemMargins}"/>
+
+                        <Border Background="#55000000" Margin="{DynamicResource DetailItemMargins}" Padding="4" Height="52" Width="382">
+                            <Grid>
+                                <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Profile Name:" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="4,0,0,27" d:LayoutOverrides="TopMargin, BottomMargin" Width="{DynamicResource DefaultTextBlockWidth}" HorizontalAlignment="Left"/>
+                                <TextBox x:Name="DtextBox5" TextWrapping="Wrap" Text="{Binding ProfileName}" FontSize="{DynamicResource DefaultTextBoxSize}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontWeight="Bold" Style="{DynamicResource DefaultTextBoxLong}" Margin="0,17,0,1" d:LayoutOverrides="Height"/>
+                            </Grid>
+                        </Border>
+                        <Border Background="#55000000" Margin="0" Padding="4" BorderThickness="{DynamicResource DetailItemMargins}" Height="60">
+                            <Grid>
+                                <TextBlock TextWrapping="Wrap" Text="Server IP Address:" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="4,0,0,27" d:LayoutOverrides="TopMargin, BottomMargin" Width="{DynamicResource DefaultTextBlockWidth}" HorizontalAlignment="Left"/>
+                                <TextBox x:Name="DtextBox2" TextWrapping="Wrap" Text="{Binding ServerIP}" FontSize="{DynamicResource DefaultTextBoxSize}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontWeight="Bold" Style="{DynamicResource DefaultTextBox}" Width="{DynamicResource DefaultTextBoxWidth}" Margin="0,17,0,1" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Border>
+                        <Button x:Name="button" Content="Button" Height="32" Width="93" Click="pressed"/>
+                    </WrapPanel>
                 </Grid>
+
             </TabItem>
             <TabItem x:Name="tabRules" Header="tabRules">
                 <Grid>
@@ -149,7 +158,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem1}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemRules}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -166,7 +175,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem2}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemUI}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -183,7 +192,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem5}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemPlayers}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -200,7 +209,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemDinos}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -217,7 +226,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem3}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemEnviron}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -234,7 +243,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource VeryDark_Color}"/>
                         </Border.Background>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItem4}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Content, ElementName=listBoxItemMods}" FontFamily="{DynamicResource HeaderFont}" FontSize="{DynamicResource HeaderSize}" HorizontalAlignment="Center">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource LightNeutral_Color}"/>
                             </TextBlock.Foreground>
@@ -242,9 +251,10 @@
                     </Border>
                 </Grid>
             </TabItem>
+            <TextBox x:Name="textBox" Height="79" TextWrapping="Wrap" Text="TextBox" Width="260"/>
 
         </TabControl>
-        <Border x:Name="border" d:LayoutOverrides="Height" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="border" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopMargin, BottomMargin" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -254,16 +264,16 @@
                 </TransformGroup>
             </Border.RenderTransform>
             <StackPanel Orientation="Vertical">
-                <ListBox x:Name="listBox" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{x:Null}" d:LayoutOverrides="LeftPosition, RightPosition" VerticalAlignment="Top" Loaded="listBox_Loaded">
-                    <ListBoxItem x:Name="listBoxItem0" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
-                    <ListBoxItem x:Name="listBoxItem1" Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItem2" Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItem5" Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItem" Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItem3" Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItem4" Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                <ListBox x:Name="listBox" MinWidth="200" Style="{DynamicResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{x:Null}" d:LayoutOverrides="LeftMargin, RightMargin" VerticalAlignment="Top" Loaded="listBox_Loaded" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center">
+                    <ListBoxItem x:Name="listBoxItemAdmin" Content="Administration" Style="{DynamicResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
+                    <ListBoxItem x:Name="listBoxItemRules" Content="Rules" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem x:Name="listBoxItemUI" Content="UI" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem x:Name="listBoxItemPlayers" Content="Player Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem x:Name="listBoxItemDinos" Content="Dino Settings" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem x:Name="listBoxItemEnviron" Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
+                    <ListBoxItem x:Name="listBoxItemMods" Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                 </ListBox>
-                <Button x:Name="backToListButton" Height="42.837" Margin="28,25,28,0" Style="{DynamicResource BackButton}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White">
+                <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" Style="{DynamicResource BackButton}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White">
                     <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Text="List" FontSize="24" FontFamily="{DynamicResource DefaultFont}"/>
                 </Button>
             </StackPanel>
