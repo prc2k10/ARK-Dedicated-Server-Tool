@@ -74,10 +74,7 @@ namespace ARK_Server_Manager
                 return new RelayCommand<Server>(
                     execute: (svr) =>
                     {
-                        // MessageBox.Show("command");
-                        serverDetailCtrl.DataContext = svr.Profile;
-                        serverDetailCtrl.ltb.DataContext = svr.Profile;
-                        serverDetailCtrl.ltb.UpdateLayout();
+                        serverDetailCtrl.DataContext = svr;
                         hideListView(null, null);
                     },
                     canExecute: (sort) => true
@@ -85,34 +82,24 @@ namespace ARK_Server_Manager
             }
         }
 
-        
-
         public void showDetailView(object sender, EventArgs e)
         {
             showDetailSB.Begin();
-            Console.WriteLine("Showing Detail View.");
         }
 
         public void showListView(object sender, EventArgs e)
         {
             showListSB.Begin();
-            Console.WriteLine("Showing List View.");
         }
 
         public void hideDetailView(object sender, EventArgs e)
         {
             hideDetailSB.Begin();
-            Console.WriteLine("Hiding Detail View.");
         }
 
         public void hideListView(object sender, EventArgs e)
         {
             hideListSB.Begin();
-            Console.WriteLine("Hiding List View.");
         }
-
-
     }
-
-
 }

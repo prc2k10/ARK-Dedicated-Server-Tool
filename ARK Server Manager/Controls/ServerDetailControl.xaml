@@ -1,13 +1,15 @@
-﻿<UserControl x:Class="ARK_Server_Manager.ServerDetailControl"
-             x:Name="controlRoot"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ARK_Server_Manager"
+             xmlns:eo="http://schemas.essentialobjects.com/wpf/" xmlns:Controls="clr-namespace:ARK_Server_Manager.Controls" x:Class="ARK_Server_Manager.ServerDetailControl"
+             x:Name="controlRoot"
              mc:Ignorable="d" 
              d:DesignHeight="743.667" d:DesignWidth="1024" Width="Auto">
     <UserControl.Resources>
+
         <Storyboard x:Key="hide">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="mainTabControl">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -85,6 +87,7 @@
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
+        <BooleanToVisibilityConverter x:Key="B2VConverter"/>
     </UserControl.Resources>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="backToListButton">
@@ -130,21 +133,52 @@
                         </TextBlock>
                     </Border>
                     <WrapPanel Orientation="Horizontal" Margin="0,58,0,0" HorizontalAlignment="Center">
-                        <local:LabeledTextBlock x:Name="ltb" Height="56" InputText="{Binding ProfileName}" Width="290" Margin="{DynamicResource DetailItemMargins}"/>
+                        <local:LabeledTextBox x:Name="ltbProfileName" Height="58" InputText="{Binding Profile.ProfileName}" LabelText="Server Profile Name:" Width="298" Margin="{DynamicResource DetailItemMargins}" />
+                        <Grid x:Name="toolButtons" Height="57" Width="145" Margin="{DynamicResource DetailItemMargins}">
+                            <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin">
+                                <StackPanel Margin="0,24,6,3" Orientation="Horizontal">
+                                    <Button x:Name="duplicateButton" Style="{DynamicResource ButtonDefault}" ToolTip="Duplicate this profile to a new one" Height="22" d:LayoutOverrides="LeftPosition, RightPosition" Width="22">
+                                        <Viewbox Height="16" Stretch="Fill" Width="15" d:IsLocked="True">
+                                            <Grid Height="96" Width="84">
+                                                <Path Data="F1M42.116,0L0,0 0,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="0,14,18,0"/>
+                                                <Path Data="F1M42.116,0L0,0 0,5 34.098,5 61,32.582 61,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="9,5,9,9"/>
+                                                <Path Data="F1M21,13L13,13 13,20 7,20 7,13 0,13 0,7 7,7 7,0 13,0 13,7 21,7z" Fill="{DynamicResource ButtonText_Brush}" Margin="63,0,0,76"/>
+                                            </Grid>
+                                        </Viewbox>
+                                    </Button>
+                                    <Button x:Name="updateButton" Content="" HorizontalAlignment="Right" Margin="4,0,0,0" Width="22" Style="{DynamicResource RefreshButton}" Height="22" d:LayoutOverrides="LeftPosition, RightPosition" ToolTip="Update to most recent version"/>
+                                    <Button x:Name="installFolderButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Width="22" Margin="4,0,0,0" Height="22" d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition">
+                                        <Viewbox Height="13" Stretch="Fill" Width="16" d:IsLocked="True">
+                                            <Grid Height="45" Width="58">
+                                                <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
+                                                <Path Data="F1M31.988,31.177L27.134,31.177 31.731,23.177 13.76,23.177 13.76,14.177 31.731,14.177 27.134,6.177 31.988,6.177 44.305,18.677z M54.706,0.177L2.851,0.177C-0.449,0.177 0.023,2.4 0.023,2.4 0.023,6.76 1.201,30.348 1.201,32.469 1.201,34.59 2.851,35.177 2.851,35.177L54.94,35.177C56.473,35.177 56.473,32.177 56.473,32.177 56.473,23.103 57.418,5.888 57.653,2.47 57.889,-0.948 54.706,0.177 54.706,0.177" Fill="{DynamicResource ButtonText_Brush}" Margin="0,9.892,0,0"/>
+                                            </Grid>
+                                        </Viewbox>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Margin="4" Orientation="Vertical" d:LayoutOverrides="Height">
+                                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" d:LayoutOverrides="TopMargin, BottomMargin" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tools:"/>
+                                <TextBlock x:Name="textBlock2_Copy2" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" FontWeight="Bold" Margin="2,2.6,0,2.4" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Runtime.Version}"/>
+                            </StackPanel>
 
-                        <Border Background="#55000000" Margin="{DynamicResource DetailItemMargins}" Padding="4" Height="52" Width="382">
-                            <Grid>
-                                <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Profile Name:" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="4,0,0,27" d:LayoutOverrides="TopMargin, BottomMargin" Width="{DynamicResource DefaultTextBlockWidth}" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="DtextBox5" TextWrapping="Wrap" Text="{Binding ProfileName}" FontSize="{DynamicResource DefaultTextBoxSize}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontWeight="Bold" Style="{DynamicResource DefaultTextBoxLong}" Margin="0,17,0,1" d:LayoutOverrides="Height"/>
-                            </Grid>
-                        </Border>
-                        <Border Background="#55000000" Margin="0" Padding="4" BorderThickness="{DynamicResource DetailItemMargins}" Height="60">
-                            <Grid>
-                                <TextBlock TextWrapping="Wrap" Text="Server IP Address:" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" VerticalAlignment="Center" Margin="4,0,0,27" d:LayoutOverrides="TopMargin, BottomMargin" Width="{DynamicResource DefaultTextBlockWidth}" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="DtextBox2" TextWrapping="Wrap" Text="{Binding ServerIP}" FontSize="{DynamicResource DefaultTextBoxSize}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontWeight="Bold" Style="{DynamicResource DefaultTextBox}" Width="{DynamicResource DefaultTextBoxWidth}" Margin="0,17,0,1" d:LayoutOverrides="Height" HorizontalAlignment="Left"/>
-                            </Grid>
-                        </Border>
-                        <Button x:Name="button" Content="Button" Height="32" Width="93" Click="pressed"/>
+                        </Grid>
+                        <local:LabeledSpinner x:Name="spinnerMaxPlayers" Height="58" LabelText="Max Players:" Width="145" Margin="{DynamicResource DetailItemMargins}" Maximum="99" SmallChange="1" LargeChange="1" Value="{Binding Profile.MaxPlayers}" />
+                        <Grid Height="58" Width="451" Margin="{DynamicResource DetailItemMargins}">
+                            <local:LabeledTextBox Height="Auto" InputText="{Binding Profile.InstallDirectory}" LabelText="Installation Location:" Width="Auto" />
+                            <Button x:Name="installFolderButton" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Height="22" VerticalAlignment="Top" Width="22" Margin="0,3,4,0">
+                                <Viewbox Height="13" Stretch="Fill" Width="16" d:IsLocked="True">
+                                    <Grid Height="45" Width="58">
+                                        <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
+                                        <Path Data="F1M31.988,31.177L27.134,31.177 31.731,23.177 13.76,23.177 13.76,14.177 31.731,14.177 27.134,6.177 31.988,6.177 44.305,18.677z M54.706,0.177L2.851,0.177C-0.449,0.177 0.023,2.4 0.023,2.4 0.023,6.76 1.201,30.348 1.201,32.469 1.201,34.59 2.851,35.177 2.851,35.177L54.94,35.177C56.473,35.177 56.473,32.177 56.473,32.177 56.473,23.103 57.418,5.888 57.653,2.47 57.889,-0.948 54.706,0.177 54.706,0.177" Fill="{DynamicResource ButtonText_Brush}" Margin="0,9.892,0,0"/>
+                                    </Grid>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status}" LabelText="Steam Status:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status}" LabelText="Server Status:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="221" BodyText="{Binding Runtime.Status}" LabelText="Installed Version:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="222" BodyText="{Binding Runtime.Status}" LabelText="Latest Available Version:" Margin="{DynamicResource DetailItemMargins}"/>
                     </WrapPanel>
                 </Grid>
 
@@ -273,10 +307,11 @@
                     <ListBoxItem x:Name="listBoxItemEnviron" Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemMods" Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                 </ListBox>
-                <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" Style="{DynamicResource BackButton}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White">
+                <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" Style="{DynamicResource BackButton}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White" ToolTip="12312321321321321">
                     <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Text="List" FontSize="24" FontFamily="{DynamicResource DefaultFont}"/>
                 </Button>
             </StackPanel>
         </Border>
+
     </Grid>
 </UserControl>

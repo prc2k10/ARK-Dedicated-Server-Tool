@@ -154,12 +154,18 @@
     <Compile Include="CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LabeledTextBlock.xaml.cs">
+      <DependentUpon>LabeledTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ErrorHandling.cs" />
     <Compile Include="GlobalSettings.xaml.cs">
       <DependentUpon>GlobalSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LabeledTextBlock.xaml.cs">
-      <DependentUpon>LabeledTextBlock.xaml</DependentUpon>
+    <Compile Include="Controls\LabeledTextBox.xaml.cs">
+      <DependentUpon>LabeledTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LabeledSpinner.xaml.cs">
+      <DependentUpon>LabeledSpinner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lib\ActionQueue.cs" />
     <Compile Include="Lib\DebugUtils.cs" />
@@ -225,7 +231,7 @@
     <Compile Include="RCONWindow.xaml.cs">
       <DependentUpon>RCONWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServerDetailControl.xaml.cs">
+    <Compile Include="Controls\ServerDetailControl.xaml.cs">
       <DependentUpon>ServerDetailControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServerSettingsControl.xaml.cs">
@@ -246,7 +252,6 @@
     </Compile>
     <Resource Include="UIStyles\locked.png" />
     <Resource Include="UIStyles\unlocked.png" />
-    <Resource Include="unchecked.jpg" />
     <Resource Include="UIStyles\checked.jpg" />
     <Resource Include="UIStyles\unchecked.jpg" />
     <Resource Include="UIStyles\TextBoxInnerShadowLong.png" />
@@ -257,11 +262,19 @@
     </Content>
     <Resource Include="UIStyles\header.png" />
     <Resource Include="UIStyles\headerTitle.jpg" />
-    <Page Include="LabeledTextBlock.xaml">
+    <Page Include="Controls\LabeledTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ServerDetailControl.xaml">
+    <Page Include="Controls\LabeledTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ServerDetailControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LabeledSpinner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

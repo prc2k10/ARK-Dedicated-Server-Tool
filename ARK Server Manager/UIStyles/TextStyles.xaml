@@ -15,13 +15,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="2" SnapsToDevicePixels="True" Margin="0">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF9CA2A8" Offset="1"/>
-                                <GradientStop Color="#FFB4B4B4"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <Border x:Name="border" BorderBrush="{x:Null}" BorderThickness="2" SnapsToDevicePixels="True" Margin="0" Background="{DynamicResource TextBoxBG_Brush}">
                         <Border>
                             <Border.Background>
                                 <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/TextBoxInnerShadowLong.png"/>
@@ -58,13 +52,11 @@
         </Style.Triggers>
     </Style>
     <Thickness x:Key="DetailItemMargins">4</Thickness>
-    <System:Double x:Key="DefaultTextBlockWidth">175</System:Double>
-    <System:Double x:Key="DefaultTextBoxWidth">175</System:Double>
     <System:Double x:Key="DefaultTextBlockSize">14</System:Double>
     <FontFamily x:Key="DefaultTextBlockFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
     <FontFamily x:Key="ServerListBodyFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
     <System:Double x:Key="DefaultTextBoxSize">16</System:Double>
-    <FontFamily x:Key="DefaultTextBoxFont">Palatino Linotype</FontFamily>
+    <FontFamily x:Key="DefaultTextBoxFont">Segoe WP Semibold</FontFamily>
     <Style x:Key="DefaultTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>

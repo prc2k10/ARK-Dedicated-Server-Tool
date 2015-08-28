@@ -11,6 +11,23 @@
 	Title="UITests"
 	Width="1024" Height="768" MinWidth="1024" MinHeight="768">
     <Window.Resources>
+        <!-- Tooltip Style -->
+
+        <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="Foreground" Value="{StaticResource MasterComp_Brush}"/>
+            <Setter Property="FontFamily" Value="{StaticResource TooltipFont}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Name="Border" BorderThickness="1" BorderBrush="Black" Background="#77000000">
+                            <ContentPresenter Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Storyboard x:Key="hideServerList">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listViewServers">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
@@ -123,14 +140,14 @@
                             <Grid x:Name="bodyArea" Margin="0,32.708,0,0" d:LayoutOverrides="LeftMargin, RightMargin">
                                 <StackPanel HorizontalAlignment="Left" Margin="6.06,6,0,10" Orientation="Vertical" Width="332.335">
                                     <StackPanel x:Name="installedVersionArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
-                                        <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Installed Version:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <TextBlock TextWrapping="Wrap" Text="Installed Version:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <TextBlock x:Name="textInstalledVersion" TextWrapping="Wrap" Text="{Binding Profile.LastInstalledVersion}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                         <Button x:Name="button" Content="Button" Height="18.327" Width="18.326" Margin="8,0,0,0" Style="{DynamicResource RefreshButton}" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                    <!--StackPanel x:Name="IPaddressArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
+                                    <StackPanel x:Name="IPaddressArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
                                         <TextBlock TextWrapping="Wrap" Text="Server IP Address:" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <TextBox x:Name="textServerIP" TextWrapping="Wrap" Text="{Binding Profile.ServerIP}" IsReadOnly="True" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center" Style="{DynamicResource PlainTextBox}"/>
-                                    </-->
+                                    </StackPanel>
                                     <StackPanel x:Name="serverPortArea" HorizontalAlignment="Stretch" Margin="0" Orientation="Horizontal" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Height="20">
                                         <TextBlock TextWrapping="Wrap" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" FontWeight="Bold" VerticalAlignment="Center"><Run Text="Server "/><Run Text="Port"/><Run Text=":"/></TextBlock>
                                         <TextBlock x:Name="textServerPort" TextWrapping="Wrap" Text="{Binding Profile.ServerPort}" d:LayoutOverrides="Height, TopPosition, BottomPosition" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource ServerListBodyFont}" FontSize="{DynamicResource ServerListBodyFontSize}" Margin="10,0,0,0" VerticalAlignment="Center"/>
