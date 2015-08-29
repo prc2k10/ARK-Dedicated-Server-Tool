@@ -20,7 +20,7 @@
                             <Border.Background>
                                 <ImageBrush ImageSource="/ARK Server Manager;component/UIStyles/TextBoxInnerShadowLong.png"/>
                             </Border.Background>
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="8,0,0,0" Background="{x:Null}" Foreground="{DynamicResource VeryDarkNeutral_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" OverridesDefaultStyle="False">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="4,0,0,0" Background="{x:Null}" Foreground="{DynamicResource VeryDarkNeutral_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" OverridesDefaultStyle="False">
                                 <ScrollViewer.Effect>
                                     <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
                                 </ScrollViewer.Effect>
@@ -52,10 +52,10 @@
         </Style.Triggers>
     </Style>
     <Thickness x:Key="DetailItemMargins">4</Thickness>
-    <System:Double x:Key="DefaultTextBlockSize">14</System:Double>
+    <System:Double x:Key="DefaultTextBlockSize">16</System:Double>
     <FontFamily x:Key="DefaultTextBlockFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
     <FontFamily x:Key="ServerListBodyFont">/ARK Server Manager;component/Fonts/#Montserrat Light</FontFamily>
-    <System:Double x:Key="DefaultTextBoxSize">16</System:Double>
+    <System:Double x:Key="DefaultTextBoxSize">14</System:Double>
     <FontFamily x:Key="DefaultTextBoxFont">Segoe WP Semibold</FontFamily>
     <Style x:Key="DefaultTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>

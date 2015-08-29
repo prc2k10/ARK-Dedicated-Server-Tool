@@ -158,7 +158,7 @@
                                 </StackPanel>
                             </Border>
                             <StackPanel Margin="4" Orientation="Vertical" d:LayoutOverrides="Height">
-                                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" d:LayoutOverrides="TopMargin, BottomMargin" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tools:"/>
+                                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DetailLabelFont}" FontSize="{DynamicResource DetailLabelFont_Size}" FontWeight="Bold" d:LayoutOverrides="TopMargin, BottomMargin" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tools:"/>
                                 <TextBlock x:Name="textBlock2_Copy2" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" FontWeight="Bold" Margin="2,2.6,0,2.4" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Runtime.Version}"/>
                             </StackPanel>
 
@@ -175,10 +175,10 @@
                                 </Viewbox>
                             </Button>
                         </Grid>
-                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status}" LabelText="Steam Status:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status}" LabelText="Server Status:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="221" BodyText="{Binding Runtime.Status}" LabelText="Installed Version:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="222" BodyText="{Binding Runtime.Status}" LabelText="Latest Available Version:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Steam Status:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Server Status:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="221" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Installed Version:" Margin="{DynamicResource DetailItemMargins}"/>
+                        <Controls:LabeledTextBlock Height="61" Width="222" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Latest Available Version:" Margin="{DynamicResource DetailItemMargins}"/>
                     </WrapPanel>
                 </Grid>
 

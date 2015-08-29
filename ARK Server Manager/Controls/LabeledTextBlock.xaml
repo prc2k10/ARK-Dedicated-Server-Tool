@@ -10,13 +10,8 @@
     </UserControl.Resources>
     <Grid>
         <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin"/>
-        <StackPanel Margin="4" Orientation="Vertical" d:LayoutOverrides="Height">
-            <StackPanel Margin="4,0,0,0" Orientation="Horizontal" d:LayoutOverrides="Width, TopPosition, BottomPosition" Height="22">
-                <TextBlock TextWrapping="Wrap" Text="{Binding LabelText}" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" d:LayoutOverrides="Height, TopPosition, BottomPosition" Margin="0" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock TextWrapping="Wrap" Text="{Binding BodyText}" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBlockFont}" FontSize="{DynamicResource DefaultTextBlockSize}" FontWeight="Bold" d:LayoutOverrides="Height, TopPosition, BottomPosition" Margin="0" VerticalAlignment="Center"/>
-
-        </StackPanel>
+        <TextBlock TextWrapping="Wrap" Text="{Binding LabelText}" Foreground="{DynamicResource TextLight_Brush}" FontSize="{DynamicResource DetailLabelFont_Size}" FontWeight="Bold" Margin="8,8.014,0,0" VerticalAlignment="Top" Height="19" FontFamily="{DynamicResource DetailLabelFont}"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding BodyText, FallbackValue='[Runtime Value]'}" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DetailBody_Font}" FontSize="{DynamicResource DetailBodyFont_Size}" FontWeight="Bold" Margin="8,0,0,7" VerticalAlignment="Bottom" Height="20"/>
 
     </Grid>
 </UserControl>
