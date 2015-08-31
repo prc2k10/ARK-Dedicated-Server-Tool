@@ -129,7 +129,7 @@
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Border>
-                    <ScrollViewer Margin="0,64,0,0" Template="{DynamicResource ScrollViewerControlTemplate}" HorizontalScrollBarVisibility="Visible">
+                    <ScrollViewer Margin="0,64,0,0" HorizontalScrollBarVisibility="Visible">
                         <StackPanel Orientation="Vertical">
                             <Grid x:Name="toolButtons" Height="58" Margin="2,0,0,0">
                                 <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin"/>
