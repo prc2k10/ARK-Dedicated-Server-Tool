@@ -117,6 +117,7 @@
       <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -250,6 +251,7 @@
     <Compile Include="UIStyles\Shapes.xaml.cs">
       <DependentUpon>Shapes.xaml</DependentUpon>
     </Compile>
+    <Resource Include="UIStyles\InnerShadowMultiline.png" />
     <Resource Include="UIStyles\locked.png" />
     <Resource Include="UIStyles\unlocked.png" />
     <Resource Include="UIStyles\checked.jpg" />
@@ -275,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LabeledSpinner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScrollViewerStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

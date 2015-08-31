@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:ARK_Server_Manager"
              xmlns:eo="http://schemas.essentialobjects.com/wpf/" xmlns:Controls="clr-namespace:ARK_Server_Manager.Controls" x:Class="ARK_Server_Manager.ServerDetailControl"
              x:Name="controlRoot"
-             mc:Ignorable="d" 
-             d:DesignHeight="743.667" d:DesignWidth="1024" Width="Auto">
+             mc:Ignorable="d" d:DesignWidth="1024" Width="Auto">
     <UserControl.Resources>
 
         <Storyboard x:Key="hide">
@@ -99,8 +98,8 @@
             <BlurEffect Radius="0"/>
         </Grid.Effect>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="195"/>
-            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="209"/>
+            <ColumnDefinition Width="6"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0,0,0,-0.333" UseLayoutRounding="True" Grid.Column="2" Style="{DynamicResource TabControlHiddenHeader}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
@@ -116,9 +115,7 @@
                 </TransformGroup>
             </TabControl.RenderTransform>
             <TabItem x:Name="tabAdmin" Header="tabAdmin" Margin="0">
-
                 <Grid>
-
                     <Border x:Name="headerArea" Margin="8,8,8,0" BorderBrush="Black" Padding="0,8" VerticalAlignment="Top" >
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="3"/>
@@ -132,13 +129,13 @@
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Border>
-                    <WrapPanel Orientation="Horizontal" Margin="0,58,0,0" HorizontalAlignment="Center">
-                        <local:LabeledTextBox x:Name="ltbProfileName" Height="58" InputText="{Binding Profile.ProfileName}" LabelText="Server Profile Name:" Width="298" Margin="{DynamicResource DetailItemMargins}" />
-                        <Grid x:Name="toolButtons" Height="57" Width="145" Margin="{DynamicResource DetailItemMargins}">
-                            <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin">
-                                <StackPanel Margin="0,24,6,3" Orientation="Horizontal">
-                                    <Button x:Name="duplicateButton" Style="{DynamicResource ButtonDefault}" ToolTip="Duplicate this profile to a new one" Height="22" d:LayoutOverrides="LeftPosition, RightPosition" Width="22">
-                                        <Viewbox Height="16" Stretch="Fill" Width="15" d:IsLocked="True">
+                    <ScrollViewer Margin="0,64,0,0" Template="{DynamicResource ScrollViewerControlTemplate}" HorizontalScrollBarVisibility="Visible">
+                        <StackPanel Orientation="Vertical">
+                            <Grid x:Name="toolButtons" Height="58" Margin="2,0,0,0">
+                                <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin"/>
+                                <StackPanel Margin="10,11,4,7" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button x:Name="duplicateButton" Style="{DynamicResource ButtonDefault}" ToolTip="Duplicate this profile to a new one" d:LayoutOverrides="LeftPosition, RightPosition" Width="40" Margin="0" Height="40">
+                                        <Viewbox Height="30" Stretch="Fill" Width="27">
                                             <Grid Height="96" Width="84">
                                                 <Path Data="F1M42.116,0L0,0 0,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="0,14,18,0"/>
                                                 <Path Data="F1M42.116,0L0,0 0,5 34.098,5 61,32.582 61,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="9,5,9,9"/>
@@ -146,42 +143,94 @@
                                             </Grid>
                                         </Viewbox>
                                     </Button>
-                                    <Button x:Name="updateButton" Content="" HorizontalAlignment="Right" Margin="4,0,0,0" Width="22" Style="{DynamicResource RefreshButton}" Height="22" d:LayoutOverrides="LeftPosition, RightPosition" ToolTip="Update to most recent version"/>
-                                    <Button x:Name="installFolderButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Width="22" Margin="4,0,0,0" Height="22" d:LayoutOverrides="Height, LeftPosition, RightPosition, TopPosition, BottomPosition">
-                                        <Viewbox Height="13" Stretch="Fill" Width="16" d:IsLocked="True">
+                                    <Button x:Name="updateButton" Content="" HorizontalAlignment="Right" Margin="4,0,0,0" Width="40" Style="{DynamicResource RefreshButton}" d:LayoutOverrides="LeftPosition, RightPosition" ToolTip="Update to most recent version" Height="40"/>
+                                    <Button x:Name="installFolderButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" d:LayoutOverrides="LeftPosition, RightPosition" Height="40">
+                                        <Viewbox Stretch="Fill" Height="20" Width="26">
                                             <Grid Height="45" Width="58">
                                                 <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
                                                 <Path Data="F1M31.988,31.177L27.134,31.177 31.731,23.177 13.76,23.177 13.76,14.177 31.731,14.177 27.134,6.177 31.988,6.177 44.305,18.677z M54.706,0.177L2.851,0.177C-0.449,0.177 0.023,2.4 0.023,2.4 0.023,6.76 1.201,30.348 1.201,32.469 1.201,34.59 2.851,35.177 2.851,35.177L54.94,35.177C56.473,35.177 56.473,32.177 56.473,32.177 56.473,23.103 57.418,5.888 57.653,2.47 57.889,-0.948 54.706,0.177 54.706,0.177" Fill="{DynamicResource ButtonText_Brush}" Margin="0,9.892,0,0"/>
                                             </Grid>
                                         </Viewbox>
                                     </Button>
+                                    <Button x:Name="stopButton" Style="{DynamicResource ButtonDefault}" ToolTip="Stop server" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                        <Rectangle Fill="#FFE20000" Height="18" Stroke="Black" Width="18"/>
+                                    </Button>
+                                    <Button x:Name="openRCONButton" Style="{DynamicResource ButtonDefault}" ToolTip="Open cosole window" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                        <Viewbox Stretch="Fill" Width="26" Height="21">
+                                            <Grid Height="54" Width="67">
+                                                <Path Data="F1M65,10L2,10 2,2 65,2z M0,54L67,54 67,0 0,0z" Fill="Black"/>
+                                                <Path Data="F1M13.395,17.438C12.58,17.86 10.874,18.279 8.72,18.279 3.73,18.279 0,15.126 0,9.297 0,3.73 3.755,0 9.245,0 11.423,0 12.843,0.473 13.446,0.79L12.869,2.654C12.029,2.233 10.794,1.918 9.324,1.918 5.175,1.918 2.416,4.57 2.416,9.218 2.416,13.579 4.913,16.334 9.193,16.334 10.611,16.334 12.029,16.046 12.948,15.599z" Fill="White" Margin="10.356,21.118,43.198,14.603"/>
+                                                <Path Data="F1M0,10.924C0,9.951 0.656,9.27 1.548,9.27 2.495,9.27 3.099,9.951 3.099,10.924 3.099,11.842 2.495,12.552 1.522,12.552 0.631,12.552 0,11.842 0,10.924 M0,1.653C0,0.682 0.656,0 1.548,0 2.495,0 3.099,0.682 3.099,1.653 3.099,2.572 2.495,3.282 1.522,3.282 0.631,3.282 0,2.572 0,1.653" Fill="White" Margin="26.043,26.845,37.858,14.603"/>
+                                                <Path Data="F1M7.142,19.039L0,0 1.787,0 8.928,19.039z" Fill="White" Margin="30.141,21.093,27.931,13.868"/>
+                                                <Path Data="F1M13.131,1.313L0,1.313 0,0 13.131,0z" Fill="White" Margin="44.618,41.077,9.251,11.61"/>
+                                            </Grid>
+                                        </Viewbox>
+                                    </Button>
+                                    <Button x:Name="openRCONButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Open RCON" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                        <Grid Height="30" Width="30">
+                                            <Viewbox Stretch="Fill" Margin="4,2,6,12">
+                                                <Grid Height="54" Width="67">
+                                                    <Path Data="F1M65,10L2,10 2,2 65,2z M0,54L67,54 67,0 0,0z" Fill="Black"/>
+                                                    <Path Data="F1M13.395,17.438C12.58,17.86 10.874,18.279 8.72,18.279 3.73,18.279 0,15.126 0,9.297 0,3.73 3.755,0 9.245,0 11.423,0 12.843,0.473 13.446,0.79L12.869,2.654C12.029,2.233 10.794,1.918 9.324,1.918 5.175,1.918 2.416,4.57 2.416,9.218 2.416,13.579 4.913,16.334 9.193,16.334 10.611,16.334 12.029,16.046 12.948,15.599z" Fill="White" Margin="10.356,21.118,43.198,14.603"/>
+                                                    <Path Data="F1M0,10.924C0,9.951 0.656,9.27 1.548,9.27 2.495,9.27 3.099,9.951 3.099,10.924 3.099,11.842 2.495,12.552 1.522,12.552 0.631,12.552 0,11.842 0,10.924 M0,1.653C0,0.682 0.656,0 1.548,0 2.495,0 3.099,0.682 3.099,1.653 3.099,2.572 2.495,3.282 1.522,3.282 0.631,3.282 0,2.572 0,1.653" Fill="White" Margin="26.043,26.845,37.858,14.603"/>
+                                                    <Path Data="F1M7.142,19.039L0,0 1.787,0 8.928,19.039z" Fill="White" Margin="30.141,21.093,27.931,13.868"/>
+                                                    <Path Data="F1M13.131,1.313L0,1.313 0,0 13.131,0z" Fill="White" Margin="44.618,41.077,9.251,11.61"/>
+                                                </Grid>
+                                            </Viewbox>
+                                            <TextBlock x:Name="textBlock2" Margin="1.734,0,1.266,0.971" TextWrapping="Wrap" Text="RCON" VerticalAlignment="Bottom" FontSize="9.333" FontWeight="Bold" Height="11" Foreground="{DynamicResource ButtonText_Brush}"/>
+                                        </Grid>
+                                    </Button>
                                 </StackPanel>
-                            </Border>
-                            <StackPanel Margin="4" Orientation="Vertical" d:LayoutOverrides="Height">
-                                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DetailLabelFont}" FontSize="{DynamicResource DetailLabelFont_Size}" FontWeight="Bold" d:LayoutOverrides="TopMargin, BottomMargin" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tools:"/>
-                                <TextBlock x:Name="textBlock2_Copy2" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" FontWeight="Bold" Margin="2,2.6,0,2.4" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Runtime.Version}"/>
-                            </StackPanel>
-
-                        </Grid>
-                        <local:LabeledSpinner x:Name="spinnerMaxPlayers" Height="58" LabelText="Max Players:" Width="145" Margin="{DynamicResource DetailItemMargins}" Maximum="99" SmallChange="1" LargeChange="1" Value="{Binding Profile.MaxPlayers}" />
-                        <Grid Height="58" Width="451" Margin="{DynamicResource DetailItemMargins}">
-                            <local:LabeledTextBox Height="Auto" InputText="{Binding Profile.InstallDirectory}" LabelText="Installation Location:" Width="Auto" />
-                            <Button x:Name="installFolderButton" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Height="22" VerticalAlignment="Top" Width="22" Margin="0,3,4,0">
-                                <Viewbox Height="13" Stretch="Fill" Width="16" d:IsLocked="True">
-                                    <Grid Height="45" Width="58">
-                                        <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
-                                        <Path Data="F1M31.988,31.177L27.134,31.177 31.731,23.177 13.76,23.177 13.76,14.177 31.731,14.177 27.134,6.177 31.988,6.177 44.305,18.677z M54.706,0.177L2.851,0.177C-0.449,0.177 0.023,2.4 0.023,2.4 0.023,6.76 1.201,30.348 1.201,32.469 1.201,34.59 2.851,35.177 2.851,35.177L54.94,35.177C56.473,35.177 56.473,32.177 56.473,32.177 56.473,23.103 57.418,5.888 57.653,2.47 57.889,-0.948 54.706,0.177 54.706,0.177" Fill="{DynamicResource ButtonText_Brush}" Margin="0,9.892,0,0"/>
+                            </Grid>
+                            <GroupBox Header="Profile" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{DynamicResource Lit_Brush}" Style="{DynamicResource GroupBoxStyle1}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
+                                <UniformGrid Rows="1" Columns="2" Height="70">
+                                    <local:LabeledTextBox x:Name="ltbProfileName" Height="60" InputText="{Binding Profile.ProfileName}" LabelText="Server Profile Name:" Width="Auto" d:LayoutOverrides="TopPosition, BottomPosition" Margin="{DynamicResource DetailItemMargins}" RenderTransformOrigin="0.502,0.467" />
+                                    <Grid Height="60" Background="#00000000" Margin="{DynamicResource DetailItemMargins}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                                        <local:LabeledTextBox Height="60" InputText="{Binding Profile.InstallDirectory}" LabelText="Installation Location:" Width="Auto" />
+                                        <Button x:Name="installFolderButton" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Height="22" VerticalAlignment="Top" Width="22" Margin="0,3,4,0">
+                                            <Viewbox Height="13" Stretch="Fill" Width="16">
+                                                <Grid Height="45" Width="58">
+                                                    <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
+                                                    <Path Data="F1M31.988,31.177L27.134,31.177 31.731,23.177 13.76,23.177 13.76,14.177 31.731,14.177 27.134,6.177 31.988,6.177 44.305,18.677z M54.706,0.177L2.851,0.177C-0.449,0.177 0.023,2.4 0.023,2.4 0.023,6.76 1.201,30.348 1.201,32.469 1.201,34.59 2.851,35.177 2.851,35.177L54.94,35.177C56.473,35.177 56.473,32.177 56.473,32.177 56.473,23.103 57.418,5.888 57.653,2.47 57.889,-0.948 54.706,0.177 54.706,0.177" Fill="{DynamicResource ButtonText_Brush}" Margin="0,9.892,0,0"/>
+                                                </Grid>
+                                            </Viewbox>
+                                        </Button>
                                     </Grid>
-                                </Viewbox>
-                            </Button>
-                        </Grid>
-                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Steam Status:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="145" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Server Status:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="221" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Installed Version:" Margin="{DynamicResource DetailItemMargins}"/>
-                        <Controls:LabeledTextBlock Height="61" Width="222" BodyText="{Binding Runtime.Status, FallbackValue='[Runtime Value]'}" LabelText="Latest Available Version:" Margin="{DynamicResource DetailItemMargins}"/>
-                    </WrapPanel>
-                </Grid>
+                                </UniformGrid>
+                            </GroupBox>
+                            <GroupBox Header="Server Details" Margin="6,0,6,10" Style="{DynamicResource GroupBoxStyle1}" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" d:LayoutOverrides="TopPosition, BottomPosition">
+                                <UniformGrid Rows="4" Columns="3" Height="280">
+                                    <Controls:LabeledTextBlock BodyText="{Binding Profile.Version, FallbackValue=[Runtime Value]}" LabelText="Installed Version:" d:LayoutOverrides="LeftPosition, RightPosition" Margin="{DynamicResource DetailItemMargins}"/>
+                                    <Controls:LabeledTextBlock LabelText="Latest Version:" Margin="{DynamicResource DetailItemMargins}" BodyText="[Unbound]"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Enable RCON Port:" InputText="{Binding RCONPort}" HasCheckBox="True" IsCheckboxChecked="{Binding RCONEnabled}"/>
+                                    <Controls:LabeledTextBlock BodyText="{Binding Runtime.Status, FallbackValue=[Runtime Value]}" LabelText="Server Status:" Margin="{DynamicResource DetailItemMargins}"/>
+                                    <Controls:LabeledTextBlock BodyText="{Binding Runtime.Status, FallbackValue=[Runtime Value]}" LabelText="Availability:" Margin="{DynamicResource DetailItemMargins}"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Query Port:" InputText="{Binding Profile.ServerPort}"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Server Port:" InputText="{Binding Profile.ServerConnectionPort}"/>
+                                    <Controls:LabeledTextBlock LabelText="Local IP:" Margin="{DynamicResource DetailItemMargins}"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Enable Idle Timeout:" InputText="{Binding Profile.EnableKickIdlePlayers}" ToolTip="Enables automatically kicking players that have been idle for the time you choose." HasCheckBox="True"/>
+                                    <local:LabeledSpinner Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Auto Save Period (Minutes):" Value="{Binding Profile.AutoSavePeriodMinutes}" Minimum="1"/>
+                                </UniformGrid>
+                            </GroupBox>
+                            <GroupBox Height="210" Margin="6,0,6,10" Header="Message of the Day:" Style="{DynamicResource GroupBoxStyle1}" Foreground="{DynamicResource TextLight_Brush}" FontSize="16" FontFamily="{DynamicResource HeaderFont}">
 
+                                <Grid Background="{DynamicResource VeryDarkNeutral_Brush}" Margin="{DynamicResource DetailItemMargins}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                                    <TextBox TextWrapping="Wrap" MaxLines="5" AcceptsReturn="True" Text="{Binding Profile.MOTD}" Style="{DynamicResource DefaultTextBox}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" Margin="10,10,10,35"/>
+                                    <eo:SpinEdit Value="{Binding Profile.MOTDDuration}" Margin="164,0,0,9" FontFamily="{DynamicResource DetailBody_Font}" FontWeight="Bold" FontSize="{DynamicResource DetailBodyFont_Size}" Maximum="{Binding Maximum}" Background="{DynamicResource TextBoxBG_Brush}" BorderBrush="{DynamicResource VeryDarkNeutral_Brush}" BorderThickness="0" Width="100" HorizontalAlignment="Left" LargeChange="5" Minimum="{Binding Minimum}" SmallChange="1" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DetailLabelFont}" FontSize="{DynamicResource DetailLabelFont_Size}" FontWeight="Bold" Margin="10,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Duration (Seconds):"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="Passwords" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{DynamicResource Lit_Brush}" Style="{DynamicResource GroupBoxStyle1}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
+                                <UniformGrid Rows="1" Columns="3" Height="70">
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="4,4,4,4" LabelText="Server Password:" InputText="{Binding Profile.ServerPassword}"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="4,4,4,4" LabelText="Admin Password:" InputText="{Binding Profile.AdminPassword}"/>
+                                    <local:LabeledTextBox Width="Auto" Height="Auto" Margin="4,4,4,4" LabelText="Spectator Password:" InputText="{Binding Profile.SpectatorPassword}"/>
+                                </UniformGrid>
+                            </GroupBox>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
             </TabItem>
             <TabItem x:Name="tabRules" Header="tabRules">
                 <Grid>
@@ -288,7 +337,7 @@
             <TextBox x:Name="textBox" Height="79" TextWrapping="Wrap" Text="TextBox" Width="260"/>
 
         </TabControl>
-        <Border x:Name="border" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopMargin, BottomMargin" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="border" d:LayoutOverrides="Height, LeftMargin, RightMargin" Background="{DynamicResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,-2.664">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -1,6 +1,12 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <LinearGradientBrush x:Key="TextBoxBG_Brush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF9CA2A8" Offset="1"/>
+        <GradientStop Color="#FFB4B4B4"/>
+    </LinearGradientBrush>
+    <ImageBrush x:Key="Locked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/locked.png"/>
+    <ImageBrush x:Key="Unlocked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/unlocked.png"/>
     <Color x:Key="Master_Color">#FF0d6cb1</Color>
     <SolidColorBrush x:Key="Master_Brush" Color="{DynamicResource Master_Color}"/>
 

@@ -9,7 +9,7 @@
 	x:Class="ARK_Server_Manager.UITests"
 	x:Name="MainWindow" Loaded="Window_Loaded"
 	Title="UITests"
-	Width="1024" Height="768" MinWidth="1024" MinHeight="768">
+	Width="1200" Height="850" MinWidth="1100" MinHeight="500">
     <Window.Resources>
         <!-- Tooltip Style -->
 
@@ -98,7 +98,24 @@
             </Button>
             <Button x:Name="button_Copy2" Width="95.986" Style="{DynamicResource ButtonDefault}" BorderBrush="Black" IsDefault="True" HorizontalAlignment="Right" Margin="0,12.743,114.987,0" Height="32" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" Width="81.151">
-                    <Path Data="F1M0,203.921L0,170.489 100.571,201.066 100.571,0 173.731,0 173.731,201.066 274.302,162.62 274.302,203.921 137.151,340.98z" Fill="{DynamicResource ButtonText_Brush}" Stretch="Fill" Height="24.283" Width="19.534"/>
+                    <Grid Height="29" Width="25">
+                        <Path Data="F1M0,44.979L0,37.604 22.183,44.348 22.183,0 38.319,0 38.319,44.348 60.502,35.869 60.502,44.979 30.251,75.209z" Fill="{DynamicResource ButtonText_Brush}" HorizontalAlignment="Stretch" Stretch="Fill" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Margin="6.301,-1.61,7.367,0" Height="13.454">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="360"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Viewbox Margin="5,11,3,-2" Stretch="Fill">
+                            <Grid Height="96" Width="84">
+                                <Path Data="F1M42.116,0L0,0 0,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="4.611,10,13.389,4"/>
+                                <Path Data="F1M21,13L13,13 13,20 7,20 7,13 0,13 0,7 7,7 7,0 13,0 13,7 21,7z" Fill="{DynamicResource ButtonText_Brush}" Margin="58.565,-4.224,-4.435,71.776" Stretch="Fill"/>
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
                     <TextBlock x:Name="textBlock4" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0" FontFamily="{DynamicResource ButtonFont}" FontSize="14.667" Foreground="{DynamicResource ButtonText_Brush}"><Run Text="I"/><Run Text="mport"/></TextBlock>
                 </StackPanel>
             </Button>

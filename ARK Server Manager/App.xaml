@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="UIStyles/Slider_TwoTone.xaml"/>
                 <ResourceDictionary Source="UIStyles/BasicStyles.xaml"/>
                 <ResourceDictionary Source="UIStyles/TextStyles.xaml"/>
+                <ResourceDictionary Source="ScrollViewerStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="LtBeige" Color="#FFE6DFD8"/>
             <SolidColorBrush x:Key="MedBeige" Color="#FFD8CCBC"/>

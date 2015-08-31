@@ -428,11 +428,12 @@
     <Grid Background="{DynamicResource BeigeGradient}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="1191*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <Border Margin="10,5" Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="#FF10274F" BorderThickness="1">
+        <Border Margin="10,5" Grid.Row="0" BorderBrush="#FF10274F" BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -670,7 +671,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Border Grid.Row="1" BorderBrush="#FFD4C2B0" BorderThickness="2" Margin="3" Padding="0" >
+        <Border Grid.Row="1" BorderBrush="#FFD4C2B0" BorderThickness="2" Margin="3" Padding="0" Grid.RowSpan="2" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFECE1D4"/>
@@ -729,14 +730,14 @@
 
                             <ComboBox Grid.Column="5" Grid.Row="1" ItemsSource="{Binding ElementName=SettingsControl, Path=NetworkInterfaces}" SelectedValue="{Binding ServerIP}" SelectedValuePath="IPAddress"
                                           ToolTip="Sets the local (private) IP the server will listen on.  This should be your primary network card which routes to the public internet.">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
                                             <Label Content="{Binding IPAddress}"/>
                                             <Label Content="{Binding Description}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                             <!--
         					<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding ServerIP}" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"
@@ -747,10 +748,10 @@
                             <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding SpectatorPassword}" VerticalContentAlignment="Center"/>
                             <local:AnnotatedSlider Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" Label="Max Players:"  Value="{Binding MaxPlayers}" Minimum="1" Maximum="127" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="25" SmallChange="10" TickFrequency="10" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="0" 
         						ToolTip="Sets the maximum number of players which can join this server."/>
-                       
+
                             <CheckBox x:Name="EnableRCON" Grid.Column="0" Grid.Row="2" IsChecked="{Binding RCONEnabled}" Content="Enable RCON Port" VerticalAlignment="Center" Margin="5"/>
                             <TextBox Grid.Column="1" Grid.Row="2" IsEnabled="{Binding ElementName=EnableRCON, Path=IsChecked}" Text="{Binding RCONPort}" VerticalContentAlignment="Center" />
-                            
+
                             <CheckBox x:Name="EnableKickIdlePlayersCheckbox" Grid.Column="0" Grid.Row="4" IsChecked="{Binding EnableKickIdlePlayers}" Content="Enable Idle Timeout" VerticalAlignment="Center" Margin="5"/>
                             <local:AnnotatedSlider Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Label="" Suffix="seconds"  Value="{Binding KickIdlePlayersPeriod}" Minimum="60" Maximum="7200" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" LargeChange="300" SmallChange="60" TickFrequency="300" LabelRelativeWidth="Auto" SliderRelativeWidth="15*" SuffixRelativeWidth="Auto" 
         						ToolTip="The time until idle players are kicked from the server."
@@ -885,23 +886,23 @@
                                     <StackPanel Grid.Row="0"  Orientation="Horizontal"  Margin="2" HorizontalAlignment="Stretch">
                                         <Label Content="Update every:"/>
                                         <TextBox Margin="0,0,0,0" Width="75" ToolTip="The number of hours and minutes between update checks.">
-                                        <Validation.ErrorTemplate>
-                                            <ControlTemplate>
-                                                <StackPanel>
-                                                    <!-- Placeholder for the TextBox itself -->
-                                                    <AdornedElementPlaceholder x:Name="textBox"/>
-                                                    <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
-                                                </StackPanel>
-                                            </ControlTemplate>
-                                        </Validation.ErrorTemplate>
-                                        <TextBox.Text>
-                                            <Binding Path="AutoUpdatePeriod" Converter="{StaticResource MinutesToTimeValueConverter}">
-                                                <Binding.ValidationRules>
-                                                    <vm:TimeValidationRule ValidatesOnTargetUpdated="true" />
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
+                                            <Validation.ErrorTemplate>
+                                                <ControlTemplate>
+                                                    <StackPanel>
+                                                        <!-- Placeholder for the TextBox itself -->
+                                                        <AdornedElementPlaceholder x:Name="textBox"/>
+                                                        <TextBlock Text="{Binding [0].ErrorContent}" Background="Red" Foreground="White"/>
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Validation.ErrorTemplate>
+                                            <TextBox.Text>
+                                                <Binding Path="AutoUpdatePeriod" Converter="{StaticResource MinutesToTimeValueConverter}">
+                                                    <Binding.ValidationRules>
+                                                        <vm:TimeValidationRule ValidatesOnTargetUpdated="true" />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                         <local:AnnotatedSlider HorizontalAlignment="Stretch"  Margin="5,0,0,0" Width="400"  Label="Restart Grace Period:" LabelRelativeWidth="125" SuffixRelativeWidth="55"  Value="{Binding ServerUpdateGraceMinutes}" SmallChange="1" LargeChange="5" Minimum="0" Maximum="60" Suffix="minutes" ToolTip="The amount of time to broadcast messages about the upgrade before shutting down and upgrading the server."/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -924,7 +925,7 @@
                                                 </Binding>
                                             </TextBox.Text>
                                         </TextBox>
-                                </StackPanel>
+                                    </StackPanel>
                                 </Grid>
                             </GroupBox>
                         </Grid>
@@ -958,7 +959,7 @@
                                     <StackPanel  IsEnabled="{Binding ElementName=EnableIncreasePvPRespawnInterval, Path=IsChecked}">
                                         <local:AnnotatedSlider Label="Increase Check Period:" Value="{Binding IncreasePvPRespawnIntervalCheckPeriod}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />
                                         <local:AnnotatedSlider Label="Increase Multiplier:" Value="{Binding IncreasePvPRespawnIntervalMultiplier}" Suffix="x" Minimum="0.01" Maximum="10" SmallChange="0.5" LargeChange="1" TickFrequency="1" />
-                                        <local:AnnotatedSlider Label="Increase Base Amount:" Value="{Binding IncreasePvPRespawnIntervalBaseAmount}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />                                        
+                                        <local:AnnotatedSlider Label="Increase Base Amount:" Value="{Binding IncreasePvPRespawnIntervalBaseAmount}" Suffix="seconds" Minimum="0" Maximum="1800" SmallChange="60" LargeChange="300" TickFrequency="60" />
                                     </StackPanel>
                                 </GroupBox>
                                 <GroupBox  HorizontalAlignment="Stretch">
