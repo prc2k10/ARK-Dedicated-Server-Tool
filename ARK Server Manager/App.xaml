@@ -8,6 +8,7 @@
     <!--StartupUri="AutoUpdate.xaml">-->
     <globalizer:GlobalizedApplication.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="TempDict.xaml"/>
                 <ResourceDictionary Source="UIStyles/Brushes.xaml"/>
@@ -19,6 +20,7 @@
                 <ResourceDictionary Source="UIStyles/TextStyles.xaml"/>
                 <ResourceDictionary Source="ScrollViewerStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
             <SolidColorBrush x:Key="LtBeige" Color="#FFE6DFD8"/>
             <SolidColorBrush x:Key="MedBeige" Color="#FFD8CCBC"/>
             <Style x:Key="BorderLabel" TargetType="{x:Type Border}">
@@ -111,14 +113,22 @@
                                         <VisualState x:Name="Indeterminate"/>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-                                <Viewbox Margin="0" HorizontalAlignment="Left" Height="{TemplateBinding Height}" Width="{TemplateBinding Height}" Stretch="Fill">
-                                    <Grid Height="17.052" Width="17.052">
+                                <Viewbox x:Name="viewbox" Margin="0" HorizontalAlignment="Left" Height="{TemplateBinding Height}" Width="{TemplateBinding Height}" Stretch="Fill">
+                                    <Grid Height="{TemplateBinding ActualHeight}" Width="{TemplateBinding ActualHeight}" Margin="0">
                                         <Border x:Name="_unchecked" BorderBrush="{TemplateBinding BorderBrush}" Margin="0" HorizontalAlignment="Stretch" BorderThickness="{TemplateBinding BorderThickness}" Background="{StaticResource Unchecked_Brush}"/>
-                                            <Border x:Name="_checked" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" Margin="0" Width="Auto" Opacity="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource Checked_Brush}"/>
+                                        <Border x:Name="_checked" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" Margin="3" Width="Auto" Opacity="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{StaticResource Checked_Brush}"/>
                                     </Grid>
                                 </Viewbox>
                                 <ContentPresenter x:Name="contentPresenter" Focusable="False" Margin="8,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" Height="Auto"/>
                             </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" TargetName="viewbox" Value="0.5"/>
+                                    <Setter Property="Opacity" TargetName="contentPresenter" Value="0.5"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="True"/>
+                                <Trigger Property="IsChecked" Value="False"/>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>

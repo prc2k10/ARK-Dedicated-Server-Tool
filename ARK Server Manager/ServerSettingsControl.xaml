@@ -968,15 +968,16 @@
                                     </GroupBox.Header>
                                     <Grid IsEnabled="{Binding ElementName=EnableAutoPvETimer, Path=IsChecked}">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="86"/>
+                                            <ColumnDefinition Width="27.973"/>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox Grid.Column="0" IsChecked="{Binding AutoPvEUseSystemTime}" Content="Use Server Time" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                                        <Label    Grid.Column="1" Content="Start Time:"  Margin="10,0,0,0"/>
-                                        <TextBox  Grid.Column="2" FontSize="12"  Width="100" Margin="5,0,0,6" VerticalContentAlignment="Center" ToolTip="The start time in hours and minutes from midnight" >
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding AutoPvEUseSystemTime}" Content="Use Server Time" HorizontalAlignment="Left" Margin="5,5,-0.001,5" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                                        <Label    Grid.Column="2" Content="Start Time:"  Margin="10,0,-0.001,0"/>
+                                        <TextBox  Grid.Column="3" FontSize="12"  Width="100" Margin="5,0,-0.001,6" VerticalContentAlignment="Center" ToolTip="The start time in hours and minutes from midnight" >
                                             <Validation.ErrorTemplate>
                                                 <ControlTemplate>
                                                     <StackPanel>
@@ -994,8 +995,8 @@
                                                 </Binding>
                                             </TextBox.Text>
                                         </TextBox>
-                                        <Label   Grid.Column="3" Content="Stop Time:" Margin="10,0,0,0"/>
-                                        <TextBox Grid.Column="4" FontSize="12" Width="100" Margin="5,0,0,6" VerticalContentAlignment="Center" ToolTip="The stop time in hours and minutes from midnight" >
+                                        <Label   Grid.Column="4" Content="Stop Time:" Margin="10.001,0,-0.001,0"/>
+                                        <TextBox Grid.Column="5" FontSize="12" Width="100" Margin="5,0,-0.001,6" VerticalContentAlignment="Center" ToolTip="The stop time in hours and minutes from midnight" >
                                             <Validation.ErrorTemplate>
                                                 <ControlTemplate>
                                                     <StackPanel>

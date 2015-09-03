@@ -155,6 +155,9 @@
     <Compile Include="CommandLine.xaml.cs">
       <DependentUpon>CommandLine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LabeledSlider.xaml.cs">
+      <DependentUpon>LabeledSlider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LabeledTextBlock.xaml.cs">
       <DependentUpon>LabeledTextBlock.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,9 @@
       <DependentUpon>ServerSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lib\ServerStatusWatcher.cs" />
+    <Compile Include="Testing\Temp.xaml.cs">
+      <DependentUpon>Temp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Testing\UITests.xaml.cs">
       <DependentUpon>UITests.xaml</DependentUpon>
     </Compile>
@@ -264,6 +270,10 @@
     </Content>
     <Resource Include="UIStyles\header.png" />
     <Resource Include="UIStyles\headerTitle.jpg" />
+    <Page Include="Controls\LabeledSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LabeledTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TempDict.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Testing\Temp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
