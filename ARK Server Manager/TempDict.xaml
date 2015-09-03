@@ -5,9 +5,6 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:eo="http://schemas.essentialobjects.com/wpf/"
                     xmlns:Aero="clr-namespace:EO.Wpf.Themes.Aero;assembly=EO.Wpf" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d">
-   
-  
-    <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     <Style x:Key="GroupBoxStyle1" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="#D5DFE5"/>
         <Setter Property="BorderThickness" Value="1"/>
