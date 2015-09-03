@@ -7,65 +7,69 @@
     </LinearGradientBrush>
     <ImageBrush x:Key="Locked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/locked.png"/>
     <ImageBrush x:Key="Unlocked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/unlocked.png"/>
+    <ImageBrush x:Key="Checked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/checked.jpg"/>
+    <ImageBrush x:Key="Unchecked_Brush" ImageSource="/ARK Server Manager;component/UIStyles/unchecked.jpg"/>
+    
+    
     <Color x:Key="Master_Color">#FF0d6cb1</Color>
-    <SolidColorBrush x:Key="Master_Brush" Color="{DynamicResource Master_Color}"/>
+    <SolidColorBrush x:Key="Master_Brush" Color="{StaticResource Master_Color}"/>
 
     <Color x:Key="MasterComp_Color">#FFff9000</Color>
-    <SolidColorBrush x:Key="MasterComp_Brush" Color="{DynamicResource MasterComp_Color}"/>
+    <SolidColorBrush x:Key="MasterComp_Brush" Color="{StaticResource MasterComp_Color}"/>
 
     <Color x:Key="Lit_Color">#FF0094ff</Color>
-    <SolidColorBrush x:Key="Lit_Brush" Color="{DynamicResource Lit_Color}"/>
+    <SolidColorBrush x:Key="Lit_Brush" Color="{StaticResource Lit_Color}"/>
 
     <Color x:Key="Highlight_Color">#3fbeff</Color>
-    <SolidColorBrush x:Key="Highlight_Brush" Color="{DynamicResource Highlight_Color}"/>
+    <SolidColorBrush x:Key="Highlight_Brush" Color="{StaticResource Highlight_Color}"/>
 
     <Color x:Key="Dark_Color">#FF253858</Color>
-    <SolidColorBrush x:Key="Dark_Brush" Color="{DynamicResource Dark_Color}"/>
+    <SolidColorBrush x:Key="Dark_Brush" Color="{StaticResource Dark_Color}"/>
 
     <Color x:Key="VeryDark_Color">#FF1D1E2E</Color>
-    <SolidColorBrush x:Key="VeryDark_Brush" Color="{DynamicResource VeryDark_Color}"/>
+    <SolidColorBrush x:Key="VeryDark_Brush" Color="{StaticResource VeryDark_Color}"/>
 
     <Color x:Key="TextLight_Color">#FFd3d3d3</Color>
-    <SolidColorBrush x:Key="TextLight_Brush" Color="{DynamicResource TextLight_Color}"/>
+    <SolidColorBrush x:Key="TextLight_Brush" Color="{StaticResource TextLight_Color}"/>
 
     <Color x:Key="MedNeutral_Color">#FF686868</Color>
-    <SolidColorBrush x:Key="MedNeutral_Brush" Color="{DynamicResource MedNeutral_Color}"/>
+    <SolidColorBrush x:Key="MedNeutral_Brush" Color="{StaticResource MedNeutral_Color}"/>
 
     <Color x:Key="DarkNeutral_Color">#FF323232</Color>
-    <SolidColorBrush x:Key="DarkNeutral_Brush" Color="{DynamicResource DarkNeutral_Color}"/>
+    <SolidColorBrush x:Key="DarkNeutral_Brush" Color="{StaticResource DarkNeutral_Color}"/>
 
     <Color x:Key="VeryDarkNeutral_Color">#FF202020</Color>
-    <SolidColorBrush x:Key="VeryDarkNeutral_Brush" Color="{DynamicResource VeryDarkNeutral_Color}"/>
+    <SolidColorBrush x:Key="VeryDarkNeutral_Brush" Color="{StaticResource VeryDarkNeutral_Color}"/>
 
     <Color x:Key="Disabled_Color">#FF9D9D9D</Color>
-    <SolidColorBrush x:Key="Disabled_Brush" Color="{DynamicResource Disabled_Color}"/>
+    <SolidColorBrush x:Key="Disabled_Brush" Color="{StaticResource Disabled_Color}"/>
 
     <Color x:Key="Glow_Color">#FF03DEFB</Color>
-    <SolidColorBrush x:Key="Glow_Brush" Color="{DynamicResource Glow_Color}"/>
+    <SolidColorBrush x:Key="Glow_Brush" Color="{StaticResource Glow_Color}"/>
 
     <Color x:Key="Go_Color">#FF53c566</Color>
-    <SolidColorBrush x:Key="Go_Brush" Color="{DynamicResource Go_Color}"/>
+    <SolidColorBrush x:Key="Go_Brush" Color="{StaticResource Go_Color}"/>
 
     <Color x:Key="LightNeutral_Color">#FFC5C5C5</Color>
-    <SolidColorBrush x:Key="LightNeutral_Brush" Color="{DynamicResource LightNeutral_Color}"/>
+    <SolidColorBrush x:Key="LightNeutral_Brush" Color="{StaticResource LightNeutral_Color}"/>
 
     <Color x:Key="DarkNeutralFade_Color">#D9404040</Color>
-    <SolidColorBrush x:Key="DarkNeutralFade_Brush" Color="{DynamicResource DarkNeutralFade_Color}"/>
+    <SolidColorBrush x:Key="DarkNeutralFade_Brush" Color="{StaticResource DarkNeutralFade_Color}"/>
 
     <Color x:Key="ButtonText_Color">#FFFFFFFF</Color>
-    <SolidColorBrush x:Key="ButtonText_Brush" Color="{DynamicResource ButtonText_Color}"/>
+    <SolidColorBrush x:Key="ButtonText_Brush" Color="{StaticResource ButtonText_Color}"/>
 
     <Color x:Key="ButtonHover_Color">#FF0094ff</Color>
-    <SolidColorBrush x:Key="ButtonHover_Brush" Color="{DynamicResource ButtonHover_Color}"/>
+    <SolidColorBrush x:Key="ButtonHover_Brush" Color="{StaticResource ButtonHover_Color}"/>
 
     <Color x:Key="ButtonPress_Color">#3fbeff</Color>
-    <SolidColorBrush x:Key="ButtonPress_Brush" Color="{DynamicResource ButtonPress_Color}"/>
+    <SolidColorBrush x:Key="ButtonPress_Brush" Color="{StaticResource ButtonPress_Color}"/>
 
     <Color x:Key="ButtonBase_Color">#FF0d6cb1</Color>
-    <SolidColorBrush x:Key="ButtonBase_Brush" Color="{DynamicResource ButtonBase_Color}"/>
+    <SolidColorBrush x:Key="ButtonBase_Brush" Color="{StaticResource ButtonBase_Color}"/>
 
     <Color x:Key="Stop_Color">#8e1c1c</Color>
-    <SolidColorBrush x:Key="Stop_Brush" Color="{DynamicResource Stop_Color}"/>
+    <SolidColorBrush x:Key="Stop_Brush" Color="{StaticResource Stop_Color}"/>
 
     <Color x:Key="StopButtonPressed_Color">#FFff3838</Color>
     <SolidColorBrush x:Key="StopButtonPressed_Brush" Color="{StaticResource StopButtonPressed_Color}"/>
@@ -84,6 +88,7 @@
 
     <Color x:Key="StartButtonPress_Color">#ff6eff7f</Color>
     <SolidColorBrush x:Key="StartButtonPress_Brush" Color="{StaticResource StartButtonPress_Color}"/>
+    
     <LinearGradientBrush x:Key="BlackFadeRight_Brush" EndPoint="0.5,1" StartPoint="0.5,0">
         <LinearGradientBrush.RelativeTransform>
             <TransformGroup>
@@ -96,17 +101,4 @@
         <GradientStop Color="Black" Offset="1"/>
         <GradientStop Color="#00000000"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
-    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
-    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
-    <!-- Resource dictionary entries should be defined here. -->
 </ResourceDictionary>

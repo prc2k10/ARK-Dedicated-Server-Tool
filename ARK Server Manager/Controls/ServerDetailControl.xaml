@@ -8,7 +8,6 @@
              x:Name="controlRoot"
              mc:Ignorable="d" d:DesignWidth="1024" Width="Auto">
     <UserControl.Resources>
-
         <Storyboard x:Key="hide">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="mainTabControl">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -129,12 +128,12 @@
                             </TextBlock.Foreground>
                         </TextBlock>
                     </Border>
-                    <ScrollViewer Margin="0,64,0,0" Template="{DynamicResource ScrollViewerControlTemplate}" HorizontalScrollBarVisibility="Visible">
+                    <ScrollViewer Margin="0,64,0,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
                             <Grid x:Name="toolButtons" Height="58" Margin="2,0,0,0">
                                 <Border Background="{DynamicResource VeryDarkNeutral_Brush}" Padding="4" d:LayoutOverrides="TopMargin, BottomMargin"/>
                                 <StackPanel Margin="10,11,4,7" Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button x:Name="duplicateButton" Style="{DynamicResource ButtonDefault}" ToolTip="Duplicate this profile to a new one" d:LayoutOverrides="LeftPosition, RightPosition" Width="40" Margin="0" Height="40">
+                                    <Button x:Name="duplicateButton" ToolTip="Duplicate this profile to a new one" d:LayoutOverrides="LeftPosition, RightPosition" Width="40" Margin="0" Height="40">
                                         <Viewbox Height="30" Stretch="Fill" Width="27">
                                             <Grid Height="96" Width="84">
                                                 <Path Data="F1M42.116,0L0,0 0,82 66,82 66,25.276z" Fill="{DynamicResource ButtonText_Brush}" Margin="0,14,18,0"/>
@@ -143,8 +142,8 @@
                                             </Grid>
                                         </Viewbox>
                                     </Button>
-                                    <Button x:Name="updateButton" Content="" HorizontalAlignment="Right" Margin="4,0,0,0" Width="40" Style="{DynamicResource RefreshButton}" d:LayoutOverrides="LeftPosition, RightPosition" ToolTip="Update to most recent version" Height="40"/>
-                                    <Button x:Name="installFolderButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" d:LayoutOverrides="LeftPosition, RightPosition" Height="40">
+                                    <Button x:Name="updateButton" Content="" HorizontalAlignment="Right" Margin="4,0,0,0" Width="40" d:LayoutOverrides="LeftPosition, RightPosition" ToolTip="Update to most recent version" Height="40"/>
+                                    <Button x:Name="installFolderButton_Copy"  ToolTip="Change install location" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" d:LayoutOverrides="LeftPosition, RightPosition" Height="40">
                                         <Viewbox Stretch="Fill" Height="20" Width="26">
                                             <Grid Height="45" Width="58">
                                                 <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
@@ -152,10 +151,10 @@
                                             </Grid>
                                         </Viewbox>
                                     </Button>
-                                    <Button x:Name="stopButton" Style="{DynamicResource ButtonDefault}" ToolTip="Stop server" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                    <Button x:Name="stopButton"  ToolTip="Stop server" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
                                         <Rectangle Fill="#FFE20000" Height="18" Stroke="Black" Width="18"/>
                                     </Button>
-                                    <Button x:Name="openRCONButton" Style="{DynamicResource ButtonDefault}" ToolTip="Open cosole window" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                    <Button x:Name="openRCONButton"  ToolTip="Open cosole window" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
                                         <Viewbox Stretch="Fill" Width="26" Height="21">
                                             <Grid Height="54" Width="67">
                                                 <Path Data="F1M65,10L2,10 2,2 65,2z M0,54L67,54 67,0 0,0z" Fill="Black"/>
@@ -166,7 +165,7 @@
                                             </Grid>
                                         </Viewbox>
                                     </Button>
-                                    <Button x:Name="openRCONButton_Copy" Style="{DynamicResource ButtonDefault}" ToolTip="Open RCON" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
+                                    <Button x:Name="openRCONButton_Copy"  ToolTip="Open RCON" HorizontalAlignment="Right" Width="40" Margin="4,0,0,0" Height="40">
                                         <Grid Height="30" Width="30">
                                             <Viewbox Stretch="Fill" Margin="4,2,6,12">
                                                 <Grid Height="54" Width="67">
@@ -182,12 +181,12 @@
                                     </Button>
                                 </StackPanel>
                             </Grid>
-                            <GroupBox Header="Profile" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{DynamicResource Lit_Brush}" Style="{DynamicResource GroupBoxStyle1}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
+                            <GroupBox Header="Profile" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
                                 <UniformGrid Rows="1" Columns="2" Height="70">
                                     <local:LabeledTextBox x:Name="ltbProfileName" Height="60" InputText="{Binding Profile.ProfileName}" LabelText="Server Profile Name:" Width="Auto" d:LayoutOverrides="TopPosition, BottomPosition" Margin="{DynamicResource DetailItemMargins}" RenderTransformOrigin="0.502,0.467" />
                                     <Grid Height="60" Background="#00000000" Margin="{DynamicResource DetailItemMargins}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
                                         <local:LabeledTextBox Height="60" InputText="{Binding Profile.InstallDirectory}" LabelText="Installation Location:" Width="Auto" />
-                                        <Button x:Name="installFolderButton" Style="{DynamicResource ButtonDefault}" ToolTip="Change install location" HorizontalAlignment="Right" Height="22" VerticalAlignment="Top" Width="22" Margin="0,3,4,0">
+                                        <Button x:Name="installFolderButton"  ToolTip="Change install location" HorizontalAlignment="Right" Height="22" VerticalAlignment="Top" Width="22" Margin="0,3,4,0">
                                             <Viewbox Height="13" Stretch="Fill" Width="16">
                                                 <Grid Height="45" Width="58">
                                                     <Path Data="F1M0,8.126C0,8.126 0.103,5.94 1.104,5.704 2.107,5.468 2.511,4.629 2.629,3.038 2.747,1.448 3.799,0 4.626,0L20.005,0C20.005,0 21.831,1.027 21.949,2.736 22.067,4.445 22.421,5.531 24.249,5.531L49.231,5.531C49.231,5.531,51.708,5.704,52.061,7.649z" Fill="{DynamicResource ButtonText_Brush}" Margin="2.645,0,2.96,36.943"/>
@@ -198,7 +197,7 @@
                                     </Grid>
                                 </UniformGrid>
                             </GroupBox>
-                            <GroupBox Header="Server Details" Margin="6,0,6,10" Style="{DynamicResource GroupBoxStyle1}" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" d:LayoutOverrides="TopPosition, BottomPosition">
+                            <GroupBox Header="Server Details" Margin="6,0,6,10"  FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" d:LayoutOverrides="TopPosition, BottomPosition">
                                 <UniformGrid Rows="4" Columns="3" Height="280">
                                     <Controls:LabeledTextBlock BodyText="{Binding Profile.Version, FallbackValue=[Runtime Value]}" LabelText="Installed Version:" d:LayoutOverrides="LeftPosition, RightPosition" Margin="{DynamicResource DetailItemMargins}"/>
                                     <Controls:LabeledTextBlock LabelText="Latest Version:" Margin="{DynamicResource DetailItemMargins}" BodyText="[Unbound]"/>
@@ -212,7 +211,7 @@
                                     <local:LabeledSpinner Width="Auto" Height="Auto" Margin="{DynamicResource DetailItemMargins}" LabelText="Auto Save Period (Minutes):" Value="{Binding Profile.AutoSavePeriodMinutes}" Minimum="1"/>
                                 </UniformGrid>
                             </GroupBox>
-                            <GroupBox Height="210" Margin="6,0,6,10" Header="Message of the Day:" Style="{DynamicResource GroupBoxStyle1}" Foreground="{DynamicResource TextLight_Brush}" FontSize="16" FontFamily="{DynamicResource HeaderFont}">
+                            <GroupBox Height="210" Margin="6,0,6,10" Header="Message of the Day:"  Foreground="{DynamicResource TextLight_Brush}" FontSize="16" FontFamily="{DynamicResource HeaderFont}">
 
                                 <Grid Background="{DynamicResource VeryDarkNeutral_Brush}" Margin="{DynamicResource DetailItemMargins}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
                                     <TextBox TextWrapping="Wrap" MaxLines="5" AcceptsReturn="True" Text="{Binding Profile.MOTD}" Style="{DynamicResource DefaultTextBox}" FontFamily="{DynamicResource DefaultTextBoxFont}" FontSize="{DynamicResource DefaultTextBoxSize}" Margin="10,10,10,35"/>
@@ -220,7 +219,7 @@
                                     <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Foreground="{DynamicResource TextLight_Brush}" FontFamily="{DynamicResource DetailLabelFont}" FontSize="{DynamicResource DetailLabelFont_Size}" FontWeight="Bold" Margin="10,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Duration (Seconds):"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Header="Passwords" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" BorderBrush="{DynamicResource Lit_Brush}" Style="{DynamicResource GroupBoxStyle1}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
+                            <GroupBox Header="Passwords" FontFamily="{DynamicResource HeaderFont}" FontSize="16" Foreground="{DynamicResource TextLight_Brush}" d:LayoutOverrides="LeftPosition, RightPosition" Margin="6,0,6,10">
                                 <UniformGrid Rows="1" Columns="3" Height="70">
                                     <local:LabeledTextBox Width="Auto" Height="Auto" Margin="4,4,4,4" LabelText="Server Password:" InputText="{Binding Profile.ServerPassword}"/>
                                     <local:LabeledTextBox Width="Auto" Height="Auto" Margin="4,4,4,4" LabelText="Admin Password:" InputText="{Binding Profile.AdminPassword}"/>
@@ -356,11 +355,22 @@
                     <ListBoxItem x:Name="listBoxItemEnviron" Content="Environment" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemMods" Content="Mods" Style="{DynamicResource MainListBoxItem}" Padding="4,8"/>
                 </ListBox>
-                <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" Style="{DynamicResource BackButton}" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White" ToolTip="12312321321321321">
-                    <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Text="List" FontSize="24" FontFamily="{DynamicResource DefaultFont}"/>
+                <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{DynamicResource ButtonFont}" FontSize="16" Background="White" Foreground="White" ToolTip="12312321321321321">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,30,0">
+                        <Path Data="F1M0,0L76.591,76.595 153.188,0 76.591,38.297z" Fill="{DynamicResource ButtonText_Brush}" Stretch="Fill" Width="32.194" RenderTransformOrigin="0.5,0.5" Height="16.097">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" Text="List" FontSize="24" FontFamily="{DynamicResource DefaultFont}" d:LayoutOverrides="TopMargin, BottomMargin, LeftPosition, RightPosition"/>
+                    </StackPanel>
                 </Button>
             </StackPanel>
         </Border>
-
     </Grid>
 </UserControl>

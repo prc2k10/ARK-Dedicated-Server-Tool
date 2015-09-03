@@ -284,7 +284,7 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <Button x:Name="decreaseButton" Grid.Column="1" Grid.Row="1" Command="eo:SpinEdit.DecreaseSmall" Style="{DynamicResource ButtonDefault}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                        <Button x:Name="decreaseButton" Grid.Column="1" Grid.Row="1" Command="eo:SpinEdit.DecreaseSmall"  d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                             <Path Data="F1M0,0L76.591,76.595 153.188,0 76.591,38.297z" Fill="{DynamicResource ButtonText_Brush}" Margin="0" Height="6.89" VerticalAlignment="Top" Stretch="Fill" Grid.Column="0" Grid.Row="1" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Grid.ColumnSpan="1" HorizontalAlignment="Left" Width="10">
                                 <Path.RenderTransform>
                                     <TransformGroup>
@@ -296,7 +296,7 @@
                                 </Path.RenderTransform>
                             </Path>
                         </Button>
-                        <Button x:Name="increaseButton" Grid.Column="1" Grid.Row="0" Command="eo:SpinEdit.IncreaseSmall" Style="{DynamicResource ButtonDefault}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                        <Button x:Name="increaseButton" Grid.Column="1" Grid.Row="0" Command="eo:SpinEdit.IncreaseSmall"  d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
                             <Path Data="F1M0,0L76.591,76.595 153.188,0 76.591,38.297z" Fill="{DynamicResource ButtonText_Brush}" Margin="0" Height="6.89" VerticalAlignment="Top" Stretch="Fill" Grid.Column="0" Grid.Row="1" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Grid.ColumnSpan="1" HorizontalAlignment="Left" Width="10">
                                 <Path.RenderTransform>
                                     <TransformGroup>

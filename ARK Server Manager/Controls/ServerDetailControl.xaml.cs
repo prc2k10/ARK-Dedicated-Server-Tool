@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ARK_Server_Manager.Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace ARK_Server_Manager
     /// </summary>
     public partial class ServerDetailControl : UserControl
     {
+        Server defaultSrv = Server.FromDefaults();
+
         public ServerDetailControl()
         {
+            // Create a default server for the control to avoid binding errors on initialization
+
+            this.DataContext = defaultSrv;
             InitializeComponent();  
+
+
         }
 
         private void listBox_Loaded(object sender, RoutedEventArgs e)
