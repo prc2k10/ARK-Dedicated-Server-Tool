@@ -31,6 +31,8 @@ namespace ARK_Server_Manager.Lib
                 new DinoSpawn { ClassName="MegaRex_Character_BP_C", DinoNameTag = "Elite Rex",  SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
                 new DinoSpawn { ClassName="Mammoth_Character_BP_C", DinoNameTag = "Mammoth",    SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
                 new DinoSpawn { ClassName="Megalodon_Character_BP_C", DinoNameTag = "Mega",       SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
+                new DinoSpawn { ClassName="Monkey_Character_BP_C ", DinoNameTag = "Mesopithecus ",  SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
+                new DinoSpawn { ClassName="Pachy_Character_BP_C", DinoNameTag = "Pachy",       SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
                 new DinoSpawn { ClassName="Para_Character_BP_C", DinoNameTag = "Para",       SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
                 new DinoSpawn { ClassName="Phiomia_Character_BP_C", DinoNameTag = "Phiomia",    SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
                 new DinoSpawn { ClassName="Piranha_Character_BP_C", DinoNameTag = "Piranha",    SpawnWeightMultiplier = 0.1F, OverrideSpawnLimitPercentage = true, SpawnLimitPercentage = 1.0F },
@@ -79,6 +81,8 @@ namespace ARK_Server_Manager.Lib
             new ClassMultiplier { ClassName="MegaRex_Character_BP_C", Multiplier = 1.0f },
             new ClassMultiplier { ClassName="MegaCarno_Character_BP_C", Multiplier = 1.0f },
             new ClassMultiplier { ClassName="MegaRaptor_Character_BP_C", Multiplier = 1.0f },
+            new ClassMultiplier { ClassName="Monkey_Character_BP_C ", Multiplier = 1.0f },
+            new ClassMultiplier { ClassName="Pachy_Character_BP_C", Multiplier = 1.0f },
             new ClassMultiplier { ClassName="Para_Character_BP_C", Multiplier = 1.0f },
             new ClassMultiplier { ClassName="Phiomia_Character_BP_C", Multiplier = 1.0f },
             new ClassMultiplier { ClassName="Piranha_Character_BP_C", Multiplier = 1.0f },
@@ -137,28 +141,28 @@ namespace ARK_Server_Manager.Lib
             new ClassMultiplier { ClassName="PrimalItemResource_Temp_C", Multiplier=1.0f },
             new ClassMultiplier { ClassName="PrimalItemResource_Thatch_C", Multiplier=1.0f },
             new ClassMultiplier { ClassName="PrimalItemResource_Wood_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_RawMeat_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_RawPrimeMeat_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Amarberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Azulberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Mejoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Narcoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Stimberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Berry_Tintoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Veggie_Citronal_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Veggie_Longrass_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Veggie_Rockarrot_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Veggie_Savoroot_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Amarberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Azulberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Mejoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Narcoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Stimberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Tintoberry_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Citronal_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Longrass_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Rockarrot_C", Multiplier=1.0f },
-            new ClassMultiplier { ClassName = "PrimalItemConsumable_Seed_Savoroot_C", Multiplier=1.0f }
+            new ClassMultiplier { ClassName="PrimalItemConsumable_RawMeat_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_RawPrimeMeat_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Amarberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Azulberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Mejoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Narcoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Stimberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Berry_Tintoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Veggie_Citronal_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Veggie_Longrass_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Veggie_Rockarrot_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Veggie_Savoroot_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Amarberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Azulberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Mejoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Narcoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Stimberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Tintoberry_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Citronal_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Longrass_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Rockarrot_C", Multiplier=1.0f },
+            new ClassMultiplier { ClassName="PrimalItemConsumable_Seed_Savoroot_C", Multiplier=1.0f }
         };
 
         public static IEnumerable<ClassMultiplier> GetStandardResourceMultipliers() => standardResourceMultipliers.Select(d => d.Duplicate<ClassMultiplier>());
@@ -279,7 +283,6 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_ArrowTranq_C",               EngramLevelRequirement=20, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_BearTrap_C",                 EngramLevelRequirement=25, EngramPointsCost=9,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_BearTrap_Large_C",           EngramLevelRequirement=25, EngramPointsCost=12, EngramHidden=false, RemoveEngramPreReq=false },
-            new EngramEntry { EngramClassName="EngramEntry_ArrowTranq_C",               EngramLevelRequirement=20, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_BloodExtractor_C",           EngramLevelRequirement=5,  EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Bookshelf_C",                EngramLevelRequirement=20, EngramPointsCost=15, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Bow_C",                      EngramLevelRequirement=15, EngramPointsCost=11, EngramHidden=false, RemoveEngramPreReq=false },
@@ -315,6 +318,7 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_Flashlight_C",               EngramLevelRequirement=45, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Forge_C",                    EngramLevelRequirement=20, EngramPointsCost=21, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_GPS_C",                      EngramLevelRequirement=45, EngramPointsCost=21, EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_GasGrenade_C",               EngramLevelRequirement=25, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Grenade_C",                  EngramLevelRequirement=30, EngramPointsCost=20, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Grill_C",                    EngramLevelRequirement=45, EngramPointsCost=40, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Gunpowder_C",                EngramLevelRequirement=10, EngramPointsCost=2,  EngramHidden=false, RemoveEngramPreReq=false },
@@ -366,6 +370,11 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_MetalSpikeWall_C",           EngramLevelRequirement=25, EngramPointsCost=11, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_MetalTrapdoor_C",            EngramLevelRequirement=40, EngramPointsCost=14, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_MetalWall_C",                EngramLevelRequirement=30, EngramPointsCost=15, EngramHidden=false, RemoveEngramPreReq=false },
+
+            new EngramEntry { EngramClassName="EngramEntry_MetalSlopedWall_Left_C",     EngramLevelRequirement=30, EngramPointsCost=7,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_MetalSlopedWall_Right_C",    EngramLevelRequirement=30, EngramPointsCost=7,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_MetalRoof_C",                EngramLevelRequirement=30, EngramPointsCost=10, EngramHidden=false, RemoveEngramPreReq=false },
+
             new EngramEntry { EngramClassName="EngramEntry_MetalWallWithDoor_C",        EngramLevelRequirement=30, EngramPointsCost=24, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_MetalWallWithWindow_C",      EngramLevelRequirement=45, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_MetalWindow_C",              EngramLevelRequirement=50, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
@@ -388,6 +397,7 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_PowerOutlet_C",              EngramLevelRequirement=50, EngramPointsCost=16, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_PreservingBin_C",            EngramLevelRequirement=20, EngramPointsCost=9,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Radio_C",                    EngramLevelRequirement=25, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_Raft_C",                     EngramLevelRequirement=15, EngramPointsCost=11, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_RocketAmmo_C",               EngramLevelRequirement=60, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_RocketLauncher_C",           EngramLevelRequirement=60, EngramPointsCost=32, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Ankylo_C",            EngramLevelRequirement=40, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
@@ -397,6 +407,7 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Dolphin_C",           EngramLevelRequirement=10, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Mammoth_C",           EngramLevelRequirement=40, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Megalodon_C",         EngramLevelRequirement=45, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_Saddle_Pachy_C",             EngramLevelRequirement=15, EngramPointsCost=9,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Para_C",              EngramLevelRequirement=10, EngramPointsCost=9,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Phiomia_C",           EngramLevelRequirement=5,  EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Plesia_C",            EngramLevelRequirement=60, EngramPointsCost=40, EngramHidden=false, RemoveEngramPreReq=false },
@@ -406,6 +417,7 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Saber_C",             EngramLevelRequirement=45, EngramPointsCost=18, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Sarco_C",             EngramLevelRequirement=35, EngramPointsCost=15, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Sauro_C",             EngramLevelRequirement=55, EngramPointsCost=21, EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_Saddle_Sauro_Platform_C",    EngramLevelRequirement=75, EngramPointsCost=35, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Scorpion_C",          EngramLevelRequirement=25, EngramPointsCost=12, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Spino_C",             EngramLevelRequirement=60, EngramPointsCost=40, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Saddle_Stego_C",             EngramLevelRequirement=30, EngramPointsCost=15, EngramHidden=false, RemoveEngramPreReq=false },
@@ -414,6 +426,7 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_Scope_C",                    EngramLevelRequirement=30, EngramPointsCost=13, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_ScubaBoots_Flippers_C",      EngramLevelRequirement=75, EngramPointsCost=20, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_ScubaHelmet_Goggles_C",      EngramLevelRequirement=75, EngramPointsCost=25, EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_ScubaPants_C",               EngramLevelRequirement=75, EngramPointsCost=35, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_ScubaShirt_SuitWithTank_C",  EngramLevelRequirement=75, EngramPointsCost=35, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_Silencer_C",                 EngramLevelRequirement=40, EngramPointsCost=13, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_SimpleBed_C",                EngramLevelRequirement=5,  EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
@@ -448,6 +461,11 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_StonePipeVertical_C",        EngramLevelRequirement=15, EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_StoneTrapdoor_C",            EngramLevelRequirement=30, EngramPointsCost=10, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_StoneWall_C",                EngramLevelRequirement=15, EngramPointsCost=8,  EngramHidden=false, RemoveEngramPreReq=false },
+
+            new EngramEntry { EngramClassName="EngramEntry_StoneSlopedWall_Left_C",     EngramLevelRequirement=15, EngramPointsCost=4,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_StoneSlopedWall_Right_C",    EngramLevelRequirement=15, EngramPointsCost=4,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_StoneRoof_C",                EngramLevelRequirement=15, EngramPointsCost=4,  EngramHidden=false, RemoveEngramPreReq=false },
+
             new EngramEntry { EngramClassName="EngramEntry_StoneWallWithDoor_C",        EngramLevelRequirement=20, EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_StoneWallWithWindow_C",      EngramLevelRequirement=25, EngramPointsCost=11, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_StoneWindow_C",              EngramLevelRequirement=30, EngramPointsCost=10, EngramHidden=false, RemoveEngramPreReq=false },
@@ -458,6 +476,11 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_ThatchDoor_C",               EngramLevelRequirement=3,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_ThatchFloor_C",              EngramLevelRequirement=2,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_ThatchWall_C",               EngramLevelRequirement=3,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+
+            new EngramEntry { EngramClassName="EngramEntry_ThatchSlopedWall_Left_C",    EngramLevelRequirement=3,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_ThatchSlopedWall_Right_C",   EngramLevelRequirement=3,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_ThatchRoof_C",               EngramLevelRequirement=3,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+
             new EngramEntry { EngramClassName="EngramEntry_ThatchWallWithDoor_C",       EngramLevelRequirement=2,  EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_TransGPS_C",                 EngramLevelRequirement=65, EngramPointsCost=30, EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_TransGPSAmmo_C",             EngramLevelRequirement=65, EngramPointsCost=20, EngramHidden=false, RemoveEngramPreReq=false },
@@ -485,11 +508,37 @@ namespace ARK_Server_Manager.Lib
             new EngramEntry { EngramClassName="EngramEntry_WoodSpikeWall_C",            EngramLevelRequirement=10, EngramPointsCost=4,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_WoodTrapdoor_C",             EngramLevelRequirement=20, EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_WoodWall_C",                 EngramLevelRequirement=5,  EngramPointsCost=7,  EngramHidden=false, RemoveEngramPreReq=false },
+
+            new EngramEntry { EngramClassName="EngramEntry_WoodSlopedWall_Left_C",      EngramLevelRequirement=10, EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_WoodSlopedWall_Right_C",     EngramLevelRequirement=10, EngramPointsCost=3,  EngramHidden=false, RemoveEngramPreReq=false },
+            new EngramEntry { EngramClassName="EngramEntry_WoodRoof_C",                 EngramLevelRequirement=10, EngramPointsCost=4,  EngramHidden=false, RemoveEngramPreReq=false },
+
             new EngramEntry { EngramClassName="EngramEntry_WoodWallWithDoor_C",         EngramLevelRequirement=10, EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_WoodWallWithWindow_C",       EngramLevelRequirement=20, EngramPointsCost=9,  EngramHidden=false, RemoveEngramPreReq=false },
             new EngramEntry { EngramClassName="EngramEntry_WoodWindow_C",               EngramLevelRequirement=25, EngramPointsCost=6,  EngramHidden=false, RemoveEngramPreReq=false },
         };
 
+        public enum StatsMultiplier
+        {
+            Health = 0,
+            Stamina = 1,
+            Torpidity = 2,
+            Oxygen = 3,
+            Food = 4,
+            Water = 5,
+            Temperature = 6,
+            Weight = 7,
+            MeleeDamageMultiplier = 8,
+            SpeedMultiplier = 9,
+            TemperatureFortitude = 10,
+            CraftingSpeedMultiplier = 11
+        };
+
         public static IEnumerable<Level> LevelProgression => levelProgression.Select(l => l.Duplicate());
+
+        internal static IEnumerable<float> GetPerLevelStatsMultipliers()
+        {
+            return new float[12] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+        }
     }
 }
