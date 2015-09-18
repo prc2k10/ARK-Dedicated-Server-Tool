@@ -25,9 +25,7 @@ namespace ARK_Server_Manager.Lib
     [XmlRoot("ArkServerProfile")]
     [Serializable()]
     public class ServerProfile : DependencyObject
-    { 
-         private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
-
+    {
         public enum MapSourceType
         {
             ByName,
@@ -228,64 +226,6 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(EnableStructureDecayProperty, value); }
         }
 
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public bool PvPStructureDecay
-        {
-            get { return (bool)GetValue(PvPStructureDecayProperty); }
-            set { SetValue(PvPStructureDecayProperty, value); }
-        }
-
-        public static readonly DependencyProperty PvPStructureDecayProperty = DependencyProperty.Register(nameof(PvPStructureDecay), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public float PvEDinoDecayPeriodMultiplier
-        {
-            get { return (float)GetValue(PvEDinoDecayPeriodMultiplierProperty); }
-            set { SetValue(PvEDinoDecayPeriodMultiplierProperty, value); }
-        }
-
-        public static readonly DependencyProperty PvEDinoDecayPeriodMultiplierProperty = DependencyProperty.Register(nameof(PvEDinoDecayPeriodMultiplier), typeof(float), typeof(ServerProfile), new PropertyMetadata(1.0f));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public bool AdminLogging
-        {
-            get { return (bool)GetValue(AdminLoggingProperty); }
-            set { SetValue(AdminLoggingProperty, value); }
-        }
-
-        public static readonly DependencyProperty AdminLoggingProperty = DependencyProperty.Register(nameof(AdminLogging), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, ConditionedOn = nameof(EnableBanListURL))]
-        public string BanListURL
-        {
-            get { return (string)GetValue(BanListURLProperty); }
-            set { SetValue(BanListURLProperty, value); }
-        }
-
-        public static readonly DependencyProperty BanListURLProperty = DependencyProperty.Register(nameof(BanListURL), typeof(string), typeof(ServerProfile), new PropertyMetadata("http://playark.com/banlist.txt"));
-
-        public bool EnableBanListURL
-        {
-            get { return (bool)GetValue(EnableBanListURLProperty); }
-            set { SetValue(EnableBanListURLProperty, value); }
-        }
-
-        public static readonly DependencyProperty EnableBanListURLProperty = DependencyProperty.Register(nameof(EnableBanListURL), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public bool DisableDinoDecayPvE
-        {
-            get { return (bool)GetValue(DisableDinoDecayPvEProperty); }
-            set { SetValue(DisableDinoDecayPvEProperty, value); }
-        }
-
-        public static readonly DependencyProperty DisableDinoDecayPvEProperty = DependencyProperty.Register(nameof(DisableDinoDecayPvE), typeof(bool), typeof(ServerProfile), new PropertyMetadata(true));
-
-
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, "AlwaysNotifyPlayerLeft")]
         public bool EnablePlayerLeaveNotifications
         {
@@ -348,17 +288,6 @@ namespace ARK_Server_Manager.Lib
             get { return (bool)GetValue(AllowPVPGammaProperty); }
             set { SetValue(AllowPVPGammaProperty, value); }
         }
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public bool DisablePvEGamma
-        {
-            get { return (bool)GetValue(DisablePvEGammaProperty); }
-            set { SetValue(DisablePvEGammaProperty, value); }
-        }
-
-        public static readonly DependencyProperty DisablePvEGammaProperty = DependencyProperty.Register(nameof(DisablePvEGamma), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
 
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, "ServerPassword")]        
         public string ServerPassword
@@ -1068,6 +997,9 @@ namespace ARK_Server_Manager.Lib
 
         public static readonly DependencyProperty SOTF_BattleSuddenDeathIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleSuddenDeathInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(300));
 
+
+
+
         public bool EnableAutoUpdate
         {
             get { return (bool)GetValue(EnableAutoUpdateProperty); }
@@ -1075,6 +1007,7 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty EnableAutoUpdateProperty = DependencyProperty.Register(nameof(EnableAutoUpdate), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
 
         public int AutoUpdatePeriod
         {
@@ -1084,6 +1017,8 @@ namespace ARK_Server_Manager.Lib
 
         public static readonly DependencyProperty AutoUpdatePeriodProperty = DependencyProperty.Register(nameof(AutoUpdatePeriod), typeof(int), typeof(ServerProfile), new PropertyMetadata(60));
 
+
+
         public bool EnableAutoStart
         {
             get { return (bool)GetValue(EnableAutoStartProperty); }
@@ -1092,6 +1027,8 @@ namespace ARK_Server_Manager.Lib
 
         public static readonly DependencyProperty EnableAutoStartProperty = DependencyProperty.Register(nameof(EnableAutoStart), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
 
+
+
         public int ServerUpdateGraceMinutes
         {
             get { return (int)GetValue(ServerUpdateGraceMinutesProperty); }
@@ -1099,6 +1036,8 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty ServerUpdateGraceMinutesProperty = DependencyProperty.Register(nameof(ServerUpdateGraceMinutes), typeof(int), typeof(ServerProfile), new PropertyMetadata(15));
+
+
 
         public bool ServerForceUpdate
         {
@@ -1115,36 +1054,6 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty ServerForceUpdateTimeProperty = DependencyProperty.Register(nameof(ServerForceUpdateTime), typeof(string), typeof(ServerProfile), new PropertyMetadata("00:00"));
-
-        [XmlIgnore]
-        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
-        public FloatIniValueArray PerLevelStatsMultiplier_Player
-        {
-            get { return (FloatIniValueArray)GetValue(PerLevelStatsMultiplier_PlayerProperty); }
-            set { SetValue(PerLevelStatsMultiplier_PlayerProperty, value); }
-        }
-
-        public static readonly DependencyProperty PerLevelStatsMultiplier_PlayerProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_Player), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
-
-        [XmlIgnore]
-        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
-        public FloatIniValueArray PerLevelStatsMultiplier_DinoTamed
-        {
-            get { return (FloatIniValueArray)GetValue(PerLevelStatsMultiplier_DinoTamedProperty); }
-            set { SetValue(PerLevelStatsMultiplier_DinoTamedProperty, value); }
-        }
-
-        public static readonly DependencyProperty PerLevelStatsMultiplier_DinoTamedProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_DinoTamed), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
-
-        [XmlIgnore]
-        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
-        public FloatIniValueArray PerLevelStatsMultiplier_DinoWild
-        {
-            get { return (FloatIniValueArray)GetValue(PerLevelStatsMultiplier_DinoWildProperty); }
-            set { SetValue(PerLevelStatsMultiplier_DinoWildProperty, value); }
-        }
-
-        public static readonly DependencyProperty PerLevelStatsMultiplier_DinoWildProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_DinoWild), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
 
         #endregion
 
@@ -1186,9 +1095,6 @@ namespace ARK_Server_Manager.Lib
             this.DinoSettings = new DinoSettingsList(this.DinoSpawnWeightMultipliers, this.PreventDinoTameClassNames, this.NPCReplacements, this.TamedDinoClassDamageMultipliers, this.TamedDinoClassResistanceMultipliers, this.DinoClassDamageMultipliers, this.DinoClassResistanceMultipliers);
             this.DinoLevels = new LevelList();
             this.PlayerLevels = new LevelList();
-            this.PerLevelStatsMultiplier_Player = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_Player), GameData.GetPerLevelStatsMultipliers);
-            this.PerLevelStatsMultiplier_DinoWild = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoWild), GameData.GetPerLevelStatsMultipliers);
-            this.PerLevelStatsMultiplier_DinoTamed = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed), GameData.GetPerLevelStatsMultipliers);
 
             GetDefaultDirectories();
         }
@@ -1503,13 +1409,6 @@ namespace ARK_Server_Manager.Lib
         public bool UpdateAutoUpdateSettings()
         {
             SaveLauncher();
-
-            if (!ServerScheduler.SetDirectoryOwnershipForAllUsers(this.InstallDirectory))
-            {
-               _logger.Error($"Unable to set directory permissions for {this.InstallDirectory}.");
-                return false;
-            }
-
 
             var schedulerKey = GetSchedulerKey();
             if(!ServerScheduler.ScheduleAutoStart(schedulerKey, this.EnableAutoStart, GetLauncherPath(), String.Empty))
