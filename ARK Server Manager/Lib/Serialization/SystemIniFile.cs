@@ -56,6 +56,11 @@ namespace ARK_Server_Manager.Lib
         public bool ClearSection;
 
         /// <summary>
+        /// If true, the value will always be written with quotes
+        /// </summary>
+        public bool QuotedString;
+
+        /// <summary>
         /// Only write the attributed value if the named field is true.
         /// </summary>
         public string ConditionedOn;
@@ -210,7 +215,13 @@ namespace ARK_Server_Manager.Lib
                         }
                         else
                         {
-                            IniWriteValue(attr.Section, keyName, Convert.ToString(value), attr.File);
+                            var strValue = Convert.ToString(value);
+                            if (attr.QuotedString && !(strValue.StartsWith("\"") && strValue.EndsWith("\"")))
+                            {
+                                strValue = "\"" + strValue + "\"";
+                            }
+
+                            IniWriteValue(attr.Section, keyName, strValue, attr.File);
                         }
                     }
                 }
@@ -223,7 +234,6 @@ namespace ARK_Server_Manager.Lib
             foreach (var field in fields)
             {
                 var attributes = field.GetCustomAttributes(typeof(IniFileEntryAttribute), false);
-                bool extraBoolValue = false;
                 foreach (var attribute in attributes)
                 {
                     var attr = attribute as IniFileEntryAttribute;
