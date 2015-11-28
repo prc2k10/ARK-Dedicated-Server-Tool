@@ -9,6 +9,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel;
+using System.Windows.Markup;
+using System.Linq;
 
 namespace ARK_Server_Manager
 {
@@ -68,6 +71,12 @@ namespace ARK_Server_Manager
             this.CurrentConfig = Config.Default;
 
             InitializeComponent();
+            var dictToRemove = this.Resources.MergedDictionaries.FirstOrDefault(d => d.Source.OriginalString.Contains(@"Globalization\en-US\en-US.xaml"));
+            if (dictToRemove != null)
+            {
+                this.Resources.MergedDictionaries.Remove(dictToRemove);
+            }
+
             MainWindow.Instance = this;
             this.ServerManager = ServerManager.Instance;
 
@@ -174,7 +183,12 @@ namespace ARK_Server_Manager
             }
         }
 
-      
+        private void RCON_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new OpenRCON();
+            window.Owner = this;
+            window.ShowDialog();
+        }
 
         private void Upgrade_Click(object sender, RoutedEventArgs e)
         {
