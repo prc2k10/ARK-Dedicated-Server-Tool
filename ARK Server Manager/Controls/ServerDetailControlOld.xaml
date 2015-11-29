@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ARK_Server_Manager"
-             xmlns:vm="clr-namespace:ARK_Server_Manager.Lib.ViewModel"
-             xmlns:panels="clr-namespace:ARK_Server_Manager.Views.ServerProfilePanels"
              xmlns:eo="http://schemas.essentialobjects.com/wpf/" xmlns:Controls="clr-namespace:ARK_Server_Manager.Controls" x:Class="ARK_Server_Manager.ServerDetailControl"
              x:Name="controlRoot"
              mc:Ignorable="d" d:DesignWidth="1024" Width="Auto" MinHeight="500">
@@ -103,29 +101,7 @@
             <ColumnDefinition Width="6"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ContentControl x:Name="mainTabControl" 
-                        Padding="0" 
-                        Background="{StaticResource DarkNeutralFade_Brush}" 
-                        BorderBrush="Black" 
-                        Margin="0,0,0,-0.333" 
-                        UseLayoutRounding="True" 
-                        Grid.Column="2" 
-                        d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"
-                        Content="{Binding CurrentPanel, ElementName=controlRoot}">
-            <ContentControl.Effect>
-                <BlurEffect Radius="0"/>
-            </ContentControl.Effect>
-            <ContentControl.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ContentControl.RenderTransform>
-        </ContentControl>
-
-        <!--<TabControl x:Name="mainTabControl2" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0,0,0,-0.333" UseLayoutRounding="True" Grid.Column="2" Style="{StaticResource TabControlHiddenHeader}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+        <TabControl x:Name="mainTabControl" Padding="0" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" SelectedIndex="{Binding SelectedIndex, ElementName=listBox}" Margin="0,0,0,-0.333" UseLayoutRounding="True" Grid.Column="2" Style="{StaticResource TabControlHiddenHeader}" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <TabControl.Effect>
                 <BlurEffect Radius="0"/>
             </TabControl.Effect>
@@ -596,7 +572,7 @@
             </TabItem>
             <TextBox x:Name="textBox" Height="79" TextWrapping="Wrap" Text="TextBox" Width="260"/>
 
-        </TabControl>-->
+        </TabControl>
         <Border x:Name="border" d:LayoutOverrides="Height, LeftMargin, RightMargin" Background="{StaticResource DarkNeutralFade_Brush}" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,-2.664">
             <Border.RenderTransform>
                 <TransformGroup>
@@ -607,35 +583,15 @@
                 </TransformGroup>
             </Border.RenderTransform>
             <StackPanel Orientation="Vertical">
-                <ListBox x:Name="listBox" 
-                         d:IsLocked="True" 
-                         d:LayoutOverrides="LeftMargin, RightMargin" 
-                         MinWidth="200" 
-                         Style="{StaticResource MainListBoxStyle}" 
-                         FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" 
-                         FontSize="18.667" 
-                         Margin="0" 
-                         Background="{x:Null}" 
-                         Foreground="{StaticResource TextLight_Brush}" 
-                         BorderBrush="{x:Null}"                          
-                         VerticalAlignment="Top" Loaded="listBox_Loaded" 
-                         HorizontalContentAlignment="Stretch" 
-                         HorizontalAlignment="Center" 
-                         ItemsSource="{Binding ProfilePanels, ElementName=controlRoot}"
-                         SelectedItem="{Binding CurrentPanel, Mode=OneWayToSource, ElementName=controlRoot}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type panels:ProfilePanelBase}">
-                            <Label Content="{Binding Title}" Padding="4,8"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <!--<ListBoxItem x:Name="listBoxItemAdmin" Content="Administration" Style="{StaticResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
+                <ListBox x:Name="listBox" MinWidth="200" Style="{StaticResource MainListBoxStyle}" FontFamily="/ARK Server Manager;component/Fonts/#Montserrat" FontSize="18.667" Margin="0" Background="{x:Null}" Foreground="{StaticResource TextLight_Brush}" BorderBrush="{x:Null}" d:LayoutOverrides="LeftMargin, RightMargin" VerticalAlignment="Top" Loaded="listBox_Loaded" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" d:IsLocked="True">
+                    <ListBoxItem x:Name="listBoxItemAdmin" Content="Administration" Style="{StaticResource MainListBoxItem}" Padding="0,8,0,0" Margin="0,3,0,0" HorizontalContentAlignment="Center"/>
                     <ListBoxItem x:Name="listBoxItemRules" Content="Rules" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemUI" Content="UI" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemPlayers" Content="Player Settings" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemDinos" Content="Dino Settings" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
                     <ListBoxItem x:Name="listBoxItemStructures" Content="Structures" Style="{StaticResource MainListBoxItem}"/>
                     <ListBoxItem x:Name="listBoxItemEnviron" Content="Environment" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
-                    <ListBoxItem x:Name="listBoxItemMods" Content="Mods" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>-->
+                    <ListBoxItem x:Name="listBoxItemMods" Content="Mods" Style="{StaticResource MainListBoxItem}" Padding="4,8"/>
                 </ListBox>
                 <Button x:Name="backToListButton" Height="42.837" Margin="0,25,0,0" BorderBrush="Black" HorizontalAlignment="Center" Width="154" BorderThickness="2" FontFamily="{StaticResource ButtonFont}" FontSize="16" Background="White" Foreground="White" ToolTip="Return to server list">
                     <StackPanel Orientation="Horizontal" Margin="0,0,30,0">

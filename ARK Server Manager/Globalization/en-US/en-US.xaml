@@ -221,7 +221,7 @@
     <sys:String x:Key="ServerSettings_NoDinoDownloadsLabel">No Dino Downloads</sys:String>
     <sys:String x:Key="ServerSettings_NoDinoDownloadsTooltip">If enabled, the dino downloads are disabled.</sys:String>
 
-    <sys:String x:Key="ServerSettings_PvPRespawnLabel">Enable Tribute Downloads</sys:String>
+    <sys:String x:Key="ServerSettings_PvPRespawnLabel">PvP Respawns</sys:String>
     <sys:String x:Key="ServerSettings_PvPRespawnTooltip">If enabled, enables the increase PvP respawn interval settings.</sys:String>
     <sys:String x:Key="ServerSettings_IntervalCheckPeriodLabel">Interval Check Period</sys:String>
     <sys:String x:Key="ServerSettings_IntervalCheckPeriodTooltip">The time period the respawn check lasts after the player is killed by a team.</sys:String>

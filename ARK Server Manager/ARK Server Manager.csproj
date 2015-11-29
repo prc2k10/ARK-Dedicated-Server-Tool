@@ -161,6 +161,16 @@
     <Compile Include="Controls\LabeledTextBlock.xaml.cs">
       <DependentUpon>LabeledTextBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ServerProfilePanels\Administration.xaml.cs">
+      <DependentUpon>Administration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServerProfilePanels\Installation.xaml.cs">
+      <DependentUpon>Installation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServerProfilePanels\ProfilePanelBase.cs" />
+    <None Include="Controls\ServerDetailControlOld.xaml.cs">
+      <DependentUpon>ServerDetailControlOld.xaml</DependentUpon>
+    </None>
     <Compile Include="ErrorHandling.cs" />
     <Compile Include="GlobalSettings.xaml.cs">
       <DependentUpon>GlobalSettings.xaml</DependentUpon>
@@ -229,6 +239,7 @@
     <Compile Include="Lib\ViewModel\IsNullValueConverter.cs" />
     <Compile Include="Lib\ViewModel\RelayCommand.cs" />
     <Compile Include="Lib\ViewModel\MinutesToTimeValueConverter.cs" />
+    <Compile Include="Lib\ViewModel\ServerProfilePanel.cs" />
     <Compile Include="Lib\ViewModel\TimeValidationRule.cs" />
     <Compile Include="Lib\ViewModel\IpValidationRule.cs" />
     <Compile Include="Lib\ViewModel\SecondsToTimeValueConverter.cs" />
@@ -255,6 +266,9 @@
     <Compile Include="Testing\Temp.xaml.cs">
       <DependentUpon>Temp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Testing\UITests2.xaml.cs">
+      <DependentUpon>UITests2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Testing\UITests.xaml.cs">
       <DependentUpon>UITests.xaml</DependentUpon>
     </Compile>
@@ -267,6 +281,14 @@
     <Compile Include="UIStyles\Shapes.xaml.cs">
       <DependentUpon>Shapes.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\ServerProfilePanels\Administration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServerProfilePanels\Installation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="UIStyles\InnerShadowMultiline.png" />
     <Resource Include="UIStyles\locked.png" />
     <Resource Include="UIStyles\unlocked.png" />
@@ -292,6 +314,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <None Include="Controls\ServerDetailControlOld.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
     <Page Include="Controls\ServerDetailControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,6 +341,10 @@
     <Page Include="Testing\Temp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Testing\UITests2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UIStyles\TextStyles.xaml">
       <SubType>Designer</SubType>
