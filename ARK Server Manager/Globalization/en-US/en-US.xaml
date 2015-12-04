@@ -19,6 +19,11 @@
     <sys:String x:Key="AutoUpdater_Status_Complete">Complete</sys:String>
     <sys:String x:Key="AutoUpdater_Status_Cancelled">Cancelled</sys:String>
     
+    <!--
+    Section Headings    
+    -->
+    <sys:String x:Key="Section_Installation">Installation</sys:String>
+    
     <!-- 
     Main Window 
     
@@ -62,7 +67,8 @@
     These are the profile settings, grouped by section.
     -->   
 
-    <!-- Server Settings - General -->    
+    <!-- Server Settings - General -->
+    <sys:String x:Key="ServerSettings_ProfileBasicsLabel">Profile Basics</sys:String>
     <sys:String x:Key="ServerSettings_ProfileLabel">Profile:</sys:String>
     <sys:String x:Key="ServerSettings_ProfileTooltip">The name for the server profile.  This is not the public name users will see in Ark.  For that, set the 'Server Name' field.</sys:String>
     <sys:String x:Key="ServerSettings_InstalledVersionLabel">Installed Version:</sys:String>
