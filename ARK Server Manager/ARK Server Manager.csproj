@@ -299,12 +299,13 @@
     <Resource Include="UIStyles\unchecked.jpg" />
     <Resource Include="UIStyles\TextBoxInnerShadowLong.png" />
     <Resource Include="UIStyles\TextBoxInnerShadow.png" />
+    <Resource Include="UIStyles\header.png" />
+    <Resource Include="UIStyles\headerTitle.jpg" />
+    <Resource Include="UIStyles\iStock_000003783032MediumA.jpg" />
     <SplashScreen Include="Art\splashScreen.png" />
     <Content Include="Lib\ServerUpdater\mcrcon.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="UIStyles\header.png" />
-    <Resource Include="UIStyles\headerTitle.jpg" />
     <Page Include="Controls\LabeledSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -389,7 +390,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="UIStyles\iStock_000003783032MediumA.jpg" />
     <Page Include="AnnotatedSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -407,10 +407,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Testing\UITests.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UIStyles\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -437,6 +433,7 @@
     <Resource Include="Art\Refresh.png" />
     <Resource Include="Art\Donate.png" />
     <Resource Include="Art\NoAvatar.png" />
+    <Resource Include="Art\bgGrad1.jpg" />
     <Content Include="Globalization\en-US\en-US.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -623,10 +620,6 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Art\bgGrad1.jpg" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforePublish">
     <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\bin\signtool.exe&quot; sign /f &quot;$(ProjectDir)Ark Server Manager_TemporaryKey.pfx&quot; /p &quot;b@}l@;jDVT4S&quot; /v &quot;$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)&quot;" />
