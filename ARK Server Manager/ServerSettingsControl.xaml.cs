@@ -23,25 +23,45 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ARK_Server_Manager.Lib.ViewModel;
 
 namespace ARK_Server_Manager
 {
+    public enum ServerSettingsResetAction
+    {
+        // Sections
+        RulesSection,
+        ChatAndNotificationsSection,
+        HudAndVisualsSection,
+        PlayerSettingsSection,
+        DinoSettingsSection,
+        EnvironmentSection,
+        StructuresSection,
+        EngramsSection,
+        CustomLevelsSection,
+        SOTFSection,
+
+        // Properties
+        PlayerMaxXpProperty,
+        DinoMaxXpProperty,
+        PlayerPerLevelStatMultipliers,
+        DinoWildPerLevelStatMultipliers,
+        DinoTamedPerLevelStatMultipliers,
+        DinoTamedAddPerLevelStatMultipliers,
+        DinoTamedAffinityPerLevelStatMultipliers,
+    }
+
     /// <summary>
     /// Interaction logic for ServerSettings.xaml
     /// </summary>
     partial class ServerSettingsControl : UserControl
     {
-        public static readonly DependencyProperty SettingsProperty =
-            DependencyProperty.Register(nameof(Settings), typeof(ServerProfile), typeof(ServerSettingsControl));
-        public static readonly DependencyProperty RuntimeProperty = 
-            DependencyProperty.Register(nameof(Runtime), typeof(ServerRuntime), typeof(ServerSettingsControl));
-        public static readonly DependencyProperty NetworkInterfacesProperty = 
-            DependencyProperty.Register(nameof(NetworkInterfaces), typeof(List<NetworkAdapterEntry>), typeof(ServerSettingsControl), new PropertyMetadata(new List<NetworkAdapterEntry>()));
-        public static readonly DependencyProperty ServerProperty =
-            DependencyProperty.Register(nameof(Server), typeof(Server), typeof(ServerSettingsControl), new PropertyMetadata(null, ServerPropertyChanged));
+        public static readonly DependencyProperty SettingsProperty = DependencyProperty.Register(nameof(Settings), typeof(ServerProfile), typeof(ServerSettingsControl));
+        public static readonly DependencyProperty RuntimeProperty = DependencyProperty.Register(nameof(Runtime), typeof(ServerRuntime), typeof(ServerSettingsControl));
+        public static readonly DependencyProperty NetworkInterfacesProperty = DependencyProperty.Register(nameof(NetworkInterfaces), typeof(List<NetworkAdapterEntry>), typeof(ServerSettingsControl), new PropertyMetadata(new List<NetworkAdapterEntry>()));
+        public static readonly DependencyProperty ServerProperty = DependencyProperty.Register(nameof(Server), typeof(Server), typeof(ServerSettingsControl), new PropertyMetadata(null, ServerPropertyChanged));
 
         CancellationTokenSource upgradeCancellationSource;
-        RCONWindow rconWindow;
 
         public ServerManager ServerManager
         {
@@ -50,8 +70,7 @@ namespace ARK_Server_Manager
         }
 
         // Using a DependencyProperty as the backing store for ServerManager.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ServerManagerProperty =
-            DependencyProperty.Register(nameof(ServerManager), typeof(ServerManager), typeof(ServerSettingsControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty ServerManagerProperty = DependencyProperty.Register(nameof(ServerManager), typeof(ServerManager), typeof(ServerSettingsControl), new PropertyMetadata(null));
 
 
 
@@ -144,11 +163,12 @@ namespace ARK_Server_Manager
             preferredIP.Description = "(Recommended) " + preferredIP.Description;
             if(String.IsNullOrWhiteSpace(this.Settings.ServerIP))
             {
-                if(preferredIP != null)
-                {
-                    this.Settings.ServerIP = preferredIP.IPAddress;
-                }
-            } 
+                // removed to enforce the 'Let ARK choose' option.
+                //if (preferredIP != null)
+                //{
+                //    this.Settings.ServerIP = preferredIP.IPAddress;
+                //}
+            }
             else if(adapters.FirstOrDefault(a => String.Equals(a.IPAddress, this.Settings.ServerIP, StringComparison.OrdinalIgnoreCase)) == null) 
             {
                 MessageBox.Show(
@@ -255,31 +275,53 @@ namespace ARK_Server_Manager
             }            
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        // REVIEW: This is a sample Command implementation which replaces the original Save_Click command, for reference when refactoring.
+        public ICommand SaveCommand
         {
-            if (Settings.EnableAutoUpdate && !Updater.IsServerCacheAutoUpdateEnabled)
+            get
             {
-                var result = MessageBox.Show("Auto-updates is enabled but the Server Cache update is not yet configured.  The server cache downloads server updates in the background automatically to enable faster server updates, particularly when there are multiple servers.  You must first configure the cache, then you may enable automatic updating.  Would you like to configure the cache now?", "Server cache not configured", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if(result == MessageBoxResult.Yes)
-                {
-                    var settingsWindow = new SettingsWindow();
-                    settingsWindow.ShowDialog();
-                    if(!Updater.IsServerCacheAutoUpdateEnabled)
+                return new RelayCommand<object>(
+                    execute: (parameter) =>
                     {
-                        MessageBox.Show("The server cache was not configured.  Disabling auto-updates.", "Server cache not configured", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        Settings.EnableAutoUpdate = false;
-                    }
-                }
-            }
+                        // NOTE: This parameter is of type object and must be cast in most cases before use.
+                        var settings = (Server)parameter;
+                        if (settings.Profile.EnableAutoUpdate && !Updater.IsServerCacheAutoUpdateEnabled)
+                        {
+                            var result = MessageBox.Show("Auto-updates is enabled but the Server Cache update is not yet configured.  The server cache downloads server updates in the background automatically to enable faster server updates, particularly when there are multiple servers.  You must first configure the cache, then you may enable automatic updating.  Would you like to configure the cache now?", "Server cache not configured", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                var settingsWindow = new SettingsWindow();
+                                settingsWindow.ShowDialog();
+                                if (!Updater.IsServerCacheAutoUpdateEnabled)
+                                {
+                                    MessageBox.Show("The server cache was not configured.  Disabling auto-updates.", "Server cache not configured", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    settings.Profile.EnableAutoUpdate = false;
+                                }
+                            }
+                        }
 
-            Settings.Save();
-            if (this.IsAdministrator)
-            {
-                if (!Settings.UpdateAutoUpdateSettings())
-                {
-                    MessageBox.Show("Failed to update scheduled tasks.  Ensure you have administrator rights on this machine and try again.  If the problem persists, please report this as a bug.", "Update schedule failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }           
+                        settings.Profile.Save();
+
+                        // NOTE: Ideally a command would not depend on this control object, so IsAdministrator would need to be some globally accessible value, much like Updater's properties are.  Then
+                        //       command's implementation becomes context-free and we can move its implementation to a separate class of commands, and bind it in the Xaml using a StaticResource.
+                        if (this.IsAdministrator)
+                        {
+                            if (!settings.Profile.UpdateAutoUpdateSettings())
+                            {
+                                MessageBox.Show("Failed to update scheduled tasks.  Ensure you have administrator rights on this machine and try again.  If the problem persists, please report this as a bug.", "Update schedule failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    },
+                    canExecute: (parameter) =>
+                    {
+                        bool canSave = true;
+
+                        // NOTE: Some logic if necessary.  If this return's false, the associated object to which this command is bound (like the Save button in this case) will be automatically disabled,
+                        // eliminating any extra Xaml binding for the IsEnabled property.
+                        return canSave;
+                    }
+                );
+            }
         }
 
         private void CopyProfile_Click(object sender, RoutedEventArgs e)
@@ -293,6 +335,7 @@ namespace ARK_Server_Manager
         private void ShowCmd_Click(object sender, RoutedEventArgs e)
         {
             var cmdLine = new CommandLine(String.Format("{0} {1}", this.Runtime.GetServerExe(), this.Settings.GetServerArgs()));
+            cmdLine.Owner = Window.GetWindow(this);
             cmdLine.ShowDialog();
         }
 
@@ -501,6 +544,94 @@ namespace ARK_Server_Manager
                 return;
 
             this.Settings.ResetOverrideMaxExperiencePointsDino();
+        }
+
+        public ICommand ResetActionCommand
+        {
+            get
+            {
+                return new RelayCommand<ServerSettingsResetAction>(
+                    execute: (action) =>
+                    {
+                        if (MessageBox.Show("Click 'Yes' to confirm you want to perform the reset.", "Confirm Reset Action", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+                            return;
+
+                        switch (action)
+                        {
+                            // sections
+                            case ServerSettingsResetAction.ChatAndNotificationsSection:
+                                this.Settings.ResetChatAndNotificationSection();
+                                break;
+
+                            case ServerSettingsResetAction.CustomLevelsSection:
+                                this.Settings.ResetCustomLevelsSection();
+                                break;
+
+                            case ServerSettingsResetAction.DinoSettingsSection:
+                                this.Settings.ResetDinoSettings();
+                                break;
+
+                            case ServerSettingsResetAction.EngramsSection:
+                                this.Settings.ResetEngramsSection();
+                                break;
+
+                            case ServerSettingsResetAction.EnvironmentSection:
+                                this.Settings.ResetEnvironmentSection();
+                                break;
+
+                            case ServerSettingsResetAction.HudAndVisualsSection:
+                                this.Settings.ResetHUDAndVisualsSection();
+                                break;
+
+                            case ServerSettingsResetAction.PlayerSettingsSection:
+                                this.Settings.ResetPlayerSettings();
+                                break;
+
+                            case ServerSettingsResetAction.RulesSection:
+                                this.Settings.ResetRulesSection();
+                                break;
+
+                            case ServerSettingsResetAction.SOTFSection:
+                                this.Settings.ResetSOTFSection();
+                                break;
+
+                            case ServerSettingsResetAction.StructuresSection:
+                                this.Settings.ResetStructuresSection();
+                                break;
+
+                            // Properties
+                            case ServerSettingsResetAction.PlayerMaxXpProperty:
+                                this.Settings.ResetOverrideMaxExperiencePointsPlayer();
+                                break;
+
+                            case ServerSettingsResetAction.DinoMaxXpProperty:
+                                this.Settings.ResetOverrideMaxExperiencePointsDino();
+                                break;
+
+                            case ServerSettingsResetAction.PlayerPerLevelStatMultipliers:
+                                this.Settings.PerLevelStatsMultiplier_Player.Reset();
+                                break;
+
+                            case ServerSettingsResetAction.DinoWildPerLevelStatMultipliers:
+                                this.Settings.PerLevelStatsMultiplier_DinoWild.Reset();
+                                break;
+
+                            case ServerSettingsResetAction.DinoTamedPerLevelStatMultipliers:
+                                this.Settings.PerLevelStatsMultiplier_DinoTamed.Reset();
+                                break;
+
+                            case ServerSettingsResetAction.DinoTamedAddPerLevelStatMultipliers:
+                                this.Settings.PerLevelStatsMultiplier_DinoTamed_Add.Reset();
+                                break;
+
+                            case ServerSettingsResetAction.DinoTamedAffinityPerLevelStatMultipliers:
+                                this.Settings.PerLevelStatsMultiplier_DinoTamed_Affinity.Reset();
+                                break;
+                        }
+                    },
+                    canExecute: (action) => true
+                );
+            }
         }
     }
 }

@@ -222,7 +222,25 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(DisableFriendlyFirePvEProperty, value); }
         }
 
-        public static readonly DependencyProperty DisableFriendlyFirePvEProperty = DependencyProperty.Register(nameof(DisableFriendlyFirePvE), typeof(bool), typeof(ServerProfile), new PropertyMetadata(true));
+        public static readonly DependencyProperty DisableFriendlyFirePvEProperty = DependencyProperty.Register(nameof(DisableFriendlyFirePvE), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode, "bDisableFriendlyFire")]
+        public bool DisableFriendlyFirePvP
+        {
+            get { return (bool)GetValue(DisableFriendlyFirePvPProperty); }
+            set { SetValue(DisableFriendlyFirePvPProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisableFriendlyFirePvPProperty = DependencyProperty.Register(nameof(DisableFriendlyFirePvP), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode, "bDisableLootCrates")]
+        public bool DisableLootCrates
+        {
+            get { return (bool)GetValue(DisableLootCratesProperty); }
+            set { SetValue(DisableLootCratesProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisableLootCratesProperty = DependencyProperty.Register(nameof(DisableLootCrates), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
 
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
         public bool AllowCaveBuildingPvE
@@ -297,6 +315,14 @@ namespace ARK_Server_Manager.Lib
 
         public static readonly DependencyProperty UseRawSocketsProperty = DependencyProperty.Register(nameof(UseRawSockets), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
 
+        public bool UseBattlEye
+        {
+            get { return (bool)GetValue(UseBattlEyeProperty); }
+            set { SetValue(UseBattlEyeProperty, value); }
+        }
+
+        public static readonly DependencyProperty UseBattlEyeProperty = DependencyProperty.Register(nameof(UseBattlEye), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
 
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
         public float PerPlatformMaxStructuresMultiplier
@@ -306,8 +332,6 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty PerPlatformMaxStructuresMultiplierProperty = DependencyProperty.Register(nameof(PerPlatformMaxStructuresMultiplier), typeof(float), typeof(ServerProfile), new PropertyMetadata(1.25f));
-
-
 
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
         public int MaxPlatformSaddleStructureLimit
@@ -391,15 +415,14 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(AllowPVPGammaProperty, value); }
         }
 
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings)]
-        public bool DisablePvEGamma
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, "DisablePvEGamma", InvertBoolean = true)]
+        public bool AllowPvEGamma
         {
-            get { return (bool)GetValue(DisablePvEGammaProperty); }
-            set { SetValue(DisablePvEGammaProperty, value); }
+            get { return (bool)GetValue(AllowPvEGammaProperty); }
+            set { SetValue(AllowPvEGammaProperty, value); }
         }
 
-        public static readonly DependencyProperty DisablePvEGammaProperty = DependencyProperty.Register(nameof(DisablePvEGamma), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+        public static readonly DependencyProperty AllowPvEGammaProperty = DependencyProperty.Register(nameof(AllowPvEGamma), typeof(bool), typeof(ServerProfile), new PropertyMetadata(true));
 
 
         [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, "ServerPassword")]        
@@ -975,6 +998,43 @@ namespace ARK_Server_Manager.Lib
         public static readonly DependencyProperty ServerModIdsProperty = DependencyProperty.Register(nameof(ServerModIds), typeof(string), typeof(ServerProfile), new PropertyMetadata(String.Empty));
 
 
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode, Key = "DinoHarvestingDamageMultiplier")]
+        public float HarvestingDamageMultiplierDino
+        {
+            get { return (float)GetValue(HarvestingDamageMultiplierDinoProperty); }
+            set { SetValue(HarvestingDamageMultiplierDinoProperty, value); }
+        }
+
+        public static readonly DependencyProperty HarvestingDamageMultiplierDinoProperty = DependencyProperty.Register(nameof(HarvestingDamageMultiplierDino), typeof(float), typeof(ServerProfile), new PropertyMetadata(3.0f));
+
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode, Key = "PlayerHarvestingDamageMultiplier")]
+        public float HarvestingDamageMultiplierPlayer
+        {
+            get { return (float)GetValue(HarvestingDamageMultiplierPlayerProperty); }
+            set { SetValue(HarvestingDamageMultiplierPlayerProperty, value); }
+        }
+
+        public static readonly DependencyProperty HarvestingDamageMultiplierPlayerProperty = DependencyProperty.Register(nameof(HarvestingDamageMultiplierPlayer), typeof(float), typeof(ServerProfile), new PropertyMetadata(1.0f));
+
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode, Key = "DinoTurretDamageMultiplier")]
+        public float TurretDamageMultiplierDino
+        {
+            get { return (float)GetValue(TurretDamageMultiplierDinoProperty); }
+            set { SetValue(TurretDamageMultiplierDinoProperty, value); }
+        }
+
+        public static readonly DependencyProperty TurretDamageMultiplierDinoProperty = DependencyProperty.Register(nameof(TurretDamageMultiplierDino), typeof(float), typeof(ServerProfile), new PropertyMetadata(1.0f));
+
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
+        public int MaxTribeLogs
+        {
+            get { return (int)GetValue(MaxTribeLogsProperty); }
+            set { SetValue(MaxTribeLogsProperty, value); }
+        }
+
+        public static readonly DependencyProperty MaxTribeLogsProperty = DependencyProperty.Register(nameof(MaxTribeLogs), typeof(int), typeof(ServerProfile), new PropertyMetadata(100));
+
+
         [XmlIgnore]
         [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
         public AggregateIniValueList<DinoSpawn> DinoSpawnWeightMultipliers
@@ -991,8 +1051,7 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(TamedDinoClassDamageMultipliersProperty, value); }
         }
 
-        public static readonly DependencyProperty TamedDinoClassDamageMultipliersProperty =
-            DependencyProperty.Register(nameof(TamedDinoClassDamageMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
+        public static readonly DependencyProperty TamedDinoClassDamageMultipliersProperty = DependencyProperty.Register(nameof(TamedDinoClassDamageMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
 
 
         [XmlIgnore]
@@ -1003,8 +1062,7 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(TamedDinoClassResistanceMultipliersProperty, value); }
         }
 
-        public static readonly DependencyProperty TamedDinoClassResistanceMultipliersProperty =
-            DependencyProperty.Register(nameof(TamedDinoClassResistanceMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
+        public static readonly DependencyProperty TamedDinoClassResistanceMultipliersProperty = DependencyProperty.Register(nameof(TamedDinoClassResistanceMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
 
 
 
@@ -1016,8 +1074,7 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(DinoClassDamageMultipliersProperty, value); }
         }
 
-        public static readonly DependencyProperty DinoClassDamageMultipliersProperty =
-            DependencyProperty.Register(nameof(DinoClassDamageMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
+        public static readonly DependencyProperty DinoClassDamageMultipliersProperty = DependencyProperty.Register(nameof(DinoClassDamageMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
 
 
         [XmlIgnore]
@@ -1038,8 +1095,7 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(DinoClassResistanceMultipliersProperty, value); }
         }
 
-        public static readonly DependencyProperty DinoClassResistanceMultipliersProperty =
-            DependencyProperty.Register(nameof(DinoClassResistanceMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
+        public static readonly DependencyProperty DinoClassResistanceMultipliersProperty = DependencyProperty.Register(nameof(DinoClassResistanceMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
 
         [XmlIgnore]
         [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
@@ -1049,8 +1105,7 @@ namespace ARK_Server_Manager.Lib
             set { SetValue(HarvestResourceItemAmountClassMultipliersProperty, value); }
         }
 
-        public static readonly DependencyProperty HarvestResourceItemAmountClassMultipliersProperty =
-            DependencyProperty.Register(nameof(HarvestResourceItemAmountClassMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
+        public static readonly DependencyProperty HarvestResourceItemAmountClassMultipliersProperty = DependencyProperty.Register(nameof(HarvestResourceItemAmountClassMultipliers), typeof(AggregateIniValueList<ClassMultiplier>), typeof(ServerProfile), new PropertyMetadata(null));
 
         [XmlIgnore]
         [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
@@ -1143,105 +1198,6 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty PassiveDefensesDamageRiderlessDinosProperty = DependencyProperty.Register(nameof(PassiveDefensesDamageRiderlessDinos), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-        #endregion
-
-        #region Survival of the Fittest Options
-
-
-
-        public bool SOTF_Enabled
-        {
-            get { return (bool)GetValue(SOTF_EnabledProperty); }
-            set { SetValue(SOTF_EnabledProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_EnabledProperty = DependencyProperty.Register(nameof(SOTF_Enabled), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-
-
-        public bool SOTF_DisableDeathSPectator
-        {
-            get { return (bool)GetValue(SOTF_DisableDeathSPectatorProperty); }
-            set { SetValue(SOTF_DisableDeathSPectatorProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_DisableDeathSPectatorProperty = DependencyProperty.Register(nameof(SOTF_DisableDeathSPectator), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-        public bool SOTF_OnlyAdminRejoinAsSpectator
-        {
-            get { return (bool)GetValue(SOTF_OnlyAdminRejoinAsSpectatorProperty); }
-            set { SetValue(SOTF_OnlyAdminRejoinAsSpectatorProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_OnlyAdminRejoinAsSpectatorProperty = DependencyProperty.Register(nameof(SOTF_OnlyAdminRejoinAsSpectator), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-        public bool SOTF_GamePlayLogging
-        {
-            get { return (bool)GetValue(SOTF_GamePlayLoggingProperty); }
-            set { SetValue(SOTF_GamePlayLoggingProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_GamePlayLoggingProperty = DependencyProperty.Register(nameof(SOTF_GamePlayLogging), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "MaxNumberOfPlayersInTribe", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_MaxNumberOfPlayersInTribe
-        {
-            get { return (int)GetValue(SOTF_MaxNumberOfPlayersInTribeProperty); }
-            set { SetValue(SOTF_MaxNumberOfPlayersInTribeProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_MaxNumberOfPlayersInTribeProperty = DependencyProperty.Register(nameof(SOTF_MaxNumberOfPlayersInTribe), typeof(int), typeof(ServerProfile), new PropertyMetadata(2));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleNumOfTribesToStartGame", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_BattleNumOfTribesToStartGame
-        {
-            get { return (int)GetValue(SOTF_BattleNumOfTribesToStartGameProperty); }
-            set { SetValue(SOTF_BattleNumOfTribesToStartGameProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_BattleNumOfTribesToStartGameProperty = DependencyProperty.Register(nameof(SOTF_BattleNumOfTribesToStartGame), typeof(int), typeof(ServerProfile), new PropertyMetadata(15));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "TimeToCollapseROD", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_TimeToCollapseROD
-        {
-            get { return (int)GetValue(SOTF_TimeToCollapseRODProperty); }
-            set { SetValue(SOTF_TimeToCollapseRODProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_TimeToCollapseRODProperty = DependencyProperty.Register(nameof(SOTF_TimeToCollapseROD), typeof(int), typeof(ServerProfile), new PropertyMetadata(9000));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleAutoStartGameInterval", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_BattleAutoStartGameInterval
-        {
-            get { return (int)GetValue(SOTF_BattleAutoStartGameIntervalProperty); }
-            set { SetValue(SOTF_BattleAutoStartGameIntervalProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_BattleAutoStartGameIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleAutoStartGameInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(60));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleAutoRestartGameInterval", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_BattleAutoRestartGameInterval
-        {
-            get { return (int)GetValue(SOTF_BattleAutoRestartGameIntervalProperty); }
-            set { SetValue(SOTF_BattleAutoRestartGameIntervalProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_BattleAutoRestartGameIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleAutoRestartGameInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(45));
-
-
-        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleSuddenDeathInterval", ConditionedOn = nameof(SOTF_Enabled))]
-        public int SOTF_BattleSuddenDeathInterval
-        {
-            get { return (int)GetValue(SOTF_BattleSuddenDeathIntervalProperty); }
-            set { SetValue(SOTF_BattleSuddenDeathIntervalProperty, value); }
-        }
-
-        public static readonly DependencyProperty SOTF_BattleSuddenDeathIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleSuddenDeathInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(300));
 
         public bool EnableAutoUpdate
         {
@@ -1310,6 +1266,26 @@ namespace ARK_Server_Manager.Lib
         }
 
         public static readonly DependencyProperty PerLevelStatsMultiplier_DinoTamedProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_DinoTamed), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
+
+        [XmlIgnore]
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
+        public FloatIniValueArray PerLevelStatsMultiplier_DinoTamed_Add
+        {
+            get { return (FloatIniValueArray)GetValue(PerLevelStatsMultiplier_DinoTamed_AddProperty); }
+            set { SetValue(PerLevelStatsMultiplier_DinoTamed_AddProperty, value); }
+        }
+
+        public static readonly DependencyProperty PerLevelStatsMultiplier_DinoTamed_AddProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_DinoTamed_Add), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
+
+        [XmlIgnore]
+        [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
+        public FloatIniValueArray PerLevelStatsMultiplier_DinoTamed_Affinity
+        {
+            get { return (FloatIniValueArray)GetValue(PerLevelStatsMultiplier_DinoTamed_AffinityProperty); }
+            set { SetValue(PerLevelStatsMultiplier_DinoTamed_AffinityProperty, value); }
+        }
+
+        public static readonly DependencyProperty PerLevelStatsMultiplier_DinoTamed_AffinityProperty = DependencyProperty.Register(nameof(PerLevelStatsMultiplier_DinoTamed_Affinity), typeof(FloatIniValueArray), typeof(ServerProfile), new PropertyMetadata(null));
 
         [XmlIgnore]
         [IniFileEntry(IniFiles.Game, IniFileSections.GameMode)]
@@ -1387,6 +1363,136 @@ namespace ARK_Server_Manager.Lib
 
         #endregion
 
+        #region Survival of the Fittest Options
+
+        public bool SOTF_Enabled
+        {
+            get { return (bool)GetValue(SOTF_EnabledProperty); }
+            set { SetValue(SOTF_EnabledProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_EnabledProperty = DependencyProperty.Register(nameof(SOTF_Enabled), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public bool SOTF_DisableDeathSPectator
+        {
+            get { return (bool)GetValue(SOTF_DisableDeathSPectatorProperty); }
+            set { SetValue(SOTF_DisableDeathSPectatorProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_DisableDeathSPectatorProperty = DependencyProperty.Register(nameof(SOTF_DisableDeathSPectator), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public bool SOTF_OnlyAdminRejoinAsSpectator
+        {
+            get { return (bool)GetValue(SOTF_OnlyAdminRejoinAsSpectatorProperty); }
+            set { SetValue(SOTF_OnlyAdminRejoinAsSpectatorProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_OnlyAdminRejoinAsSpectatorProperty = DependencyProperty.Register(nameof(SOTF_OnlyAdminRejoinAsSpectator), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public bool SOTF_GamePlayLogging
+        {
+            get { return (bool)GetValue(SOTF_GamePlayLoggingProperty); }
+            set { SetValue(SOTF_GamePlayLoggingProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_GamePlayLoggingProperty = DependencyProperty.Register(nameof(SOTF_GamePlayLogging), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "MaxNumberOfPlayersInTribe", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_MaxNumberOfPlayersInTribe
+        {
+            get { return (int)GetValue(SOTF_MaxNumberOfPlayersInTribeProperty); }
+            set { SetValue(SOTF_MaxNumberOfPlayersInTribeProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_MaxNumberOfPlayersInTribeProperty = DependencyProperty.Register(nameof(SOTF_MaxNumberOfPlayersInTribe), typeof(int), typeof(ServerProfile), new PropertyMetadata(2));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleNumOfTribesToStartGame", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_BattleNumOfTribesToStartGame
+        {
+            get { return (int)GetValue(SOTF_BattleNumOfTribesToStartGameProperty); }
+            set { SetValue(SOTF_BattleNumOfTribesToStartGameProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_BattleNumOfTribesToStartGameProperty = DependencyProperty.Register(nameof(SOTF_BattleNumOfTribesToStartGame), typeof(int), typeof(ServerProfile), new PropertyMetadata(15));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "TimeToCollapseROD", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_TimeToCollapseROD
+        {
+            get { return (int)GetValue(SOTF_TimeToCollapseRODProperty); }
+            set { SetValue(SOTF_TimeToCollapseRODProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_TimeToCollapseRODProperty = DependencyProperty.Register(nameof(SOTF_TimeToCollapseROD), typeof(int), typeof(ServerProfile), new PropertyMetadata(9000));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleAutoStartGameInterval", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_BattleAutoStartGameInterval
+        {
+            get { return (int)GetValue(SOTF_BattleAutoStartGameIntervalProperty); }
+            set { SetValue(SOTF_BattleAutoStartGameIntervalProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_BattleAutoStartGameIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleAutoStartGameInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(60));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleAutoRestartGameInterval", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_BattleAutoRestartGameInterval
+        {
+            get { return (int)GetValue(SOTF_BattleAutoRestartGameIntervalProperty); }
+            set { SetValue(SOTF_BattleAutoRestartGameIntervalProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_BattleAutoRestartGameIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleAutoRestartGameInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(45));
+
+        [IniFileEntry(IniFiles.GameUserSettings, IniFileSections.ServerSettings, Key = "BattleSuddenDeathInterval", ConditionedOn = nameof(SOTF_Enabled))]
+        public int SOTF_BattleSuddenDeathInterval
+        {
+            get { return (int)GetValue(SOTF_BattleSuddenDeathIntervalProperty); }
+            set { SetValue(SOTF_BattleSuddenDeathIntervalProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_BattleSuddenDeathIntervalProperty = DependencyProperty.Register(nameof(SOTF_BattleSuddenDeathInterval), typeof(int), typeof(ServerProfile), new PropertyMetadata(300));
+
+        public bool SOTF_NoEvents
+        {
+            get { return (bool)GetValue(SOTF_NoEventsProperty); }
+            set { SetValue(SOTF_NoEventsProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_NoEventsProperty = DependencyProperty.Register(nameof(SOTF_NoEvents), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public bool SOTF_NoBosses
+        {
+            get { return (bool)GetValue(SOTF_NoBossesProperty); }
+            set { SetValue(SOTF_NoBossesProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_NoBossesProperty = DependencyProperty.Register(nameof(SOTF_NoBosses), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public bool SOTF_BothBosses
+        {
+            get { return (bool)GetValue(SOTF_BothBossesProperty); }
+            set { SetValue(SOTF_BothBossesProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_BothBossesProperty = DependencyProperty.Register(nameof(SOTF_BothBosses), typeof(bool), typeof(ServerProfile), new PropertyMetadata(false));
+
+        public float SOTF_EvoEventInterval
+        {
+            get { return (float)GetValue(SOTF_EvoEventIntervalProperty); }
+            set { SetValue(SOTF_EvoEventIntervalProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_EvoEventIntervalProperty = DependencyProperty.Register(nameof(SOTF_EvoEventInterval), typeof(float), typeof(ServerProfile), new PropertyMetadata(1.0f));
+
+        public float SOTF_RingStartTime
+        {
+            get { return (float)GetValue(SOTF_RingStartTimeProperty); }
+            set { SetValue(SOTF_RingStartTimeProperty, value); }
+        }
+
+        public static readonly DependencyProperty SOTF_RingStartTimeProperty = DependencyProperty.Register(nameof(SOTF_RingStartTime), typeof(float), typeof(ServerProfile), new PropertyMetadata(1000.0f));
+
+        #endregion
+
         #region RCON Settings
 
         public Rect RCONWindowExtents
@@ -1425,9 +1531,11 @@ namespace ARK_Server_Manager.Lib
             this.DinoSettings = new DinoSettingsList(this.DinoSpawnWeightMultipliers, this.PreventDinoTameClassNames, this.NPCReplacements, this.TamedDinoClassDamageMultipliers, this.TamedDinoClassResistanceMultipliers, this.DinoClassDamageMultipliers, this.DinoClassResistanceMultipliers);
             this.DinoLevels = new LevelList();
             this.PlayerLevels = new LevelList();
-            this.PerLevelStatsMultiplier_Player = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_Player), GameData.GetPerLevelStatsMultipliers);
-            this.PerLevelStatsMultiplier_DinoWild = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoWild), GameData.GetPerLevelStatsMultipliers);
-            this.PerLevelStatsMultiplier_DinoTamed = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed), GameData.GetPerLevelStatsMultipliers);
+            this.PerLevelStatsMultiplier_Player = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_Player), GameData.GetPerLevelStatsMultipliers_Default);
+            this.PerLevelStatsMultiplier_DinoWild = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoWild), GameData.GetPerLevelStatsMultipliers_Default);
+            this.PerLevelStatsMultiplier_DinoTamed = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed), GameData.GetPerLevelStatsMultipliers_DinoTamed);
+            this.PerLevelStatsMultiplier_DinoTamed_Add = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed_Add), GameData.GetPerLevelStatsMultipliers_DinoTamed_Add);
+            this.PerLevelStatsMultiplier_DinoTamed_Affinity = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed_Affinity), GameData.GetPerLevelStatsMultipliers_DinoTamed_Affinity);
 
             GetDefaultDirectories();
         }
@@ -1445,7 +1553,6 @@ namespace ARK_Server_Manager.Lib
             list.Clear();
             list.AddRange(GameData.LevelProgression);
         }
-
 
         public void ResetLevelProgressionToOfficial(LevelProgression levelProgression)
         {
@@ -1662,8 +1769,7 @@ namespace ARK_Server_Manager.Lib
             // TODO: Refactor this into SystemIniFile
             //
             var values = iniFile.IniReadSection(IniFileSections.GameMode, IniFiles.Game);
-            var filteredValues = values.Where(s => !s.StartsWith("LevelExperienceRampOverrides=") &&
-!s.StartsWith("OverridePlayerLevelEngramPoints=")).ToList();
+            var filteredValues = values.Where(s => !s.StartsWith("LevelExperienceRampOverrides=") && !s.StartsWith("OverridePlayerLevelEngramPoints=")).ToList();
             if (this.EnableLevelProgressions)
             {
                 //
@@ -1689,6 +1795,9 @@ namespace ARK_Server_Manager.Lib
             if (this.SOTF_Enabled)
             {
                 serverArgs.Append(Config.Default.DefaultServerMap);
+
+                serverArgs.Append("?EvoEventInterval=").Append(this.SOTF_EvoEventInterval);
+                serverArgs.Append("?RingStartTime=").Append(this.SOTF_RingStartTime);
             }
             else
             {
@@ -1751,11 +1860,19 @@ namespace ARK_Server_Manager.Lib
                 serverArgs.Append($"?GameModIds={this.ServerModIds}");
             }
 
+            if (!String.IsNullOrWhiteSpace(this.AdditionalArgs) && !this.AdditionalArgs.StartsWith(" "))
+                serverArgs.Append(" ");
             serverArgs.Append(this.AdditionalArgs);
 
             if(this.SOTF_Enabled)
             {
                 serverArgs.Append(" -TotalConversionMod=496735411");
+
+                if (this.SOTF_GamePlayLogging)
+                {
+                    serverArgs.Append(" -gameplaylogging");
+                }
+
                 if(this.SOTF_DisableDeathSPectator)
                 {
                     serverArgs.Append(" -DisableDeathSpectator");
@@ -1766,10 +1883,24 @@ namespace ARK_Server_Manager.Lib
                     serverArgs.Append(" -OnlyAdminRejoinAsSpectator");
                 }
 
-                if(this.SOTF_GamePlayLogging)
+                if (this.SOTF_NoEvents)
                 {
-                    serverArgs.Append(" -gameplaylogging");
+                    serverArgs.Append(" -noevents");
                 }
+
+                if (this.SOTF_NoBosses)
+                {
+                    serverArgs.Append(" -nobosses");
+                }
+                else if (this.SOTF_BothBosses)
+                {
+                    serverArgs.Append(" -bothbosses");
+                }
+            }
+
+            if (this.UseBattlEye)
+            {
+                serverArgs.Append(" -UseBattlEye");
             }
 
             if (this.DisableValveAntiCheatSystem)
@@ -1877,17 +2008,201 @@ namespace ARK_Server_Manager.Lib
             settings.HarvestResourceItemAmountClassMultipliers.Reset();
             settings.ResetLevelProgressionToDefault(LevelProgression.Player);
             settings.ResetLevelProgressionToDefault(LevelProgression.Dino);
+            settings.PerLevelStatsMultiplier_DinoTamed.Reset();
+            settings.PerLevelStatsMultiplier_DinoTamed_Add.Reset();
+            settings.PerLevelStatsMultiplier_DinoTamed_Affinity.Reset();
+            settings.PerLevelStatsMultiplier_DinoWild.Reset();
+            settings.PerLevelStatsMultiplier_Player.Reset();
             return settings;
         }
 
+        #region Reset Methods
+        // individual value reset methods
         public void ResetOverrideMaxExperiencePointsPlayer()
         {
-            OverrideMaxExperiencePointsPlayer = GameData.DEFAULT_MAX_EXPERIENCE_POINTS_PLAYER;
+            this.ClearValue(OverrideMaxExperiencePointsPlayerProperty);
         }
 
         public void ResetOverrideMaxExperiencePointsDino()
         {
-            OverrideMaxExperiencePointsDino = GameData.DEFAULT_MAX_EXPERIENCE_POINTS_DINO;
+            this.ClearValue(OverrideMaxExperiencePointsDinoProperty);
         }
+
+        // section reset methods
+        public void ResetChatAndNotificationSection()
+        {
+            this.ClearValue(EnableGlobalVoiceChatProperty);
+            this.ClearValue(EnableProximityChatProperty);
+            this.ClearValue(EnablePlayerLeaveNotificationsProperty);
+            this.ClearValue(EnablePlayerJoinedNotificationsProperty);
+        }
+
+        public void ResetCustomLevelsSection()
+        {
+            this.ClearValue(EnableLevelProgressionsProperty);
+
+            this.PlayerLevels = new LevelList();
+            this.ResetLevelProgressionToOfficial(LevelProgression.Player);
+
+            this.DinoLevels = new LevelList();
+            this.ResetLevelProgressionToOfficial(LevelProgression.Dino);
+        }
+
+        public void ResetDinoSettings()
+        {
+            this.ClearValue(OverrideMaxExperiencePointsDinoProperty);
+            this.ClearValue(DinoDamageMultiplierProperty);
+            this.ClearValue(TamedDinoDamageMultiplierProperty);
+            this.ClearValue(DinoResistanceMultiplierProperty);
+            this.ClearValue(TamedDinoResistanceMultiplierProperty);
+            this.ClearValue(MaxTamedDinosProperty);
+            this.ClearValue(DinoCharacterFoodDrainMultiplierProperty);
+            this.ClearValue(DinoCharacterStaminaDrainMultiplierProperty);
+            this.ClearValue(DinoCharacterHealthRecoveryMultiplierProperty);
+            this.ClearValue(DinoCountMultiplierProperty);
+            this.ClearValue(HarvestingDamageMultiplierDinoProperty);
+            this.ClearValue(TurretDamageMultiplierDinoProperty);
+            this.ClearValue(DisableDinoDecayPvEProperty);
+            this.ClearValue(PvEDinoDecayPeriodMultiplierProperty);
+
+            this.DinoSpawnWeightMultipliers = new AggregateIniValueList<DinoSpawn>(nameof(DinoSpawnWeightMultipliers), GameData.GetDinoSpawns);
+            this.PreventDinoTameClassNames = new StringIniValueList(nameof(PreventDinoTameClassNames), () => new string[0]);
+            this.NPCReplacements = new AggregateIniValueList<NPCReplacement>(nameof(NPCReplacements), GameData.GetNPCReplacements);
+            this.TamedDinoClassDamageMultipliers = new AggregateIniValueList<ClassMultiplier>(nameof(TamedDinoClassDamageMultipliers), GameData.GetStandardDinoMultipliers);
+            this.TamedDinoClassResistanceMultipliers = new AggregateIniValueList<ClassMultiplier>(nameof(TamedDinoClassResistanceMultipliers), GameData.GetStandardDinoMultipliers);
+            this.DinoClassDamageMultipliers = new AggregateIniValueList<ClassMultiplier>(nameof(DinoClassDamageMultipliers), GameData.GetStandardDinoMultipliers);
+            this.DinoClassResistanceMultipliers = new AggregateIniValueList<ClassMultiplier>(nameof(DinoClassResistanceMultipliers), GameData.GetStandardDinoMultipliers);
+            this.DinoSettings = new DinoSettingsList(this.DinoSpawnWeightMultipliers, this.PreventDinoTameClassNames, this.NPCReplacements, this.TamedDinoClassDamageMultipliers, this.TamedDinoClassResistanceMultipliers, this.DinoClassDamageMultipliers, this.DinoClassResistanceMultipliers);
+
+            this.PerLevelStatsMultiplier_DinoWild = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoWild), GameData.GetPerLevelStatsMultipliers_Default);
+            this.PerLevelStatsMultiplier_DinoTamed = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed), GameData.GetPerLevelStatsMultipliers_DinoTamed);
+            this.PerLevelStatsMultiplier_DinoTamed_Add = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed_Add), GameData.GetPerLevelStatsMultipliers_DinoTamed_Add);
+            this.PerLevelStatsMultiplier_DinoTamed_Affinity = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_DinoTamed_Affinity), GameData.GetPerLevelStatsMultipliers_DinoTamed_Affinity);
+
+            this.ClearValue(MatingIntervalMultiplierProperty);
+            this.ClearValue(EggHatchSpeedMultiplierProperty);
+            this.ClearValue(BabyMatureSpeedMultiplierProperty);
+            this.ClearValue(BabyFoodConsumptionSpeedMultiplierProperty);
+        }
+
+        public void ResetEngramsSection()
+        {
+            this.OverrideNamedEngramEntries = new AggregateIniValueList<EngramEntry>(nameof(OverrideNamedEngramEntries), GameData.GetStandardEngramOverrides);
+            this.OverrideNamedEngramEntries.Reset();
+        }
+
+        public void ResetEnvironmentSection()
+        {
+            this.ClearValue(TamingSpeedMultiplierProperty);
+            this.ClearValue(HarvestAmountMultiplierProperty);
+            this.ClearValue(ResourcesRespawnPeriodMultiplierProperty);
+            this.ClearValue(ResourceNoReplenishRadiusPlayersProperty);
+            this.ClearValue(ResourceNoReplenishRadiusStructuresProperty);
+            this.ClearValue(ClampResourceHarvestDamageProperty);
+            this.ClearValue(HarvestHealthMultiplierProperty);
+
+            this.HarvestResourceItemAmountClassMultipliers = new AggregateIniValueList<ClassMultiplier>(nameof(HarvestResourceItemAmountClassMultipliers), GameData.GetStandardResourceMultipliers);
+            this.HarvestResourceItemAmountClassMultipliers.Reset();
+
+            this.ClearValue(DayCycleSpeedScaleProperty);
+            this.ClearValue(DayTimeSpeedScaleProperty);
+            this.ClearValue(NightTimeSpeedScaleProperty);
+            this.ClearValue(GlobalSpoilingTimeMultiplierProperty);
+            this.ClearValue(GlobalItemDecompositionTimeMultiplierProperty);
+            this.ClearValue(GlobalCorpseDecompositionTimeMultiplierProperty);
+            this.ClearValue(CropDecaySpeedMultiplierProperty);
+            this.ClearValue(CropGrowthSpeedMultiplierProperty);
+            this.ClearValue(LayEggIntervalMultiplierProperty);
+            this.ClearValue(PoopIntervalMultiplierProperty);
+        }
+
+        public void ResetHUDAndVisualsSection()
+        {
+            this.ClearValue(AllowCrosshairProperty);
+            this.ClearValue(AllowHUDProperty);
+            this.ClearValue(AllowThirdPersonViewProperty);
+            this.ClearValue(AllowMapPlayerLocationProperty);
+            this.ClearValue(AllowPVPGammaProperty);
+            this.ClearValue(AllowPvEGammaProperty);
+        }
+
+        public void ResetPlayerSettings()
+        {
+            this.ClearValue(EnableFlyerCarryProperty);
+            this.ClearValue(XPMultiplierProperty);
+            this.ClearValue(OverrideMaxExperiencePointsPlayerProperty);
+            this.ClearValue(PlayerDamageMultiplierProperty);
+            this.ClearValue(PlayerResistanceMultiplierProperty);
+            this.ClearValue(PlayerCharacterWaterDrainMultiplierProperty);
+
+            this.ClearValue(PlayerCharacterFoodDrainMultiplierProperty);
+            this.ClearValue(PlayerCharacterStaminaDrainMultiplierProperty);
+            this.ClearValue(PlayerCharacterHealthRecoveryMultiplierProperty);
+            this.ClearValue(HarvestingDamageMultiplierPlayerProperty);
+
+            this.PerLevelStatsMultiplier_Player = new FloatIniValueArray(nameof(PerLevelStatsMultiplier_Player), GameData.GetPerLevelStatsMultipliers_Default);
+        }
+
+        public void ResetRulesSection()
+        {
+            this.ClearValue(EnableHardcoreProperty);
+            this.ClearValue(EnablePVPProperty);
+            this.ClearValue(AllowCaveBuildingPvEProperty);
+            this.ClearValue(DisableFriendlyFirePvPProperty);
+            this.ClearValue(DisableFriendlyFirePvEProperty);
+            this.ClearValue(DisableLootCratesProperty);
+            this.ClearValue(DifficultyOffsetProperty);
+            this.ClearValue(EnableTributeDownloadsProperty);
+            this.ClearValue(PreventDownloadSurvivorsProperty);
+            this.ClearValue(PreventDownloadItemsProperty);
+            this.ClearValue(PreventDownloadDinosProperty);
+            this.ClearValue(IncreasePvPRespawnIntervalProperty);
+            this.ClearValue(IncreasePvPRespawnIntervalCheckPeriodProperty);
+            this.ClearValue(IncreasePvPRespawnIntervalMultiplierProperty);
+            this.ClearValue(IncreasePvPRespawnIntervalBaseAmountProperty);
+            this.ClearValue(AutoPvETimerProperty);
+            this.ClearValue(AutoPvEUseSystemTimeProperty);
+            this.ClearValue(AutoPvEStartTimeSecondsProperty);
+            this.ClearValue(AutoPvEStopTimeSecondsProperty);
+            this.ClearValue(AllowTribeWarPvEProperty);
+            this.ClearValue(AllowTribeWarCancelPvEProperty);
+            this.ClearValue(AllowCustomRecipesProperty);
+            this.ClearValue(CustomRecipeEffectivenessMultiplierProperty);
+            this.ClearValue(CustomRecipeSkillMultiplierProperty);
+        }
+
+        public void ResetSOTFSection()
+        {
+            this.ClearValue(SOTF_EnabledProperty);
+            this.ClearValue(SOTF_DisableDeathSPectatorProperty);
+            this.ClearValue(SOTF_OnlyAdminRejoinAsSpectatorProperty);
+            this.ClearValue(SOTF_MaxNumberOfPlayersInTribeProperty);
+            this.ClearValue(SOTF_BattleNumOfTribesToStartGameProperty);
+            this.ClearValue(SOTF_TimeToCollapseRODProperty);
+            this.ClearValue(SOTF_BattleAutoStartGameIntervalProperty);
+            this.ClearValue(SOTF_BattleAutoRestartGameIntervalProperty);
+            this.ClearValue(SOTF_BattleSuddenDeathIntervalProperty);
+            this.ClearValue(SOTF_GamePlayLoggingProperty);
+        }
+
+        public void ResetStructuresSection()
+        {
+            this.ClearValue(StructureResistanceMultiplierProperty);
+            this.ClearValue(StructureDamageMultiplierProperty);
+            this.ClearValue(StructureDamageRepairCooldownProperty);
+            this.ClearValue(PvPStructureDecayProperty);
+            this.ClearValue(PvPZoneStructureDamageMultiplierProperty);
+            this.ClearValue(MaxStructuresVisibleProperty);
+            this.ClearValue(PerPlatformMaxStructuresMultiplierProperty);
+            this.ClearValue(MaxPlatformSaddleStructureLimitProperty);
+            this.ClearValue(FlyerPlatformAllowUnalignedDinoBasingProperty);
+            this.ClearValue(EnableStructureDecayProperty);
+            this.ClearValue(PvEStructureDecayDestructionPeriodProperty);
+            this.ClearValue(PvEStructureDecayPeriodMultiplierProperty);
+            this.ClearValue(AutoDestroyOldStructuresMultiplierProperty);
+            this.ClearValue(ForceAllStructureLockingProperty);
+            this.ClearValue(PassiveDefensesDamageRiderlessDinosProperty);
+        }
+        #endregion
     }
 }

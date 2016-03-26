@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -163,7 +164,7 @@ namespace ARK_Server_Manager.Lib
                     if (collection != null)
                     {
                         var filteredSection = IniReadSection(attr.Section, attr.File)
-                                                    .Where(s => !s.StartsWith(collection.IniCollectionKey + "="))
+                                                    .Where(s => !s.StartsWith(collection.IniCollectionKey + (collection.IsArray ? "[" : "=")))
                                                     .ToArray();
                         IniWriteSection(attr.Section, filteredSection, attr.File);
                     }
@@ -221,7 +222,7 @@ namespace ARK_Server_Manager.Lib
                         }
                         else
                         {
-                            var strValue = Convert.ToString(value);
+                            var strValue = Convert.ToString(value, CultureInfo.GetCultureInfo("en-US"));
                             if (attr.QuotedString && !(strValue.StartsWith("\"") && strValue.EndsWith("\"")))
                             {
                                 strValue = "\"" + strValue + "\"";
@@ -233,7 +234,7 @@ namespace ARK_Server_Manager.Lib
                                 strValue = strValue.Replace(Environment.NewLine, @"\n");
                             }
 
-                            IniWriteValue(attr.Section, keyName, @strValue, attr.File);
+                            IniWriteValue(attr.Section, keyName, strValue, attr.File);
                         }
                     }
                 }
@@ -321,7 +322,7 @@ namespace ARK_Server_Manager.Lib
                             else if (fieldType == typeof(float))
                             {
                                 float floatValue;
-                                float.TryParse(iniValue, out floatValue);
+                                float.TryParse(iniValue, NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"), out floatValue);
                                 field.SetValue(obj, floatValue);
                             }                           
                             else

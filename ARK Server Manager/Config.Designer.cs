@@ -325,6 +325,15 @@ namespace ARK_Server_Manager {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://arkdedicated.com/version")]
+        public string AvailableVersionUrl2 {
+            get {
+                return ((string)(this["AvailableVersionUrl2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://api.ark.bar/server/{0}/{1}")]
         public string ServerStatusUrlFormat {
             get {
@@ -500,6 +509,30 @@ namespace ARK_Server_Manager {
         public string HelpUrl {
             get {
                 return ((string)(this["HelpUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OpenRCON_ServerIP {
+            get {
+                return ((string)(this["OpenRCON_ServerIP"]));
+            }
+            set {
+                this["OpenRCON_ServerIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32330")]
+        public int OpenRCON_RCONPort {
+            get {
+                return ((int)(this["OpenRCON_RCONPort"]));
+            }
+            set {
+                this["OpenRCON_RCONPort"] = value;
             }
         }
     }
