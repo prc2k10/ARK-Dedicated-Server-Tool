@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<UserControl x:Class="ARK_Server_Manager.Controls.ServerDetailControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:ARK_Server_Manager"
              xmlns:vm="clr-namespace:ARK_Server_Manager.Lib.ViewModel"
              xmlns:panels="clr-namespace:ARK_Server_Manager.Views.ServerProfilePanels"
-             xmlns:eo="http://schemas.essentialobjects.com/wpf/" xmlns:Controls="clr-namespace:ARK_Server_Manager.Controls" x:Class="ARK_Server_Manager.ServerDetailControl"
+             xmlns:eo="http://schemas.essentialobjects.com/wpf/" 
+             xmlns:Controls="clr-namespace:ARK_Server_Manager.Controls" 
              x:Name="controlRoot"
              mc:Ignorable="d" d:DesignWidth="1024" Width="Auto" MinHeight="500">
     <UserControl.Resources>

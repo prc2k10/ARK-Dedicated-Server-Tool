@@ -21,12 +21,9 @@ namespace ARK_Server_Manager.Controls
     /// </summary>
     public partial class LabeledTextBlock : UserControl
     {
-
-
-
         // Added Dependency Properties
         public static readonly DependencyProperty LabelTextProperty = DependencyProperty.Register(nameof(LabelText), typeof(String), typeof(LabeledTextBlock), new FrameworkPropertyMetadata() { BindsTwoWayByDefault = true });
-        public static readonly DependencyProperty BodyTextProperty = DependencyProperty.Register(nameof(BodyText), typeof(String), typeof(LabeledTextBlock), new FrameworkPropertyMetadata() { BindsTwoWayByDefault = true });
+        public static readonly DependencyProperty BodyTextProperty = DependencyProperty.Register(nameof(BodyText), typeof(object), typeof(LabeledTextBlock), new FrameworkPropertyMetadata() { BindsTwoWayByDefault = true });
 
         #region Public Dependency Properties
         [Category("Custom Properties")]
@@ -37,14 +34,12 @@ namespace ARK_Server_Manager.Controls
         }
 
         [Category("Custom Properties")]
-        public String BodyText
+        public object BodyText
         {
-            get { return (String)GetValue(BodyTextProperty); }
+            get { return (object)GetValue(BodyTextProperty); }
             set { SetValue(BodyTextProperty, value); }
         }
         #endregion
-
-
 
         public LabeledTextBlock()
         {

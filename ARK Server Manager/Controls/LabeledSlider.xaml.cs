@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ARK_Server_Manager
+namespace ARK_Server_Manager.Controls
 {
     /// <summary>
     /// Interaction logic for LabeledSlider.xaml

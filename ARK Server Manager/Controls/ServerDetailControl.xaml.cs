@@ -17,7 +17,7 @@ using System.Collections.ObjectModel;
 using ARK_Server_Manager.Lib.ViewModel;
 using ARK_Server_Manager.Views.ServerProfilePanels;
 
-namespace ARK_Server_Manager
+namespace ARK_Server_Manager.Controls
 {
     /// <summary>
     /// Interaction logic for ServerDetailControl.xaml

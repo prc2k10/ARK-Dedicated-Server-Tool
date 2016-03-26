@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:root="clr-namespace:ARK_Server_Manager"
+             xmlns:controls="clr-namespace:ARK_Server_Manager.Controls"
              xmlns:lib="clr-namespace:ARK_Server_Manager.Lib"
              xmlns:local="clr-namespace:ARK_Server_Manager.Views.ServerProfilePanels"
              mc:Ignorable="d" 
@@ -32,12 +33,23 @@
                   Style="{StaticResource SectionContentGroupBox}"
                   Grid.Row="1">
             <UniformGrid Rows="2" Columns="2">
-                <root:LabeledTextBox Style="{StaticResource SectionContentLabeledTextBox}" 
+                <controls:LabeledTextBox Style="{StaticResource SectionContentLabeledTextBox}" 
                                      LabelText="{DynamicResource ServerSettings_ProfileLabel}" 
-                                     InputText="{Binding ProfileName}"/>
-                <root:LabeledTextBox Style="{StaticResource SectionContentLabeledTextBox}"
+                                     InputText="{Binding Profile.ProfileName}"
+                                     ToolTip="{DynamicResource ServerSettings_ProfileTooltip}"/>
+                <controls:LabeledTextBox Style="{StaticResource SectionContentLabeledTextBox}"
                                      LabelText="{DynamicResource ServerSettings_InstallLocationLabel}" 
-                                     InputText="{Binding InstallDirectory}"/>
+                                     InputText="{Binding Profile.InstallDirectory}"
+                                     ToolTip="{DynamicResource ServerSettings_InstallLocationTooltip}"/>
+
+                <controls:LabeledTextBlock Style="{StaticResource SectionContentLabeledTextBlock}"
+                                     LabelText="{DynamicResource ServerSettings_InstalledVersionLabel}" 
+                                     BodyText="{Binding Runtime.Version}"
+                                     ToolTip="{DynamicResource ServerSettings_InstalledVersionTooltip}"/>
+                <controls:LabeledTextBlock Style="{StaticResource SectionContentLabeledTextBlock}"
+                                     LabelText="{DynamicResource ServerSettings_AvailableVersionLabel}" 
+                                     BodyText="{Binding AvailableVersion, Source={x:Static lib:ServerManager.Instance}}"
+                                     ToolTip="{DynamicResource ServerSettings_AvailableVersionTooltip}"/>
 
             </UniformGrid>
         </GroupBox>
