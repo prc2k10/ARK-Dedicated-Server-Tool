@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ARK_Server_Manager.Lib;
 
 namespace ARK_Server_Manager
 {
@@ -108,6 +109,7 @@ namespace ARK_Server_Manager
         public AnnotatedSlider()
         {
             InitializeComponent();
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
             (this.Content as FrameworkElement).DataContext = this;
         }
 

@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Globalization\en-US\en-US.xaml"/>
+                <ResourceDictionary Source="Styles\Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <vm:IpValidationRule x:Key="IpValidationRule"/>
             <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFFFFF"/>

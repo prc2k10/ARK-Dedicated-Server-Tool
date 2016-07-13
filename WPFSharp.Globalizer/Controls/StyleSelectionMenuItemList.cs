@@ -43,7 +43,7 @@ namespace WPFSharp.Globalizer.Controls
         {
             var lang = inStyle as string;
             if (!string.IsNullOrWhiteSpace(lang))
-                GlobalizedApplication.Instance.StyleManager.SwitchStyle(inStyle.ToString() + ".xaml");
+                GlobalizedApplication.Instance.StyleManager.SwitchStyle(inStyle.ToString());
         }
     }
 }

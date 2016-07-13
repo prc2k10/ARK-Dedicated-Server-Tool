@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
@@ -19,6 +20,7 @@ namespace WPFSharp.Globalizer
         #endregion
 
         #region Contructor
+
         public GlobalizationManager(Collection<ResourceDictionary> inMergedDictionaries)
             : base(inMergedDictionaries)
         {
@@ -34,18 +36,13 @@ namespace WPFSharp.Globalizer
         /// </summary>
         public void SwitchLanguage(string inFiveCharLang, bool inForceSwitch = false)
         {
-            if (CultureInfo.CurrentCulture.Name.Equals(inFiveCharLang) && !inForceSwitch)
+            if (AvailableLanguages.Instance.SelectedLanguage != null && AvailableLanguages.Instance.SelectedLanguage.Equals(inFiveCharLang) && !inForceSwitch)
                 return;
 
-            if(!AvailableLanguages.Instance.Contains(inFiveCharLang))
+            if (!AvailableLanguages.Instance.Contains(inFiveCharLang))
             {
                 throw new CultureNotFoundException(String.Format("The language {0} is not available.", inFiveCharLang));
             }
-
-            // Set the new language
-            var ci = new CultureInfo(inFiveCharLang);
-            Thread.CurrentThread.CurrentCulture = ci;
-            Thread.CurrentThread.CurrentUICulture = ci;
 
             FileNames = new List<string>();
             string[] xamlFiles;
@@ -69,7 +66,12 @@ namespace WPFSharp.Globalizer
 
             // Add new Resource Dictionaries
             LoadDictionariesFromFiles(FileNames);
-            var args = new ResourceDictionaryChangedEventArgs { ResourceDictionaryPaths = FileNames };
+
+            var args = new ResourceDictionaryChangedEventArgs
+            {
+                ResourceDictionaryNames = FileNames.Select(f => Path.GetFileNameWithoutExtension(f)).ToList(),
+                ResourceDictionaryPaths = FileNames,
+            };
             NotifyResourceDictionaryChanged(args);
         }
 
@@ -93,12 +95,12 @@ namespace WPFSharp.Globalizer
             }
         }
 
-        public override EnhancedResourceDictionary LoadFromFile(String inFile)
+        public override EnhancedResourceDictionary LoadFromFile(string inFile)
         {
             return LoadFromFile(inFile, true);
         }
 
-        public EnhancedResourceDictionary LoadFromFile(String inFile, bool inRequireGlobalizationType = true)
+        public EnhancedResourceDictionary LoadFromFile(string inFile, bool inRequireGlobalizationType = true)
         {
             string file = inFile;
             // Determine if the path is absolute or relative
@@ -110,22 +112,30 @@ namespace WPFSharp.Globalizer
             if (!File.Exists(file))
                 return null;
 
-            using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+            try
             {
-                // Read in an EnhancedResourceDictionary File or preferably an GlobalizationResourceDictionary file
-                var erd = XamlReader.Load(fs) as EnhancedResourceDictionary;
-
-                if (erd != null)
+                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    if (inRequireGlobalizationType)
-                    {
-                        if (erd is GlobalizationResourceDictionary)
-                            return erd;
+                    // Read in an EnhancedResourceDictionary File or preferably an GlobalizationResourceDictionary file
+                    var erd = XamlReader.Load(fs) as EnhancedResourceDictionary;
 
-                        return null;
+                    if (erd != null)
+                    {
+                        erd.Source = file;
+                        if (inRequireGlobalizationType)
+                        {
+                            if (erd is GlobalizationResourceDictionary)
+                                return erd;
+
+                            return null;
+                        }
                     }
+                    return erd;
                 }
-                return erd;
+            }
+            catch
+            {
+                return null;
             }
         }
 

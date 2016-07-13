@@ -66,7 +66,7 @@ namespace ARK_Server_Manager
             this.CurrentConfig = Config.Default;
 
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             MainWindow.Instance = this;
             this.ServerManager = ServerManager.Instance;

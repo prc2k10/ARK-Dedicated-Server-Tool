@@ -17,7 +17,7 @@ namespace ARK_Server_Manager
         public ProgressWindow(string windowTitle)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             if (!string.IsNullOrWhiteSpace(windowTitle))
                 Title = windowTitle;

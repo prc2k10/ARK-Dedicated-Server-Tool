@@ -19,7 +19,7 @@ namespace ARK_Server_Manager
         public AutoUpdateWindow()
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

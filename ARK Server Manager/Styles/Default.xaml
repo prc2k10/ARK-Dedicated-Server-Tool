@@ -21,7 +21,7 @@
 
     <!--Generic control styles-->
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="DarkOrange" />
     </Style>
 
     <!--Named styles-->

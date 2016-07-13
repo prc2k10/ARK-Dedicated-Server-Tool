@@ -270,9 +270,6 @@
       <DependentUpon>ServerSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lib\ServerStatusWatcher.cs" />
-    <Compile Include="Testing\UITests.xaml.cs">
-      <DependentUpon>UITests.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TribeProfileWindow.xaml.cs">
       <DependentUpon>TribeProfileWindow.xaml</DependentUpon>
     </Compile>
@@ -316,9 +313,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Styles\Blue.xaml">
+    <Content Include="Styles\Blue.xaml">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Page Include="WPFControls\AnnotatedSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,10 +324,6 @@
     <Page Include="AutoUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Eraseme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Content Include="Globalization\de-DE\de-DE.xaml">
       <SubType>Designer</SubType>
@@ -344,10 +338,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PlayerProfileWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Testing\UITests.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

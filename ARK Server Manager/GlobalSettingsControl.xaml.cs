@@ -28,7 +28,7 @@ namespace ARK_Server_Manager
             this.DataContext = this;
 
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.IsAdministrator = SecurityUtils.IsAdministrator();
         }

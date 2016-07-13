@@ -23,7 +23,7 @@ namespace ARK_Server_Manager
         public MainFrame()
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
         }
     }
 }

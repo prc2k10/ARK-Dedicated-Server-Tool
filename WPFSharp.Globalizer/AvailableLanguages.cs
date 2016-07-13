@@ -1,35 +1,52 @@
 ﻿// See license at end of the file
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows;
 
 namespace WPFSharp.Globalizer
 {
-    public class AvailableLanguages : List<string>, INotifyPropertyChanged
+    public class AvailableLanguages : ObservableCollection<string>, INotifyPropertyChanged
     {
+        private Dictionary<string, string> _CultureInfoMap;
+
         private AvailableLanguages()
         {
             GlobalizedApplication.Instance.GlobalizationManager.ResourceDictionaryChangedEvent += GlobalizationManager_ResourceDictionaryChangedEvent;
         }
 
-        private void GlobalizationManager_ResourceDictionaryChangedEvent(object sender, EventArgs e)
+        private void GlobalizationManager_ResourceDictionaryChangedEvent(object sender, ResourceDictionaryChangedEventArgs args)
         {
-            NotifyPropertyChanged("SelectedLanguage");
+            if (args == null || args.ResourceDictionaryNames == null || args.ResourceDictionaryNames[0] == null)
+                return;
+
+            SelectedLanguage = args.ResourceDictionaryNames[args.ResourceDictionaryNames.Count - 1];
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public static AvailableLanguages Instance { get; set; }
 
+        public string SelectedLanguage
+        {
+            get { return CultureInfo.CurrentCulture.Name; }
+            set
+            {
+                if (CultureInfo.CurrentCulture.Name == value)
+                    return;
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(value);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(value);
+                NotifyPropertyChanged("SelectedLanguage");
+            }
+        }
+
         public static void CreateInstance()
         {
             Instance = new AvailableLanguages();
-        }
-
-        public string SelectedLanguage
-        {
-            get { return CultureInfo.CurrentCulture.IetfLanguageTag; }
         }
 
         public void AddListFromSubDirectories(string inPath)
@@ -59,7 +76,7 @@ namespace WPFSharp.Globalizer
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        new public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string inPropertyName)
         {
@@ -73,11 +90,13 @@ namespace WPFSharp.Globalizer
 
         public Dictionary<string, string> CultureInfoMap
         {
-            get { return _CultureInfoMap ?? (_CultureInfoMap = new Dictionary<string, string>()); }
-        } private Dictionary<string, string> _CultureInfoMap;
+            get
+            {
+                return _CultureInfoMap ?? (_CultureInfoMap = new Dictionary<string, string>());
+            }
+        }
     }
 }
-
 
 #region License
 /*

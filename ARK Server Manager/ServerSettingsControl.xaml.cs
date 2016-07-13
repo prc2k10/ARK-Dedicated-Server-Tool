@@ -125,7 +125,7 @@ namespace ARK_Server_Manager
         {
             this.CurrentConfig = Config.Default;
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.ServerManager = ServerManager.Instance;
             this.IsAdministrator = SecurityUtils.IsAdministrator();

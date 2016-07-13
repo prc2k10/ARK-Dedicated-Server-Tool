@@ -19,7 +19,6 @@ namespace WPFSharp.Globalizer
         {
             // Make App a singleton
             Instance = this;
-
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -46,7 +45,7 @@ namespace WPFSharp.Globalizer
 
             // Load the default style
             CreateAvailableStyles();
-            StyleManager.SwitchStyle(StyleManager.DefaultStyle);
+            StyleManager.SwitchStyle(StyleManager.FallbackStyle, true);
 
             // Get current 5 character language and load the appropriate Globalization file
             CreateAvailableLanguages();

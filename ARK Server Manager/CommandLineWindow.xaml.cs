@@ -14,7 +14,7 @@ namespace ARK_Server_Manager
         public CommandLineWindow(string commandLine)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.DataContext = commandLine;
         }

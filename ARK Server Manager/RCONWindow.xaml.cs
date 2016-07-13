@@ -190,7 +190,7 @@ namespace ARK_Server_Manager
         public RCONWindow(RCONParameters parameters)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.CurrentInputWindowMode = InputWindowMode.None;
             this.RCONParameters = parameters;

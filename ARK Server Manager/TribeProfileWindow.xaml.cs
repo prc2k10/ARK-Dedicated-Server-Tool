@@ -23,7 +23,7 @@ namespace ARK_Server_Manager
         public TribeProfileWindow(PlayerInfo player, ICollection<PlayerInfo> players, String serverFolder)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.Player = player;
             this.Players = players;

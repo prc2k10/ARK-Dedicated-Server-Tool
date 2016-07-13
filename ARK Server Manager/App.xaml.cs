@@ -186,8 +186,16 @@ namespace ARK_Server_Manager
                 Debug.WriteLine(ex.Message);
             }
 
-            if (!string.IsNullOrWhiteSpace(Config.Default.StyleName))
-                _globalizer.StyleManager.SwitchStyle($"{Config.Default.StyleName}.xaml");
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Config.Default.StyleName))
+                    _globalizer.StyleManager.SwitchStyle(Config.Default.StyleName, true);
+            }
+            catch (StyleNotFoundException ex)
+            {
+                // just output the exception message, it should default back to the fallback style.
+                Debug.WriteLine(ex.Message);
+            }
 
             // check if we are starting ASM for server restart
             if (e.Args.Any(a => a.StartsWith(ARG_AUTORESTART)))

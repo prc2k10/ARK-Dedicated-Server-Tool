@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Globalization\en-US\en-US.xaml"/>
+                <ResourceDictionary Source="/Styles/Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <ContentControl x:Key="DataDirectoryButtonContent">
                 <StackPanel Orientation="Horizontal">
@@ -71,7 +72,7 @@
             </GroupBox.Header>
             <StackPanel Orientation="Vertical">
                 <globcntrls:LanguageSelectionComboBox SelectionChanged="LanguageSelectionComboBox_SelectionChanged"/>
-                <globcntrls:StyleSelectionComboBox SelectionChanged="StyleSelectionComboBox_SelectionChanged" Margin="0,5,0,0" Visibility="Collapsed"/>
+                <globcntrls:StyleSelectionComboBox SelectionChanged="StyleSelectionComboBox_SelectionChanged" Margin="0,5,0,0"/>
             </StackPanel>
         </GroupBox>
 

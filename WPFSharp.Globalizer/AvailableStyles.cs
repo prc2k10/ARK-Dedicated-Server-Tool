@@ -1,12 +1,15 @@
 ﻿// See license at end of the file
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 
 namespace WPFSharp.Globalizer
 {
-    public class AvailableStyles : List<string>, INotifyPropertyChanged
+    public class AvailableStyles : ObservableCollection<string>, INotifyPropertyChanged
     {
+        private string _SelectedStyle;
+
         private AvailableStyles()
         {
             GlobalizedApplication.Instance.StyleManager.ResourceDictionaryChangedEvent += GlobalizationManager_ResourceDictionaryChangedEvent;
@@ -17,7 +20,8 @@ namespace WPFSharp.Globalizer
             if (args == null || args.ResourceDictionaryNames == null || args.ResourceDictionaryNames[0] == null)
                 return;
 
-            SelectedStyle = args.ResourceDictionaryNames[0];
+            SelectedStyle = args.ResourceDictionaryNames[args.ResourceDictionaryNames.Count - 1];
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public static AvailableStyles Instance { get; set; }
@@ -33,7 +37,6 @@ namespace WPFSharp.Globalizer
                 NotifyPropertyChanged("SelectedStyle");
             }
         }
-        private string _SelectedStyle;
 
         public static void CreateInstance()
         {
@@ -65,7 +68,7 @@ namespace WPFSharp.Globalizer
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        new public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string inPropertyName)
         {

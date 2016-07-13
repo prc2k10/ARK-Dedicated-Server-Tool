@@ -42,7 +42,7 @@ namespace ARK_Server_Manager
         public OpenRCONWindow()
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             LoadDefaults();
             this.DataContext = this;

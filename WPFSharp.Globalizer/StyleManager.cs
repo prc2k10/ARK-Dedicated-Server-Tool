@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -13,7 +14,7 @@ namespace WPFSharp.Globalizer
     {
         #region Members
 
-        public static String DefaultStyle = "Default.xaml";
+        public static string FallbackStyle = "Default";
 
         #endregion
 
@@ -28,55 +29,48 @@ namespace WPFSharp.Globalizer
         #endregion
 
         #region Functions
+
         /// <summary>
         /// Dynamically load a Localization ResourceDictionary from a file
         /// </summary>
-        public void SwitchStyle(String inFileName, string inResourceDictionaryName = null)
+        public void SwitchStyle(string styleName, bool inForceSwitch = false)
         {
-            string path = inFileName;
-            if (!File.Exists(path) && !path.Contains(@":\"))
-                path = Path.Combine(GlobalizedApplication.Instance.Directory, SubDirectory, inFileName);
-            if (File.Exists(path))
-            {
-                RemoveResourceDictionaries();
-                MergedDictionaries.Add(LoadFromFile(path) as StyleResourceDictionary);
-                var args = new ResourceDictionaryChangedEventArgs();
-                args.ResourceDictionaryNames.Add(Path.GetFileNameWithoutExtension(inFileName));
-                args.ResourceDictionaryPaths.Add(path);
+            if (AvailableStyles.Instance.SelectedStyle != null && AvailableStyles.Instance.SelectedStyle.Equals(styleName) && !inForceSwitch)
+                return;
 
-                NotifyResourceDictionaryChanged(args);
-            }
-            else
+            if (!AvailableStyles.Instance.Contains(styleName))
             {
-                Debug.WriteLine("ResourceDictionary not found: " + inFileName);
-            }
-        }
-
-        public override EnhancedResourceDictionary LoadFromFile(string inFile)
-        {
-            string file = inFile;
-            // Determine if the path is absolute or relative
-            if (!Path.IsPathRooted(inFile))
-            {
-                string exedir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                if (exedir != null)
-                    file = Path.Combine(exedir, inFile);
+                throw new StyleNotFoundException(String.Format("The style {0} is not available.", styleName));
             }
 
-            if (!File.Exists(file))
-                return null;
+            FileNames = new List<string>();
+            string file;
 
-            using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+            // check if the switch to style matches the default style
+            if (!styleName.Equals(FallbackStyle))
             {
-                // Read in ResourceDictionary File or preferably an EnhancedResourceDictionary file
-                var styleResourceDictionary = XamlReader.Load(fs) as StyleResourceDictionary;
-
-                if (styleResourceDictionary == null)
-                    return null;
-
-                styleResourceDictionary.Source = inFile;
-                return styleResourceDictionary;
+                file = Path.Combine(DefaultPath, FallbackStyle + ".xaml");
+                if (File.Exists(file))
+                    FileNames.Add(file);
             }
+
+            // load the switch to style
+            file = Path.Combine(DefaultPath, styleName + ".xaml");
+            if (File.Exists(file))
+                FileNames.Add(file);
+
+            // Remove previous ResourceDictionaries
+            RemoveResourceDictionaries();
+
+            // Add new Resource Dictionaries
+            LoadDictionariesFromFiles(FileNames);
+
+            var args = new ResourceDictionaryChangedEventArgs()
+            {
+                ResourceDictionaryNames = FileNames.Select(f => Path.GetFileNameWithoutExtension(f)).ToList(),
+                ResourceDictionaryPaths = FileNames,
+            };
+            NotifyResourceDictionaryChanged(args);
         }
 
         private void RemoveResourceDictionaries()
@@ -93,6 +87,58 @@ namespace WPFSharp.Globalizer
                 GlobalizedApplication.Instance.Resources.MergedDictionaries.Remove(rd);
             }
         }
+
+        public override EnhancedResourceDictionary LoadFromFile(string inFile)
+        {
+            string file = inFile;
+            // Determine if the path is absolute or relative
+            if (!Path.IsPathRooted(inFile))
+            {
+                file = Path.Combine(DefaultPath, inFile);
+            }
+
+            if (!File.Exists(file))
+                return null;
+
+            try
+            {
+
+                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    // Read in ResourceDictionary File or preferably an EnhancedResourceDictionary file
+                    var srd = XamlReader.Load(fs) as StyleResourceDictionary;
+
+                    if (srd != null)
+                    {
+                        srd.Source = file;
+                        if (srd is StyleResourceDictionary)
+                            return srd;
+
+                        return null;
+                    }
+                    return srd;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public override void LoadDictionariesFromFiles(List<string> inList)
+        {
+            foreach (var filePath in inList)
+            {
+                // Only Style resource dictionaries should be added
+                // Ignore other types
+                var styleResourceDictionary = LoadFromFile(filePath) as StyleResourceDictionary;
+                if (styleResourceDictionary == null)
+                    continue;
+
+                MergedDictionaries.Add(styleResourceDictionary);
+            }
+        }
+
         #endregion
     }
 }

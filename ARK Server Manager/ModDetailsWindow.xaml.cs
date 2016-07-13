@@ -25,7 +25,7 @@ namespace ARK_Server_Manager
         public ModDetailsWindow(ServerProfile profile)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             _profile = profile;
             this.Title = string.Format(_globalizer.GetResourceString("ModDetails_ProfileTitle"), _profile?.ProfileName);

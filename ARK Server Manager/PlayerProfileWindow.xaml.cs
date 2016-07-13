@@ -21,7 +21,7 @@ namespace ARK_Server_Manager
         public PlayerProfileWindow(PlayerInfo player, String serverFolder)
         {
             InitializeComponent();
-            WindowUtils.RemoveDefaultResourceDictionary(this);
+            WindowUtils.RemoveDefaultResourceDictionaries(this);
 
             this.Player = player;
             this.ServerFolder = serverFolder;
