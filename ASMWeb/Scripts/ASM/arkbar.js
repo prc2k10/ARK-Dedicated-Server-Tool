@@ -28,7 +28,7 @@ var ArkBar;
             });
         };
         return HostConnection;
-    })();
+    }());
     ArkBar.HostConnection = HostConnection;
 })(ArkBar || (ArkBar = {}));
 ;
